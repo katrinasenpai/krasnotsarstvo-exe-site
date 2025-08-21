@@ -1,0 +1,28 @@
+# CODEOWNERS file for KrasnoTsarstvo.exe Site
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners
+* @yourusername
+
+# Frontend components
+/src/components/ @yourusername
+/src/App.tsx @yourusername
+
+# Styling and assets
+/src/assets/ @yourusername
+/src/index.css @yourusername
+/tailwind.config.js @yourusername
+
+# Configuration files
+/vite.config.ts @yourusername
+/tsconfig*.json @yourusername
+/eslint.config.js @yourusername
+
+# Documentation
+/README.md @yourusername
+/CONTRIBUTING.md @yourusername
+/CHANGELOG.md @yourusername
+/LICENSE @yourusername
+
+# GitHub specific files
+/.github/ @yourusername

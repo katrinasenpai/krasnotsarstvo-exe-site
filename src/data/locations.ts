@@ -1,0 +1,524 @@
+// src/data/locations.ts
+// Этот файл содержит все данные для интерактивной карты.
+// Чтобы что-то изменить (текст, картинку, положение пина), нужно редактировать этот файл.
+
+// Импорт изображений для карточек 
+
+import nota_real from '../assets/images/cards/nota_real.webp';
+import nota_fantasy from '../assets/images/cards/nota_fantasy.webp';
+import sloboda_real from '../assets/images/cards/sloboda_real.webp';
+import sloboda_fantasy from '../assets/images/cards/sloboda_fantasy.webp';
+import zavod_real from '../assets/images/cards/zavod_real.webp';
+import zavod_fantasy from '../assets/images/cards/zavod_fantasy.webp';
+import forest_real from '../assets/images/cards/forest_real.webp';
+import forest_fantasy from '../assets/images/cards/forest_fantasy.webp';
+import quarter_real from '../assets/images/cards/quarter_real.webp';
+import quarter_fantasy from '../assets/images/cards/quarter_fantasy.webp';
+import rzevskaya_real from '../assets/images/cards/rzevskaya_real.webp';
+import rzevskaya_fantasy from '../assets/images/cards/rzevskaya_fantasy.webp';
+import ladozhskaya_real from '../assets/images/cards/ladozhskaya_real.webp';
+import ladozhskaya_fantasy from '../assets/images/cards/ladozhskaya_fantasy.webp';
+import vokzal_real from '../assets/images/cards/vokzal_real.webp';
+import vokzal_fantasy from '../assets/images/cards/vokzal_fantasy.webp';
+import sfera_real from '../assets/images/cards/sfera_real.webp';
+import sfera_fantasy from '../assets/images/cards/sfera_fantasy.webp';
+import stakan_real from '../assets/images/cards/stakan_real.webp';
+import stakan_fantasy from '../assets/images/cards/stakan_fantasy.webp';
+import dacha_real from '../assets/images/cards/dacha_real.webp';
+import dacha_fantasy from '../assets/images/cards/dacha_fantasy.webp';
+import shkaf_real from '../assets/images/cards/shkaf_real.webp';
+import shkaf_fantasy from '../assets/images/cards/shkaf_fantasy.webp';
+import bedlam_real from '../assets/images/cards/bedlam_real.webp';
+import bedlam_fantasy from '../assets/images/cards/bedlam_fantasy.webp';
+import park_real from '../assets/images/cards/park_real.webp';
+import park_fantasy from '../assets/images/cards/park_fantasy.webp';
+import gogol_real from '../assets/images/cards/gogol_real.webp';
+import gogol_fantasy from '../assets/images/cards/gogol_fantasy.webp';
+import rinok_real from '../assets/images/cards/rinok_real.webp';
+import rinok_fantasy from '../assets/images/cards/rinok_fantasy.webp';
+import kalancha_real from '../assets/images/cards/kalancha_real.webp';
+import kalancha_fantasy from '../assets/images/cards/kalancha_fantasy.webp';
+import berega_real from '../assets/images/cards/berega_real.webp';
+import berega_fantasy from '../assets/images/cards/berega_fantasy.webp';
+import verfi_real from '../assets/images/cards/verfi_real.webp';
+import verfi_fantasy from '../assets/images/cards/verfi_fantasy.webp';
+import pushka_real from '../assets/images/cards/pushka_real.webp';
+import pushka_fantasy from '../assets/images/cards/pushka_fantasy.webp';
+import most_real from '../assets/images/cards/most_real.webp';
+import most_fantasy from '../assets/images/cards/most_fantasy.webp';
+import kapishya_real from '../assets/images/cards/kapishya_real.webp';
+import kapishya_fantasy from '../assets/images/cards/kapishya_fantasy.webp';
+import buff_real from '../assets/images/cards/buff_real.webp';
+import buff_fantasy from '../assets/images/cards/buff_fantasy.webp';
+import katakombs_real from '../assets/images/cards/katakombs_real.webp';
+import katakombs_fantasy from '../assets/images/cards/katakombs_fantasy.webp';
+import ohta_real from '../assets/images/cards/ohta_real.webp';
+import ohta_fantasy from '../assets/images/cards/ohta_fantasy.webp';
+import neva_real from '../assets/images/cards/neva_real.webp';
+import neva_fantasy from '../assets/images/cards/neva_fantasy.webp';
+
+
+// --- ШАГ 2: Определяем типы данных для TypeScript ---
+export type LocationId = "nota" | "sloboda" | "zavod" | "forest" | "quarter" | "rzevskaya" | "ladozhskaya" | "vokzal" | "sfera" | "stakan" | "dacha" | "shkaf" | "bedlam" | "park" | "gogol" | "rinok" | "kalancha" | "berega" | "verfi" | "pushka" | "most" | "kapishya" | "buff" | "katakombs" | "ohta" | "neva";
+
+export type LocationInfo = {
+  title: string;
+  description: string;
+  image: string;
+};
+
+export type Location = {
+  id: LocationId;
+  title: string;
+  coords: { x: string; y: string };
+  tooltip: string;
+  real_info: LocationInfo;
+  fantasy_info: LocationInfo;
+  status: 'available' | 'locked' | 'visited';
+};
+
+// --- ШАГ 3: Создаём сам объект с данными ---
+export const locationsData: Record<LocationId, Location> = {
+  nota: {
+    id: 'nota',
+    title: 'Библиотека НОТА',
+    coords: { x: '68%', y: '42%' },
+    tooltip: "Это мрачное, но величественное здание с витражами в форме нотных станков. При приближении можно услышать тихие отголоски мелодий.",
+    real_info: {
+      title: 'БКЦ «НОТА»',
+      description: `БКЦ «НОТА» – современное библиотечно-культурное пространство в Красногвардейском районе Санкт-Петербурга, открытое 25 ноября 2023 года.`,
+      image: nota_real,
+    },
+    fantasy_info: {
+      title: 'Библиотека НОТА',
+      description: `В КрасноЦарстве это мрачное, но величественное здание с витражами в форме нотных станков. Внутри – просторные залы, где парят призрачные фолианты с музыкальными партитурам.`,
+      image: nota_fantasy,
+    },
+    status: 'available',
+  },
+  sloboda: {
+    id: 'sloboda',
+    title: 'Слобода Алхимиков',
+    coords: { x: '59%', y: '13%' },
+    tooltip: "Район, где живут и работают самые искусные алхимики. Улицы тесно прижаты, над крышами вьются цветные дымки от колб.",
+    real_info: {
+        title: 'Ильинская слобода',
+        description: `Ильинская слобода представляла собой рабочий посёлок, где жили мастера и ремесленники порохового производства. Пётр I переселял мастеров сюда и дал им особые привилегии, освободив от многих повинностей.`,
+        image: sloboda_real,
+    },
+    fantasy_info: {
+        title: 'Слобода Алхимиков',
+        description: `Район, где живут и работают самые искусные алхимики. Основатель – Великий Алхимик Илий, раскрывший секрет преображения простых металлов в магические эссенции.`,
+        image: sloboda_fantasy,
+    },
+    status: 'available',
+  },
+  zavod: {
+    id: 'zavod',
+    title: 'Зелейный завод',
+    coords: { x: '64%', y: '9%' },
+    tooltip: "Огромный комплекс магических мастерских, где алхимики и инженеры варят зелья – от целительных до боевых.",
+    real_info: {
+        title: 'Охтинский пороховой завод',
+        description: `Старейшее промышленное предприятие Санкт-Петербурга, основанное Петром I в 1715 году. За свою историю предприятие пережило несколько разрушительных взрывов.`,
+        image: zavod_real,
+    },
+    fantasy_info: {
+        title: 'Зелейный завод',
+        description: `Огромный комплекс магических мастерских. Однажды случился «Взрыв семи котлов» – при попытке сварить «эликсир укрепления стен» была допущена ошибка.`,
+        image: zavod_fantasy,
+    },
+    status: 'available',
+  },
+  forest: {
+    id: 'forest',
+    title: 'Тёмный лес',
+    coords: { x: '88%', y: '35%' },
+    tooltip: "Когда-то это был живописный лес, но во время Великой магической войны его корни напитались тёмной энергией.",
+    real_info: {
+        title: 'Ржевский лесопарк',
+        description: `Обширный зелёный массив на восточной границе Санкт-Петербурга, один из любимых мест отдыха горожан. Служит «лёгкими» района.`,
+        image: forest_real,
+    },
+    fantasy_info: {
+        title: 'Тёмный лес',
+        description: `Огромный, мрачный лес, где в кривых стволах деревьев застыла тьма. Во время Великой магической войны его корни напитались тёмной энергией от ритуалов колдунов.`,
+        image: forest_fantasy,
+    },
+    status: 'available',
+  },
+  quarter: {
+    id: 'quarter',
+    title: 'Квартал четырёх дураков',
+    coords: { x: '77%', y: '29%' },
+    tooltip: "Комплекс переходов, змеящихся под старинным кварталом. Местные обходят этот лабиринт стороной.",
+    real_info: {
+        title: 'Квартал Ржевка-Пороховые',
+        description: `Крупный жилой квартал с типовой советской архитектурой, построенный в конце 1970-х – 1980-х годов.`,
+        image: quarter_real,
+    },
+    fantasy_info: {
+        title: 'Квартал четырёх дураков',
+        description: `Подземный комплекс переходов. Четыре могучих волшебника когда-то не поладили между собой, пытаясь построить тайный ход. Вышли «четыре тупика» и бесконечная путаница.`,
+        image: quarter_fantasy,
+    },
+    status: 'available',
+  },
+  rzevskaya: {
+    id: 'rzevskaya',
+    title: 'Библиотека «Ржевская»',
+    coords: { x: '58%', y: '33%' },
+    tooltip: "Узловой центр, где соединяются магия и технологии. Высокие книжные стеллажи соседствуют со светящимися порталами.",
+    real_info: {
+        title: 'Библиотека «Ржевская»',
+        description: `Современный культурно-информационный центр в Красногвардейском районе. В 2017 году после обновления она вновь открылась, став высокотехнологичным пространством.`,
+        image: rzevskaya_real,
+    },
+    fantasy_info: {
+        title: 'Библиотека «Ржевская»',
+        description: `Узловой центр, где соединяются магия и технологии. Была создана Великим Архимагом, который решил объединить древние фолианты и кристаллические компьютеры.`,
+        image: rzevskaya_fantasy,
+    },
+    status: 'available',
+  },
+  ladozhskaya: {
+    id: 'ladozhskaya',
+    title: 'Лавка древних артефактов',
+    coords: { x: '58%', y: '69%' },
+    tooltip: "Подземный магический магазин, расположенный в таинственных катакомбах. Владелица лавки — загадочная эльфийка-альбинос.",
+    real_info: {
+        title: 'Станция метро «Ладожская»',
+        description: `Станция интегрирована в транспортный узел Ладожского вокзала. Художественное оформление посвящено Дороге жизни – спасательной магистрали времен блокады Ленинграда.`,
+        image: ladozhskaya_real,
+    },
+    fantasy_info: {
+        title: 'Лавка древних артефактов',
+        description: `Подземный магический магазин в таинственных катакомбах. Владелица, загадочная эльфийка-альбинос, тщательно отбирает предметы, каждый из которых обладает собственной историей и силой.`,
+        image: ladozhskaya_fantasy,
+    },
+    status: 'available',
+  },
+  vokzal: {
+    id: 'vokzal',
+    title: 'Станция Дирижаблей',
+    coords: { x: '54%', y: '62%' },
+    tooltip: "Величественный воздушный порт КрасноЦарства, где пересекаются маршруты междугородных судов, пиратских флотилий и королевских курьеров.",
+    real_info: {
+        title: 'Ладожский вокзал',
+        description: `Самый новый из действующих железнодорожных вокзалов Санкт-Петербурга. Это современный транспортный комплекс, спроектированный как «интеллектуальное здание».`,
+        image: vokzal_real,
+    },
+    fantasy_info: {
+        title: 'Станция Дирижаблей',
+        description: `Величественный воздушный порт КрасноЦарства. Над платформами медленно покачиваются массивные дирижабли с резными деревянными палубами.`,
+        image: vokzal_fantasy,
+    },
+    status: 'available',
+  },
+  sfera: {
+    id: 'sfera',
+    title: 'Библиотека «Сфера»',
+    coords: { x: '43%', y: '28%' },
+    tooltip: "Когда-то библиотека выполняла роль астрономического телескопа: маги-астрономы наблюдали за небесами, открывали порталы к иным измерениям.",
+    real_info: {
+        title: 'Библиотека «СФЕРА»',
+        description: `Современная библиотека, объединяющая книжный фонд, мультимедийные технологии и интерактивные пространства. Открыта 21 октября 2023 г.`,
+        image: sfera_real,
+    },
+    fantasy_info: {
+        title: 'Библиотека «Сфера»',
+        description: `Округлое здание, внутри – кольцевой зал с полками. В центре стоит огромный волшебный глобус, раньше показывавший звёзды и миры.`,
+        image: sfera_fantasy,
+    },
+    status: 'available',
+  },
+  stakan: {
+    id: 'stakan',
+    title: 'Крепость-Стакан',
+    coords: { x: '41%', y: '35%' },
+    tooltip: "Древнее гномье сооружение, единственное место в КрасноЦарстве, где создают волшебные предметы из закалённого огнём стекла.",
+    real_info: {
+        title: 'Дом-стакан',
+        description: `Народное название круглого многоэтажного жилого дома. Экспериментальный советский дом, построен в начале 1970-х годов как общежитие.`,
+        image: stakan_real,
+    },
+    fantasy_info: {
+        title: 'Крепость-Стакан',
+        description: `Древнее гномье сооружение, возведённое на вершине скалы. Единственное место в КрасноЦарстве, где создают волшебные предметы из закалённого огнём стекла.`,
+        image: stakan_fantasy,
+    },
+    status: 'available',
+  },
+  dacha: {
+    id: 'dacha',
+    title: 'Уткина Гавань',
+    coords: { x: '39%', y: '62%' },
+    tooltip: "Живописный остров на сверкающей реке. Белоколонная усадьба отражается в воде, а вокруг нее плавают утки.",
+    real_info: {
+        title: 'Уткина дача',
+        description: `Старинная усадьба на берегу Охты, затерянная среди современных высоток. Название не имеет отношения к уткам – она названа по фамилии последних владельцев Уткиных.`,
+        image: dacha_real,
+    },
+    fantasy_info: {
+        title: 'Уткина Гавань',
+        description: `Живописный остров на сверкающей реке. Древний водный дух покровительствует гавани: когда-то он выбрал фамилию «Уткин», и с тех пор волшебные утки стали тотемом острова.`,
+        image: dacha_fantasy,
+    },
+    status: 'available',
+  },
+  shkaf: {
+    id: 'shkaf',
+    title: 'Библиотека ШКАФ',
+    coords: { x: '35%', y: '14%' },
+    tooltip: "Библиотека была местом хранения артефактов-ключей от параллельных измерений. Ныне заклинания искажены.",
+    real_info: {
+        title: 'Библиотека «ШКАФ»',
+        description: `Современное культурное пространство, сочетающее в себе библиотеку, арт-резиденцию и креативную площадку. В 2018 году превратилась в арт-резиденцию «ШКАФ».`,
+        image: shkaf_real,
+    },
+    fantasy_info: {
+        title: 'Библиотека «ШКАФ»',
+        description: `Магическое пространство, где каждая полка – портал в маленький карманный мир. Но с приходом проклятия большинство порталов потускнели.`,
+        image: shkaf_fantasy,
+    },
+    status: 'available',
+  },
+  bedlam: {
+    id: 'bedlam',
+    title: 'Лечебница',
+    coords: { x: '22.5%', y: '10%' },
+    tooltip: "Огромный госпиталь, окружённый магическими барьерами. Включает отдаленное крыло — Бедлам.",
+    real_info: {
+        title: 'Больница им. Петра Великого',
+        description: `Крупный клинический центр, один из старейших в городе. Основана в 1903 году в честь 200-летия Санкт-Петербурга.`,
+        image: bedlam_real,
+    },
+    fantasy_info: {
+        title: 'Лечебница',
+        description: `Огромный госпиталь, окружённый магическими барьерами. По коридорам снуют лекари-магистры. За сияющим фасадом скрывается отдаленное крыло — Бедлам.`,
+        image: bedlam_fantasy,
+    },
+    status: 'available',
+  },
+  park: {
+    id: 'park',
+    title: 'Древо Мудрости и Источник жизни',
+    coords: { x: '28%', y: '25.85%' },
+    tooltip: "Могучее Древо Мудрости, стоящее у пруда с целебной водой. Весь ствол исписан загадочными узорами.",
+    real_info: {
+        title: 'Полюстровский парк',
+        description: `Зелёная зона отдыха в Красногвардейском районе. Основан в 1967 году на месте старой застройки и мусорной свалки.`,
+        image: park_real,
+    },
+    fantasy_info: {
+        title: 'Древо Мудрости и Источник жизни',
+        description: `Могучее Древо Мудрости, стоящее у пруда с целебной водой – Источника жизни. Говорят, древо посадил великий целитель, благословивший эти земли.`,
+        image: park_fantasy,
+    },
+    status: 'available',
+  },
+  gogol: {
+    id: 'gogol',
+    title: 'Библиотека Гоголя',
+    coords: { x: '31%', y: '34%' },
+    tooltip: "Мрачная библиотека в бордовых тонах, окутанная серой дымкой. Проклятие здесь наложило особый отпечаток.",
+    real_info: {
+        title: 'Центральная районная библиотека имени Н. В. Гоголя',
+        description: `Крупнейшая и старейшая библиотека Красногвардейского района. В 2013 году после реконструкции превратилась в многофункциональное общественное пространство.`,
+        image: gogol_real,
+    },
+    fantasy_info: {
+        title: 'Библиотека Гоголя',
+        description: `Мрачная библиотека в бордовых тонах, обитель классической литературы. Проклятие здесь наложило особый отпечаток - истории и писатели там медленно исчезают.`,
+        image: gogol_fantasy,
+    },
+    status: 'available',
+  },
+  rinok: {
+    id: 'rinok',
+    title: 'Рынок',
+    coords: { x: '33.5%', y: '52%' },
+    tooltip: "Широкая мостовая, по бокам которой раскинулись торговые ряды. Здесь можно найти всё — от душистого хлеба до зачарованных безделушек.",
+    real_info: {
+        title: 'ТРЦ «Охта Молл»',
+        description: `Один из крупнейших торгово-развлекательных центров Санкт-Петербурга. Открыт 27 августа 2016 года.`,
+        image: rinok_real,
+    },
+    fantasy_info: {
+        title: 'Рынок',
+        description: `Широкая мостовая с торговыми рядами. Считается, что где-то среди прилавков прячется секретная лавка, в которой можно купить всё, но найти её удаётся лишь немногим.`,
+        image: rinok_fantasy,
+    },
+    status: 'available',
+  },
+  kalancha: {
+    id: 'kalancha',
+    title: 'Каланча',
+    coords: { x: '33%', y: '45.5%' },
+    tooltip: "Высокая сторожевая башня с вечным огнём на шпиле. Внизу располагается «Огненный отряд» – маги и элементалисты.",
+    real_info: {
+        title: 'Охтинская пожарная часть',
+        description: `Одно из старейших пожарных подразделений Санкт-Петербурга, основанное в 1828 году. Известна своей высокой каланчой, которая является символом района.`,
+        image: kalancha_real,
+    },
+    fantasy_info: {
+        title: 'Каланча',
+        description: `Высокая сторожевая башня с вечным огнём на шпиле. Построена после Великого Пожара, когда магический огонь чуть не уничтожил половину КрасноЦарства.`,
+        image: kalancha_fantasy,
+    },
+    status: 'available',
+  },
+  berega: {
+    id: 'berega',
+    title: 'Молочные берега',
+    coords: { x: '28.5%', y: '46%' },
+    tooltip: "Живописная долина вдоль реки, чьи берега усыпаны нежно-розовыми травами. Повсюду пасутся волшебные коровы.",
+    real_info: {
+        title: 'Пастбища в Охтенской слободе',
+        description: `Аллюзия на бывшие молочные хозяйства. По легенде, Пётр I выделил жителям Охты пастбища и обеспечил их отборными голландскими коровами, чтобы они снабжали столицу молоком.`,
+        image: berega_real,
+    },
+    fantasy_info: {
+        title: 'Молочные берега',
+        description: `Живописная долина вдоль бирюзовой реки. Повсюду пасутся волшебные коровы, которые дают целительное молоко, способное укрепить разум.`,
+        image: berega_fantasy,
+    },
+    status: 'available',
+  },
+  verfi: {
+    id: 'verfi',
+    title: 'Плотницкая верфь',
+    coords: { x: '27%', y: '48%' },
+    tooltip: "Плотницкая верфь когда-то снабжала судами весь флот КрасноЦарства. Здесь создавались корабли, способные противостоять магическим бурям.",
+    real_info: {
+        title: 'Охтинские верфи',
+        description: `Судостроительное предприятие, основанное Петром I в 1721 году, один из первых центров судостроения на Неве.`,
+        image: verfi_real,
+    },
+    fantasy_info: {
+        title: 'Плотницкая верфь',
+        description: `На берегу волшебной реки раскинулась оживлённая верфь. Здесь создавались корабли, способные противостоять магическим бурям, ведь их доски пропитывались речными рунами.`,
+        image: verfi_fantasy,
+    },
+    status: 'available',
+  },
+  pushka: {
+    id: 'pushka',
+    title: 'Пушка (Ниеншанц)',
+    coords: { x: '24.8%', y: '50.7%' },
+    tooltip: "Уничтоженная крепость, от которой остались фрагменты стен и громадная ржавая пушка. По ночам тут слышны отголоски битв.",
+    real_info: {
+        title: 'Памятный знак «Крепость Ниеншанц»',
+        description: `Мемориал на Охтинском мысу, установленный в 2000 году в честь шведской крепости XVII века, предшествовавшей Санкт-Петербургу.`,
+        image: pushka_real,
+    },
+    fantasy_info: {
+        title: 'Пушка (Ниеншанц)',
+        description: `Уничтоженная крепость, от которой остались фрагменты стен и громадная ржавая пушка. Согласно преданию, один особенно мощный выстрел из этой пушки снёс часть берега, образовав Уткину Гавань.`,
+        image: pushka_fantasy,
+    },
+    status: 'available',
+  },
+  most: {
+    id: 'most',
+    title: 'Большой арочный мост',
+    coords: { x: '21%', y: '50.7%' },
+    tooltip: "Высоченный арочный мост, с двумя башенками. Стальные фермы отлиты из «зорного железа», упавшего с неба.",
+    real_info: {
+        title: 'Большеохтинский мост',
+        description: `Один из крупнейших мостов Санкт-Петербурга. Построен в 1909–1911 годах и изначально назывался мостом Императора Петра Великого.`,
+        image: most_real,
+    },
+    fantasy_info: {
+        title: 'Большой арочный мост',
+        description: `Высоченный арочный мост. Считается, что во время его возведения кузнец-астролог выковал в арки частички метеорита, что придало мосту особую прочность.`,
+        image: most_fantasy,
+    },
+    status: 'available',
+  },
+  kapishya: {
+    id: 'kapishya',
+    title: 'Древнее капище',
+    coords: { x: '27.7%', y: '59%' },
+    tooltip: "Заброшенное святилище, где сохранились выветренные каменные идолы. Сверху – застарелые надгробия, ритуальные знаки, мох и туман.",
+    real_info: {
+        title: 'Малоохтинское старообрядческое кладбище',
+        description: `Одно из старейших старообрядческих некрополей Санкт-Петербурга, основанное в XVIII веке. Важный центр старообрядческой общины.`,
+        image: kapishya_real,
+    },
+    fantasy_info: {
+        title: 'Древнее капище',
+        description: `Заброшенное святилище, где сохранились выветренные каменные идолы. Когда-то тут проводили языческие обряды, дабы умилостивить духов предков.`,
+        image: kapishya_fantasy,
+    },
+    status: 'available',
+  },
+  buff: {
+    id: 'buff',
+    title: 'Театр «Буффонада»',
+    coords: { x: '31.5%', y: '70%' },
+    tooltip: "Волшебный театр, где комедия и магические иллюзии сливаются воедино. Актёры – мастера перевоплощений.",
+    real_info: {
+        title: 'Театр «Буфф»',
+        description: `Один из самых известных музыкально-комедийных театров Санкт-Петербурга. Здесь начинали карьеру Юрий Гальцев, Геннадий Ветров и Елена Воробей.`,
+        image: buff_real,
+    },
+    fantasy_info: {
+        title: 'Театр «Буффонада»',
+        description: `Волшебный театр, где комедия и магические иллюзии сливаются воедино. Создатель театра заключил пакт с духом веселья, благодаря чему здесь невозможно долго печалиться.`,
+        image: buff_fantasy,
+    },
+    status: 'available',
+  },
+  katakombs: {
+    id: 'katakombs',
+    title: 'Катакомбы «Заходи – не бойся, выходи – не плачь»',
+    coords: { x: '27.5%', y: '77%' },
+    tooltip: "Подземные катакомбы со старой каменной аркой. Внутри сумрачно, коридоры петляют, а фонари мигают жёлтым светом.",
+    real_info: {
+        title: 'Ст. метро Новочеркасская',
+        description: `Станция Правобережной линии, расположенная под Заневской площадью. Подземные переходы у станции известны своей запутанностью, из-за чего они стали объектом шуток.`,
+        image: katakombs_real,
+    },
+    fantasy_info: {
+        title: 'Катакомбы «Заходи – не бойся, выходи – не плачь»',
+        description: `Подземные катакомбы со старой каменной аркой. Проклятие Забвения усилило эффект: теперь всякий, кто спускается неподготовленным, может потерять память.`,
+        image: katakombs_fantasy,
+    },
+    status: 'available',
+  },
+  ohta: {
+    id: 'ohta',
+    title: 'Река Охта',
+    coords: { x: '52%', y: '46%' },
+    tooltip: "Главная магическая река КрасноЦарства. Течение неспешное, но глубокое, берега порой покрыты туманом.",
+    real_info: {
+        title: 'Река Охта',
+        description: `Крупнейший правый приток Невы в пределах Санкт-Петербурга. В переводе с ижорского языка означает «медвежья».`,
+        image: ohta_real,
+    },
+    fantasy_info: {
+        title: 'Река Охта',
+        description: `Главная магическая река КрасноЦарства. Царь Пётр колдунским жезлом пробил русло, чтобы связать все поселения. С тех пор вода напитана энергией творения.`,
+        image: ohta_fantasy,
+    },
+    status: 'available',
+  },
+  neva: {
+    id: 'neva',
+    title: 'Река Нева',
+    coords: { x: '19%', y: '61%' },
+    tooltip: "Магическая водная артерия, начинающая свой путь в Ладожском озере. Её широкие, каменистые берега хранят древние тайны.",
+    real_info: {
+        title: 'Река Нева',
+        description: `Главная река Санкт-Петербурга, соединяющая Ладожское озеро с Финским заливом. Самая полноводная река Европы после Волги.`,
+        image: neva_real,
+    },
+    fantasy_info: {
+        title: 'Река Нева',
+        description: `Великая река Нева – магическая водная артерия. По преданию, Нева зарождается в глубинах Ладожского озера, где древние воды отражают северное сияние.`,
+        image: neva_fantasy,
+    },
+    status: 'available',
+  },
+};
