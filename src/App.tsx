@@ -454,38 +454,17 @@ function App() {
 
           {/* --- Новая единая панель --- */}
           <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-10">
-              
-              {/* Левая колонка: Wishlist */}
-              <div className="text-center md:text-left">
-                <h3 className="font-serif text-2xl text-gold-leaf mb-4">Добавьте в желаемое</h3>
-                <p className="text-off-white/70 mb-6">Это лучший способ поддержать игру и не пропустить её выход.</p>
-                <div className="flex flex-col gap-4">
-                  <a href="ССЫЛКА_НА_ВАШ_STEAM" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-gray-700/50 hover:bg-gray-600/80 border border-gray-600 text-white font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <i className="fab fa-steam text-2xl"></i>
-                    <span>Wishlist on Steam</span>
-                  </a>
-                  <a href="ССЫЛКА_НА_ВАШ_VK_PLAY" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3 bg-blue-600/50 hover:bg-blue-500/80 border border-blue-500 text-white font-bold py-3 px-6 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                    <i className="fas fa-gamepad text-2xl"></i>
-                    <span>В желаемое на VK Play</span>
-                  </a>
-                </div>
+            <div className="text-center">
+              <h3 className="font-serif text-2xl text-gold-leaf mb-4">Следите за новостями</h3>
+              <p className="text-off-white/70 mb-6">Присоединяйтесь к нашему сообществу, чтобы быть в курсе всех событий и не пропустить релиз игры.</p>
+              <div className="flex items-center justify-center gap-8">
+                <a href="https://vk.com/rzhevka_lib" target="_blank" rel="noopener noreferrer" aria-label="Наша группа ВКонтакте" className="text-shadow-grey hover:text-blue-500 transition-all duration-300 transform hover:scale-110">
+                  <i className="fab fa-vk text-6xl"></i>
+                </a>
+                <a href="https://t.me/lib_rzhevka" target="_blank" rel="noopener noreferrer" aria-label="Наш Телеграм канал" className="text-shadow-grey hover:text-sky-500 transition-all duration-300 transform hover:scale-110">
+                  <i className="fab fa-telegram text-6xl"></i>
+                </a>
               </div>
-
-              {/* Правая колонка: Соцсети */}
-              <div className="text-center md:text-left">
-                <h3 className="font-serif text-2xl text-gold-leaf mb-4">Следите за новостями</h3>
-                <p className="text-off-white/70 mb-6">Присоединяйтесь к нашему сообществу, чтобы быть в курсе всех событий.</p>
-                <div className="flex items-center justify-center md:justify-start gap-8">
-                  <a href="https://vk.com/rzhevka_lib" target="_blank" rel="noopener noreferrer" aria-label="Наша группа ВКонтакте" className="text-shadow-grey hover:text-blue-500 transition-all duration-300 transform hover:scale-110">
-                    <i className="fab fa-vk text-6xl"></i>
-                  </a>
-                  <a href="https://t.me/lib_rzhevka" target="_blank" rel="noopener noreferrer" aria-label="Наш Телеграм канал" className="text-shadow-grey hover:text-sky-500 transition-all duration-300 transform hover:scale-110">
-                    <i className="fab fa-telegram text-6xl"></i>
-                  </a>
-                </div>
-              </div>
-
             </div>
           </div>
           
