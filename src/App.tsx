@@ -7,7 +7,7 @@ import { CharacterCard } from './components/CharacterCard';
 import { Map } from './components/Map';
 import { Separator } from './components/Separator'; 
 import { FeaturesTabs } from './components/FeaturesTabs';
-import heroVideo from './assets/videos/hero-animation.webm';
+import heroVideo from './assets/videos/hero-animation1.webm';
 import playerImg from './assets/images/player.webp';
 import iskinImg from './assets/images/iskin.webp';
 import apprenticeImg from './assets/images/apprentice.webp';
