@@ -43,7 +43,7 @@ import BellIcon from './assets/icons/bell-icon.svg?react';
 const navLinks = [
   { href: 'home', IconComponent: HomeIcon, label: 'Главная' },
   { href: 'story', IconComponent: StoryIcon, label: 'Об игре' },
-  { href: 'teaser', IconComponent: TeaserIcon, label: 'Тизер'},
+  { href: 'teaser', IconComponent: TeaserIcon, label: 'Трейлер'},
   { href: 'characters', IconComponent: CharactersIcon, label: 'Персонажи' },
   { href: 'map', IconComponent: MapIcon, label: 'Карта'},
   { href: 'features', IconComponent: FeaturesIcon, label: 'Особенности' },
@@ -241,10 +241,10 @@ function App() {
             <div className="lg:w-1/2 text-center lg:text-left">
               <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-left gap-4">
                 <TeaserIcon className="w-10 h-10" />
-                1Й ВЗГЛЯД НА МИР
+                ТРЕЙЛЕР
               </h2>
               <p className="text-lg text-off-white/80 leading-relaxed">
-                Погрузитесь в атмосферу КрасноЦарства с первым тизером игры. Мир охвачен Проклятием Забвения: страницы пустеют, порталы рушатся, память исчезает. И только ты, случайный посетитель библиотеки, можешь восстановить утраченные знания...
+                Погрузитесь в атмосферу КрасноЦарства с первым трейлером игры. Мир охвачен Проклятием Забвения: страницы пустеют, порталы рушатся, память исчезает. И только ты, случайный посетитель библиотеки, можешь восстановить утраченные знания...
               </p>
             </div>
 
@@ -255,12 +255,13 @@ function App() {
                 {/* Адаптивный контейнер для видео */}
                 <div className="aspect-video">
                   
-                  {/* --- КОД VIMEO СЮДА --- */}
+                  {/* --- ВК ВИДЕО IFRAME --- */}
                   <iframe 
-                    src="https://player.vimeo.com/video/ID_ВИДЕО?h=..." 
+                    src="https://vkvideo.ru/video_ext.php?oid=-17047312&id=456240242&hd=2&autoplay=1" 
                     className="w-full h-full rounded-md" 
+                    style={{backgroundColor: '#000'}}
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
                     frameBorder="0" 
-                    allow="autoplay; fullscreen; picture-in-picture" 
                     allowFullScreen>
                   </iframe>
 
