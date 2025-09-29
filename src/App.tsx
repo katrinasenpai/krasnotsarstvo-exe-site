@@ -257,7 +257,7 @@ function App() {
                   
                   {/* --- ВК ВИДЕО IFRAME --- */}
                   <iframe 
-                    src="https://vkvideo.ru/video_ext.php?oid=-17047312&id=456240242&hd=2&autoplay=1" 
+                    src="https://vkvideo.ru/video_ext.php?oid=-17047312&id=456240243&hd=2&autoplay=1" 
                     className="w-full h-full rounded-md" 
                     style={{backgroundColor: '#000'}}
                     allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
