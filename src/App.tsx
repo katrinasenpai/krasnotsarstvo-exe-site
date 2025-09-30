@@ -101,6 +101,8 @@ const galleryImages = [
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -114,7 +116,34 @@ function App() {
     }
   };
 
+  // Обработчики для свайпа
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      scrollRight();
+    }
+    if (isRightSwipe) {
+      scrollLeft();
+    }
+  };
+
   const galleryScrollRef = useRef<HTMLDivElement>(null);
+  const [galleryTouchStart, setGalleryTouchStart] = useState<number | null>(null);
+  const [galleryTouchEnd, setGalleryTouchEnd] = useState<number | null>(null);
 
   const galleryScrollLeft = () => {
     if (galleryScrollRef.current) {
@@ -125,6 +154,31 @@ function App() {
   const galleryScrollRight = () => {
     if (galleryScrollRef.current) {
       galleryScrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
+
+  // Обработчики для свайпа галереи
+  const handleGalleryTouchStart = (e: React.TouchEvent) => {
+    setGalleryTouchEnd(null);
+    setGalleryTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleGalleryTouchMove = (e: React.TouchEvent) => {
+    setGalleryTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleGalleryTouchEnd = () => {
+    if (!galleryTouchStart || !galleryTouchEnd) return;
+    
+    const distance = galleryTouchStart - galleryTouchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe) {
+      galleryScrollRight();
+    }
+    if (isRightSwipe) {
+      galleryScrollLeft();
     }
   };
 
@@ -143,7 +197,7 @@ function App() {
       
       {/* HERO */}
       <section id="home" className="relative h-screen overflow-hidden">
-        <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-cover z-0">
+        <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-contain md:object-cover z-0">
           <source src={heroVideo} type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-black/50 z-10" />
@@ -288,6 +342,9 @@ function App() {
           <div 
             ref={scrollContainerRef} 
             className="flex overflow-x-hidden gap-8 pb-4 scroll-smooth no-scrollbar"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             {charactersData.map((char) => (
               // --- ИЗМЕНЕНИЯ ТОЛЬКО ЗДЕСЬ ---
@@ -305,7 +362,7 @@ function App() {
           <button 
             onClick={scrollLeft} 
             // Добавляем классы для плавного увеличения
-            className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125"
+            className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить влево"
           >
             <ArrowLeftIcon 
@@ -316,7 +373,7 @@ function App() {
           <button 
             onClick={scrollRight} 
             // Добавляем классы для плавного увеличения
-            className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125"
+            className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить вправо"
           >
             <ArrowRightIcon 
@@ -376,6 +433,9 @@ function App() {
           <div 
             ref={galleryScrollRef}
             className="flex overflow-x-auto gap-6 pb-4 scroll-smooth no-scrollbar"
+            onTouchStart={handleGalleryTouchStart}
+            onTouchMove={handleGalleryTouchMove}
+            onTouchEnd={handleGalleryTouchEnd}
           >
             {galleryImages.map((image, index) => (
               // 1. Каждое изображение теперь - это кнопка
@@ -394,14 +454,14 @@ function App() {
           {/* Кнопки-стрелки для галереи остаются без изменений */}
           <button 
             onClick={galleryScrollLeft} 
-            className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125"
+            className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить галерею влево"
           >
             <ArrowLeftIcon className="w-8 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300" />
           </button>
           <button 
             onClick={galleryScrollRight} 
-            className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125"
+            className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить галерею вправо"
           >
             <ArrowRightIcon className="w-8 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300" />
