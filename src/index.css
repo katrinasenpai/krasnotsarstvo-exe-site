@@ -59,4 +59,26 @@
   .page-turn-container {
     perspective: 2000px;
   }
+
+  /* Мобильные стили */
+  @media (max-width: 768px) {
+    .container {
+      @apply px-4;
+    }
+    
+    /* Улучшенная читаемость на мобильных */
+    .font-handwriting {
+      line-height: 1.2;
+    }
+    
+    /* Адаптивные кнопки */
+    .mobile-button {
+      @apply text-sm py-2 px-4;
+    }
+    
+    /* Скрытие элементов на мобильных */
+    .mobile-hidden {
+      @apply hidden md:block;
+    }
+  }
 }

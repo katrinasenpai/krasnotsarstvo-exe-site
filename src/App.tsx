@@ -131,7 +131,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-midnight-ink text-off-white pl-20"> 
+    <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20"> 
       <SplashCursor
         SPLAT_FORCE={2000}        // <-- Уменьшили силу (было 6000 по умолчанию)
         DENSITY_DISSIPATION={4}   // <-- Как быстро исчезает "дым"
@@ -147,25 +147,24 @@ function App() {
           <source src={heroVideo} type="video/webm" />
         </video>
         <div className="absolute inset-0 bg-black/50 z-10" />
-        <div className="relative z-20 h-full px-16 md:px-24">
-          <div className="absolute top-[27%]">
-            <p className="font-handwriting text-5xl font-normal max-w-md text-shadow-grey opacity-80">
+        <div className="relative z-20 h-full px-4 sm:px-8 md:px-16 lg:px-24">
+          <div className="absolute top-[20%] sm:top-[25%] md:top-[27%] left-0 right-0 px-4">
+            <p className="font-handwriting text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal max-w-xs sm:max-w-sm md:max-w-md text-shadow-grey opacity-80 leading-tight">
               Ты — тот, кто сквозь портал шагнул в КрасноЦарство, но кем ты станешь — решаешь ты сам.
             </p>
           </div>
-          <div className="absolute flex gap-4 bottom-[15%] right-[10%]">
+          <div className="absolute flex flex-col sm:flex-row gap-3 sm:gap-4 bottom-[10%] sm:bottom-[15%] left-4 sm:left-auto sm:right-[10%] right-4">
             <a 
               href="#download" 
-              className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-6 rounded flex items-center gap-2 shadow-lg transition-transform transform hover:scale-105"
+              className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <i className="fas fa-heart mr-2"></i>
               <span>Добавить в желаемое</span>
             </a>
             <a 
               href="#story" 
-              className="border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold py-3 px-6 rounded flex items-center gap-2 transition-transform transform hover:scale-105"
+              className="border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
-              {/* --- ВОТ ЗДЕСЬ ИЗМЕНЕНИЕ --- */}
               <i className="fas fa-book-open mr-2"></i>
               <span>Узнать больше</span>
             </a>
