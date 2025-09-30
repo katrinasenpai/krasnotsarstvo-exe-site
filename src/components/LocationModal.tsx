@@ -28,8 +28,26 @@ export function LocationModal({ cardId, onClose }: LocationModalProps) {
 
         <div className="flex-grow flex flex-col md:flex-row gap-8 overflow-y-auto pr-2">
           <div className="md:w-1/2">
-            <h3 className="font-serif text-2xl mb-2">{info.title}</h3>
-            <p className="whitespace-pre-wrap leading-relaxed">{info.description}</p>
+            <h3 className="font-serif text-2xl mb-4">{info.title}</h3>
+            <div className="space-y-4">
+              <p className="whitespace-pre-wrap leading-relaxed text-sm">{info.description}</p>
+              
+              {/* Ссылка на внешний ресурс для реальных объектов */}
+              {view === 'real' && info.external_link && (
+                <div className="mt-6 p-4 bg-gold-leaf/10 rounded-lg border border-gold-leaf/20">
+                  <h4 className="font-serif text-lg mb-2 text-gold-leaf">Узнать больше</h4>
+                  <a 
+                    href={info.external_link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-gold-leaf hover:text-gold-leaf/80 transition-colors font-medium"
+                  >
+                    <i className="fas fa-external-link-alt"></i>
+                    Открыть на Краснакарте
+                  </a>
+                </div>
+              )}
+            </div>
           </div>
           <div className="md:w-1/2 flex items-center justify-center">
             <img src={info.image} alt={info.title} className="max-w-full max-h-full object-contain rounded-md" />
