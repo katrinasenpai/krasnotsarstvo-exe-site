@@ -94,6 +94,7 @@ export const locationsData: Record<LocationId, Location> = {
       title: 'БКЦ «НОТА»',
       description: `БКЦ «НОТА» – современное библиотечно-культурное пространство в Красногвардейском районе Санкт-Петербурга, открытое 25 ноября 2023 года.`,
       image: nota_real,
+      external_link: 'https://krasnakarta.ru/objects/detail/biblioteka-nota/'
     },
     fantasy_info: {
       title: 'Библиотека НОТА',
@@ -111,6 +112,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Ильинская слобода',
         description: `Ильинская слобода представляла собой рабочий посёлок, где жили мастера и ремесленники порохового производства. Пётр I переселял мастеров сюда и дал им особые привилегии, освободив от многих повинностей.`,
         image: sloboda_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/ilinskaya-sloboda/'
     },
     fantasy_info: {
         title: 'Слобода Алхимиков',
@@ -128,6 +130,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Охтинский пороховой завод',
         description: `Старейшее промышленное предприятие Санкт-Петербурга, основанное Петром I в 1715 году. За свою историю предприятие пережило несколько разрушительных взрывов.`,
         image: zavod_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/ohtinski-zavod/'
     },
     fantasy_info: {
         title: 'Зелейный завод',
@@ -145,6 +148,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Ржевский лесопарк',
         description: `Обширный зелёный массив на восточной границе Санкт-Петербурга, один из любимых мест отдыха горожан. Служит «лёгкими» района.`,
         image: forest_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/rzevskii-lesopark/'
     },
     fantasy_info: {
         title: 'Тёмный лес',
@@ -162,6 +166,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Квартал Ржевка-Пороховые',
         description: `Крупный жилой квартал с типовой советской архитектурой, построенный в конце 1970-х – 1980-х годов.`,
         image: quarter_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/Rzhevka-Porokhovye/'
     },
     fantasy_info: {
         title: 'Квартал четырёх дураков',
@@ -184,7 +189,7 @@ export const locationsData: Record<LocationId, Location> = {
 
 Интересный факт: В библиотеке есть интерактивные зоны, мультимедийные залы и даже виртуальная реальность для изучения истории района.`,
       image: rzevskaya_real,
-      external_link: 'https://krasnakarta.ru/rzevskaya'
+      external_link: 'https://krasnakarta.ru/objects/detail/biblioteka-rjevskaya/'
     },
     fantasy_info: {
       title: 'Библиотека «Ржевская»',
@@ -242,6 +247,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Ладожский вокзал',
         description: `Самый новый из действующих железнодорожных вокзалов Санкт-Петербурга. Это современный транспортный комплекс, спроектированный как «интеллектуальное здание».`,
         image: vokzal_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/voksalni-complex-ladosjski/'
     },
     fantasy_info: {
         title: 'Станция Дирижаблей',
@@ -259,6 +265,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Библиотека «СФЕРА»',
         description: `Современная библиотека, объединяющая книжный фонд, мультимедийные технологии и интерактивные пространства. Открыта 21 октября 2023 г.`,
         image: sfera_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/biblioteka-sfera/'
     },
     fantasy_info: {
         title: 'Библиотека «Сфера»',
@@ -276,6 +283,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Дом-стакан',
         description: `Народное название круглого многоэтажного жилого дома. Экспериментальный советский дом, построен в начале 1970-х годов как общежитие.`,
         image: stakan_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/dom-stakan/'
     },
     fantasy_info: {
         title: 'Крепость-Стакан',
@@ -293,6 +301,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Уткина дача',
         description: `Старинная усадьба на берегу Охты, затерянная среди современных высоток. Название не имеет отношения к уткам – она названа по фамилии последних владельцев Уткиных.`,
         image: dacha_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/utkina-dacha/'
     },
     fantasy_info: {
         title: 'Уткина Гавань',
@@ -310,6 +319,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Библиотека «ШКАФ»',
         description: `Современное культурное пространство, сочетающее в себе библиотеку, арт-резиденцию и креативную площадку. В 2018 году превратилась в арт-резиденцию «ШКАФ».`,
         image: shkaf_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/biblioteka-shkaf/'
     },
     fantasy_info: {
         title: 'Библиотека «ШКАФ»',
@@ -327,6 +337,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Больница им. Петра Великого',
         description: `Крупный клинический центр, один из старейших в городе. Основана в 1903 году в честь 200-летия Санкт-Петербурга.`,
         image: bedlam_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/bolnitsa-imeni-petravelicogo/'
     },
     fantasy_info: {
         title: 'Лечебница',
@@ -344,6 +355,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Полюстровский парк',
         description: `Зелёная зона отдыха в Красногвардейском районе. Основан в 1967 году на месте старой застройки и мусорной свалки.`,
         image: park_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/polustrovski-park/'
     },
     fantasy_info: {
         title: 'Древо Мудрости и Источник жизни',
@@ -366,7 +378,7 @@ export const locationsData: Record<LocationId, Location> = {
 
 Интересный факт: В 2017 году сквер перед библиотекой был благоустроен, а на его территории появилась цветочная клумба в виде раскрытой книги и литературный арт-объект «Голубь Экзюпери».`,
       image: gogol_real,
-      external_link: 'https://krasnakarta.ru/gogol'
+      external_link: 'https://krasnakarta.ru/objects/detail/biblioteka-gogolya/'
     },
     fantasy_info: {
       title: 'Библиотека Гоголя',
@@ -392,6 +404,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'ТРЦ «Охта Молл»',
         description: `Один из крупнейших торгово-развлекательных центров Санкт-Петербурга. Открыт 27 августа 2016 года.`,
         image: rinok_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/torgovo-razvlekatelnii-centr-ohta-moll/'
     },
     fantasy_info: {
         title: 'Рынок',
@@ -409,6 +422,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Охтинская пожарная часть',
         description: `Одно из старейших пожарных подразделений Санкт-Петербурга, основанное в 1828 году. Известна своей высокой каланчой, которая является символом района.`,
         image: kalancha_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/pozharnaya-BO/'
     },
     fantasy_info: {
         title: 'Каланча',
@@ -426,6 +440,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Пастбища в Охтенской слободе',
         description: `Аллюзия на бывшие молочные хозяйства. По легенде, Пётр I выделил жителям Охты пастбища и обеспечил их отборными голландскими коровами, чтобы они снабжали столицу молоком.`,
         image: berega_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/skulptura-ohtenka/'
     },
     fantasy_info: {
         title: 'Молочные берега',
@@ -443,6 +458,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Охтинские верфи',
         description: `Судостроительное предприятие, основанное Петром I в 1721 году, один из первых центров судостроения на Неве.`,
         image: verfi_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/ohtinski-mys/'
     },
     fantasy_info: {
         title: 'Плотницкая верфь',
@@ -460,6 +476,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Памятный знак «Крепость Ниеншанц»',
         description: `Мемориал на Охтинском мысу, установленный в 2000 году в честь шведской крепости XVII века, предшествовавшей Санкт-Петербургу.`,
         image: pushka_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/pamyatni-znak-krepost-nienshnats/'
     },
     fantasy_info: {
         title: 'Пушка (Ниеншанц)',
@@ -482,7 +499,7 @@ export const locationsData: Record<LocationId, Location> = {
 
 Интересный факт: Башни моста украшены бронзовыми медальонами с изображениями Петра I и Екатерины II, а также гербами Санкт-Петербурга и Российской империи.`,
       image: most_real,
-      external_link: 'https://krasnakarta.ru/most'
+      external_link: 'https://krasnakarta.ru/objects/detail/bolsheohtinski-park/'
     },
     fantasy_info: {
       title: 'Большой арочный мост',
@@ -508,6 +525,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Малоохтинское старообрядческое кладбище',
         description: `Одно из старейших старообрядческих некрополей Санкт-Петербурга, основанное в XVIII веке. Важный центр старообрядческой общины.`,
         image: kapishya_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/maloohtinskoye-staroobryadcheskoe-cladbishe/'
     },
     fantasy_info: {
         title: 'Древнее капище',
@@ -525,6 +543,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Театр «Буфф»',
         description: `Один из самых известных музыкально-комедийных театров Санкт-Петербурга. Здесь начинали карьеру Юрий Гальцев, Геннадий Ветров и Елена Воробей.`,
         image: buff_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/teatr-buff/'
     },
     fantasy_info: {
         title: 'Театр «Буффонада»',
@@ -542,6 +561,7 @@ export const locationsData: Record<LocationId, Location> = {
         title: 'Ст. метро Новочеркасская',
         description: `Станция Правобережной линии, расположенная под Заневской площадью. Подземные переходы у станции известны своей запутанностью, из-за чего они стали объектом шуток.`,
         image: katakombs_real,
+        external_link: 'https://krasnakarta.ru/objects/detail/stanstiya-metro-novocherkaskaya/'
     },
     fantasy_info: {
         title: 'Катакомбы «Заходи – не бойся, выходи – не плачь»',
