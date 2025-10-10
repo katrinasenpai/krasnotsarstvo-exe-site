@@ -1,6 +1,6 @@
 // src/App.tsx
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import SplashCursor from './components/SplashCursor';
 import { CharacterCard } from './components/CharacterCard';
@@ -144,6 +144,23 @@ function App() {
   const galleryScrollRef = useRef<HTMLDivElement>(null);
   const [galleryTouchStart, setGalleryTouchStart] = useState<number | null>(null);
   const [galleryTouchEnd, setGalleryTouchEnd] = useState<number | null>(null);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Определение размера экрана для отключения курсора на мобильных
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.matchMedia('(min-width: 768px)').matches);
+    };
+
+    // Проверяем при загрузке
+    checkIsDesktop();
+
+    // Добавляем слушатель изменения размера окна
+    window.addEventListener('resize', checkIsDesktop);
+
+    // Очистка слушателя при размонтировании
+    return () => window.removeEventListener('resize', checkIsDesktop);
+  }, []);
 
   const galleryScrollLeft = () => {
     if (galleryScrollRef.current) {
@@ -186,13 +203,15 @@ function App() {
 
   return (
     <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20"> 
-      <SplashCursor
-        SPLAT_FORCE={2000}        // <-- Уменьшили силу (было 6000 по умолчанию)
-        DENSITY_DISSIPATION={4}   // <-- Как быстро исчезает "дым"
-        SPLAT_RADIUS={0.5}      // <-- Размер "кляксы" от курсора
-        CURL={10}                // <-- Степень "завихрения"
-        PRESSURE={0.2}           // <-- Сила "давления" жидкости
-      />
+      {isDesktop && (
+        <SplashCursor
+          SPLAT_FORCE={2000}        // <-- Уменьшили силу (было 6000 по умолчанию)
+          DENSITY_DISSIPATION={4}   // <-- Как быстро исчезает "дым"
+          SPLAT_RADIUS={0.5}      // <-- Размер "кляксы" от курсора
+          CURL={10}                // <-- Степень "завихрения"
+          PRESSURE={0.2}           // <-- Сила "давления" жидкости
+        />
+      )}
       <Navbar navLinks={navLinks} />
       
       {/* HERO */}
