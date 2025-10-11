@@ -29,6 +29,8 @@ import gallery4 from './assets/images/gallery-4.webp';
 import gallery5 from './assets/images/gallery-5.webp';
 import gallery6 from './assets/images/gallery-6.webp';
 import gallery7 from './assets/images/gallery-7.webp';
+import orgLogos1 from './assets/images/org-logos.webp';
+import orgLogos2 from './assets/images/org-logos_2.webp';
 
 // --- ИМПОРТЫ ИКОНОК ---
 import HomeIcon from './assets/icons/home-icon.svg?react';
@@ -557,13 +559,13 @@ function App() {
         orgLogos={[
           { 
             id: 'org1', 
-            src: '/src/assets/images/org-logos.webp', 
+            src: orgLogos1, 
             alt: 'ЦБС Красногвардейского района', 
             href: 'https://kr-cbs.ru/' 
           },
           { 
             id: 'org2', 
-            src: '/src/assets/images/org-logos_2.webp', 
+            src: orgLogos2, 
             alt: 'Библиотека «Ржевская»', 
             href: 'https://kr-cbs.ru/libraries/rzhevskaya' 
           }
