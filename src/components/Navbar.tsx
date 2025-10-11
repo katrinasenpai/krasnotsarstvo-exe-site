@@ -94,8 +94,8 @@ export function Navbar({ navLinks }: NavbarProps) {
         {/* Выдвижное боковое меню */}
         <div className={`fixed top-0 left-0 h-full w-80 bg-midnight-ink/95 backdrop-blur-lg border-r border-shadow-grey/20 transform transition-transform duration-300 z-40 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="flex flex-col h-full">
-            {/* Заголовок с логотипом */}
-            <div className="p-6 border-b border-shadow-grey/20">
+            {/* Заголовок с логотипом и кнопкой закрытия */}
+            <div className="p-6 border-b border-shadow-grey/20 relative">
               <div className="flex items-center gap-3 mb-4">
                 <a 
                   href="#home" 
@@ -107,6 +107,16 @@ export function Navbar({ navLinks }: NavbarProps) {
                 </a>
                 <h2 className="text-gold-leaf font-serif text-xl">Навигация</h2>
               </div>
+              {/* Кнопка закрытия в правом верхнем углу */}
+              <button
+                onClick={toggleMobileMenu}
+                className="absolute top-4 right-4 p-2 text-gold-leaf hover:bg-gold-leaf/10 rounded-lg transition-colors"
+                aria-label="Закрыть меню"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
             
             {/* Список ссылок */}
