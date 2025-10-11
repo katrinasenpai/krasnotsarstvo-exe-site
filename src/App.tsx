@@ -7,6 +7,7 @@ import { CharacterCard } from './components/CharacterCard';
 import { Map } from './components/Map';
 import { Separator } from './components/Separator'; 
 import { FeaturesTabs } from './components/FeaturesTabs';
+import { Footer } from './components/Footer';
 import heroVideo from './assets/videos/hero-animation.webm';
 import playerImg from './assets/images/player.webp';
 import iskinImg from './assets/images/iskin.webp';
@@ -202,6 +203,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
+    <>
     <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20"> 
       {isDesktop && (
         <SplashCursor
@@ -551,12 +553,24 @@ function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="py-12 border-t border-shadow-grey/20">
-        <div className="container text-center text-shadow-grey">
-          <p>&copy; 2025 КрасноЦарство.exe. ЦБС Красногвардейского района.</p>
-        </div>
-      </footer>
+      <Footer 
+        orgLogos={[
+          { 
+            id: 'org1', 
+            src: '/src/assets/images/org-logos.webp', 
+            alt: 'ЦБС Красногвардейского района', 
+            href: 'https://kr-cbs.ru/' 
+          },
+          { 
+            id: 'org2', 
+            src: '/src/assets/images/org-logos_2.webp', 
+            alt: 'Библиотека «Ржевская»', 
+            href: 'https://kr-cbs.ru/libraries/rzhevskaya' 
+          }
+        ]}
+      />
     </div>
+    </>
   );
 }
 
