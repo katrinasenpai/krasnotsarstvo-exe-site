@@ -1,6 +1,6 @@
 // src/components/Map.tsx
 
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect } from 'react';
 import { locationsData, LocationId } from '../data/locations';
 import mapImage from '../assets/images/map_krascarsvo.webp';
 import { LocationModal } from './LocationModal';
@@ -24,6 +24,22 @@ export function Map() {
       });
     }
   }, [inView]);
+
+  // Блокировка прокрутки страницы когда открыта карточка
+  useEffect(() => {
+    if (activeCardId) {
+      // Блокируем прокрутку
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Восстанавливаем прокрутку
+      document.body.style.overflow = 'unset';
+    }
+
+    // Очистка при размонтировании компонента
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [activeCardId]);
 
   return (
     <>
