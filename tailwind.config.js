@@ -10,7 +10,7 @@ export default {
         'midnight-ink': '#0A0C1A',
         'ancient-parchment': '#F5E9D3',
         'mystic-cyan': '#00F2FF',
-        'gold-leaf': '#D4AF37',
+        'gold-leaf': '#f0b65a',
         'off-white': '#EAEAEA',
         'deep-blue-ink': '#1E2A4A',
         'shadow-grey': '#333850',

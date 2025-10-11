@@ -1,15 +1,15 @@
 :root {
     --primary-bg: #1a1a1a;
     --secondary-bg: #2d2d2d;
-    --accent-gold: #d4af37;
+    --accent-gold: #f0b65a;
     --accent-amber: #ffb347;
     --text-light: #f5f5f5;
     --text-gray: #cccccc;
     --text-dark: #666666;
     --shadow-dark: rgba(0, 0, 0, 0.8);
-    --shadow-gold: rgba(212, 175, 55, 0.3);
+    --shadow-gold: rgba(240, 182, 90, 0.3);
     --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    --gradient-gold: linear-gradient(135deg, #d4af37 0%, #ffb347 100%);
+    --gradient-gold: linear-gradient(135deg, #f0b65a 0%, #ffb347 100%);
 }
 
 * {

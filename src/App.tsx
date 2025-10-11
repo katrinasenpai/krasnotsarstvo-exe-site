@@ -229,14 +229,14 @@ function App() {
           <div className="absolute flex flex-col sm:flex-row gap-3 sm:gap-4 bottom-[10%] sm:bottom-[15%] left-4 sm:left-auto sm:right-[10%] right-4">
             <a 
               href="#download" 
-              className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
+              className="bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <i className="fas fa-heart mr-2"></i>
               <span>Добавить в желаемое</span>
             </a>
             <a 
               href="#story" 
-              className="border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
+              className="border border-gold-leaf text-gold-leaf hover:bg-gold-leaf hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <i className="fas fa-book-open mr-2"></i>
               <span>Узнать больше</span>
