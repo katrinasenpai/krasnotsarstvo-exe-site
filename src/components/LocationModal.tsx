@@ -14,7 +14,7 @@ export function LocationModal({ cardId, onClose }: LocationModalProps) {
   const info = view === 'real' ? location.real_info : location.fantasy_info;
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999] p-4 lightbox-fade-in" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[9999] p-4 lightbox-fade-in" onClick={onClose} style={{zIndex: 9999}}>
       <div className="relative bg-ancient-parchment text-deep-blue-ink w-full max-w-5xl h-[90vh] rounded-lg p-6 md:p-8 flex flex-col gap-4" onClick={(e) => e.stopPropagation()}>
         
         <button onClick={onClose} className="absolute top-2 right-3 text-4xl text-deep-blue-ink/50 hover:text-deep-blue-ink transition-colors">&times;</button>
