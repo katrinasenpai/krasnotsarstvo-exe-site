@@ -96,27 +96,30 @@ export function Navbar({ navLinks }: NavbarProps) {
           <div className="flex flex-col h-full">
             {/* Заголовок с логотипом и кнопкой закрытия */}
             <div className="p-6 border-b border-shadow-grey/20 relative">
-              <div className="flex items-center gap-3 mb-4">
-                <a 
-                  href="#home" 
-                  onClick={handleLogoClick}
-                  className="group block p-1 rounded-lg hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
-                  aria-label="Главная страница"
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <a 
+                    href="#home" 
+                    onClick={handleLogoClick}
+                    className="group block p-1 rounded-lg hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
+                    aria-label="Главная страница"
+                  >
+                    <LogoIcon className="w-8 h-8 text-gold-leaf group-hover:logo-glow transition-all duration-300" />
+                  </a>
+                  <h2 className="text-gold-leaf font-serif text-xl">Навигация</h2>
+                </div>
+                {/* Красивая кнопка закрытия справа */}
+                <button
+                  onClick={toggleMobileMenu}
+                  className="group p-2 rounded-lg hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
+                  aria-label="Закрыть меню"
                 >
-                  <LogoIcon className="w-8 h-8 text-gold-leaf group-hover:logo-glow transition-all duration-300" />
-                </a>
-                <h2 className="text-gold-leaf font-serif text-xl">Навигация</h2>
+                  <div className="w-6 h-6 flex items-center justify-center">
+                    <span className="block w-5 h-0.5 bg-gold-leaf transition-all duration-300 group-hover:bg-gold-leaf/80 rotate-45"></span>
+                    <span className="block w-5 h-0.5 bg-gold-leaf transition-all duration-300 group-hover:bg-gold-leaf/80 -rotate-45 -ml-5"></span>
+                  </div>
+                </button>
               </div>
-              {/* Кнопка закрытия в правом верхнем углу */}
-              <button
-                onClick={toggleMobileMenu}
-                className="absolute top-4 right-4 p-2 text-gold-leaf hover:bg-gold-leaf/10 rounded-lg transition-colors"
-                aria-label="Закрыть меню"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
             </div>
             
             {/* Список ссылок */}
