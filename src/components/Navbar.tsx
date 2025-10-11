@@ -1,6 +1,7 @@
 // src/components/Navbar.tsx
 
 import React, { useState } from 'react';
+import LogoIcon from '../assets/icons/logo.svg?react';
 
 // Определяем типы для наших данных, чтобы всё было строго
 type NavLink = {
@@ -26,6 +27,16 @@ export function Navbar({ navLinks }: NavbarProps) {
     setIsMobileMenuOpen(false);
   };
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.getElementById('home')?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    // Закрываем мобильное меню после клика
+    setIsMobileMenuOpen(false);
+  };
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -33,7 +44,19 @@ export function Navbar({ navLinks }: NavbarProps) {
   return (
     <>
       {/* Десктопная навигация - скрыта на мобильных */}
-      <nav className="hidden md:flex fixed top-0 left-0 h-full w-20 bg-midnight-ink/80 backdrop-blur-lg border-r border-shadow-grey/20 flex-col items-center justify-center z-50">
+      <nav className="hidden md:flex fixed top-0 left-0 h-full w-20 bg-midnight-ink/80 backdrop-blur-lg border-r border-shadow-grey/20 flex-col items-center z-50">
+        {/* Логотип */}
+        <div className="mt-8 mb-16">
+          <a 
+            href="#home" 
+            onClick={handleLogoClick}
+            className="group block p-2 rounded-lg hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
+            aria-label="Главная страница"
+          >
+            <LogoIcon className="w-10 h-10 text-gold-leaf group-hover:logo-glow transition-all duration-300" />
+          </a>
+        </div>
+        
         <ul className="flex flex-col items-center gap-6">
           {navLinks.map((link) => (
             <li key={link.href} className="navbar-item group">
@@ -71,9 +94,19 @@ export function Navbar({ navLinks }: NavbarProps) {
         {/* Выдвижное боковое меню */}
         <div className={`fixed top-0 left-0 h-full w-80 bg-midnight-ink/95 backdrop-blur-lg border-r border-shadow-grey/20 transform transition-transform duration-300 z-40 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="flex flex-col h-full">
-            {/* Заголовок */}
+            {/* Заголовок с логотипом */}
             <div className="p-6 border-b border-shadow-grey/20">
-              <h2 className="text-gold-leaf font-serif text-xl">Навигация</h2>
+              <div className="flex items-center gap-3 mb-4">
+                <a 
+                  href="#home" 
+                  onClick={handleLogoClick}
+                  className="group block p-1 rounded-lg hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
+                  aria-label="Главная страница"
+                >
+                  <LogoIcon className="w-8 h-8 text-gold-leaf group-hover:logo-glow transition-all duration-300" />
+                </a>
+                <h2 className="text-gold-leaf font-serif text-xl">Навигация</h2>
+              </div>
             </div>
             
             {/* Список ссылок */}

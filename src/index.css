@@ -37,6 +37,20 @@
   .navbar-tooltip {
     @apply absolute left-full top-1/2 -translate-y-1/2 ml-4 px-3 py-1.5 bg-gold-leaf text-midnight-ink text-sm font-bold whitespace-nowrap rounded-md scale-0 group-hover:scale-100 transition-all origin-left pointer-events-none;
   }
+  
+  /* Анимация логотипа */
+  .logo-animation {
+    animation: logoFloat 3s ease-in-out infinite;
+  }
+  
+  @keyframes logoFloat {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-2px) rotate(1deg); }
+  }
+  
+  .logo-glow {
+    filter: drop-shadow(0 0 8px rgba(240, 182, 90, 0.6));
+  }
 
   /* Карточки персонажей */
   .flip-card { perspective: 1000px; }
