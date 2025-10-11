@@ -221,9 +221,9 @@ function App() {
         </video>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 h-full px-4 sm:px-8 md:px-16 lg:px-24">
-          <div className="absolute top-[20%] sm:top-[25%] md:top-[27%] left-0 right-0 px-4">
-            <p className="font-handwriting text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal max-w-xs sm:max-w-sm md:max-w-md text-shadow-grey opacity-80 leading-tight">
-              Ты — тот, кто сквозь портал шагнул в КрасноЦарство, но кем ты станешь — решаешь ты сам.
+          <div className="absolute top-[25%] sm:top-[30%] md:top-[35%] left-0 sm:left-8 md:left-24 right-0 sm:right-8 md:right-16">
+            <p className="font-handwriting text-lg sm:text-xl md:text-2xl lg:text-3xl font-extralight max-w-sm sm:max-w-md md:max-w-lg text-gold-leaf opacity-50 leading-relaxed [text-shadow:0_0_2px_var(--gold-leaf)] tracking-wide">
+              ✨ Помоги восстановить утраченные знания — исследуй мистические локации КрасноЦарства и&nbsp;открывай реальную историю их прототипов в Красногвардейском районе <span className="whitespace-nowrap">Санкт-Петербурга</span> 
             </p>
           </div>
           <div className="absolute flex flex-col sm:flex-row gap-3 sm:gap-4 bottom-[10%] sm:bottom-[15%] left-4 sm:left-auto sm:right-[10%] right-4">
