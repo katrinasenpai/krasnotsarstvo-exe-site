@@ -44,19 +44,19 @@ export function Map() {
   return (
     <>
       {/* This is the simple container for the map */}
-      <div ref={ref} className="relative w-full aspect-[1.77] rounded-lg overflow-hidden">
+      <div ref={ref} className="relative w-full rounded-lg overflow-hidden md:aspect-[1.77]">
         {/* The map is visible immediately, without animations */}
         <img 
           src={mapImage} 
           alt="Карта КрасноЦарства" 
-          className="w-full h-full object-cover"
+          className="w-full h-auto md:h-full md:object-cover object-contain"
         />
 
         {/* The pins are initially invisible and wait for the useInView signal */}
         {Object.values(locationsData).map((loc) => (
           <button
             key={loc.id}
-            className="map-pin group absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 scale-75"
+            className="map-pin group absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 scale-75 touch-none"
             style={{ left: loc.coords.x, top: loc.coords.y }}
             onClick={() => setActiveCardId(loc.id)}
           >

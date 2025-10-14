@@ -1,6 +1,7 @@
 // src/components/LocationModal.tsx
 
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { locationsData, LocationId } from '../data/locations';
 
 type LocationModalProps = {
@@ -13,7 +14,7 @@ export function LocationModal({ cardId, onClose }: LocationModalProps) {
   const location = locationsData[cardId];
   const info = view === 'real' ? location.real_info : location.fantasy_info;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[99999] p-4 lightbox-fade-in" onClick={onClose} style={{zIndex: 99999, isolation: 'isolate'}}>
       <div className="relative bg-ancient-parchment text-deep-blue-ink w-full max-w-5xl h-[90vh] rounded-lg p-6 md:p-8 flex flex-col gap-4 overflow-hidden" onClick={(e) => e.stopPropagation()}>
         
@@ -54,6 +55,7 @@ export function LocationModal({ cardId, onClose }: LocationModalProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
