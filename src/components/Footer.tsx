@@ -61,7 +61,7 @@ export function Footer({ orgLogos = [] }: FooterProps) {
         {/* Блок логотипов организаций */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-serif text-2xl text-gold-leaf">Партнёры и организации</h3>
+            <h3 className="font-serif text-2xl text-gold-leaf">Организаторы и партнёры</h3>
           </div>
           <div className="grid grid-cols-2 gap-6 items-center">
             {orgLogos.length === 0 ? (
