@@ -79,6 +79,10 @@
     .container {
       @apply px-4;
     }
+    /* Центровка hero-текста на узких экранах */
+    .hero-mobile-center {
+      @apply text-center mx-auto;
+    }
     
     /* Улучшенная читаемость на мобильных */
     .font-handwriting {

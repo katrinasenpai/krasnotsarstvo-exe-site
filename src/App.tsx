@@ -225,8 +225,8 @@ function App() {
         </video>
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 h-full px-4 sm:px-8 md:px-16 lg:px-24">
-          <div className="absolute top-[15%] sm:top-[30%] md:top-[35%] left-0 sm:left-8 md:left-24 right-0 sm:right-8 md:right-16">
-            <p className="font-handwriting text-lg sm:text-xl md:text-2xl lg:text-3xl font-extralight max-w-sm sm:max-w-md md:max-w-lg text-gold-leaf opacity-50 leading-relaxed [text-shadow:0_0_2px_var(--gold-leaf)] tracking-wide">
+          <div className="absolute top-[12%] sm:top-[30%] md:top-[35%] left-1/2 -translate-x-1/2 w-[92%] sm:w-auto sm:left-8 sm:translate-x-0 md:left-24 md:right-16">
+            <p className="font-handwriting text-xl sm:text-2xl md:text-2xl lg:text-3xl font-extralight max-w-md sm:max-w-md md:max-w-lg text-gold-leaf opacity-50 leading-relaxed text-center sm:text-left [text-shadow:0_0_2px_var(--gold-leaf)] tracking-wide">
               ✨ Помоги восстановить утраченные знания — исследуй мистические локации КрасноЦарства и&nbsp;открывай реальную историю их прототипов в Красногвардейском районе <span className="whitespace-nowrap">Санкт-Петербурга</span> 
             </p>
           </div>
