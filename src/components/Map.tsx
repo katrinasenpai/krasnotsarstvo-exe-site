@@ -56,7 +56,7 @@ export function Map() {
         {Object.values(locationsData).map((loc) => (
           <button
             key={loc.id}
-            className="map-pin group absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 z-20 opacity-0 scale-75 touch-none"
+            className="map-pin group absolute w-8 h-8 -translate-x-[52%] -translate-y-[74%] md:-translate-x-1/2 md:-translate-y-1/2 z-20 opacity-0 scale-75 touch-none"
             style={{ left: loc.coords.x, top: loc.coords.y }}
             onClick={() => setActiveCardId(loc.id)}
           >
