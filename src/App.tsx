@@ -563,7 +563,7 @@ function App() {
                 <i className="fas fa-star text-gold-leaf text-2xl"></i>
                 <h3 className="font-serif text-xl text-gold-leaf">Полноценная версия</h3>
               </div>
-              <p className="text-off-white/90 text-lg font-semibold">Зима 2025</p>
+              <p className="text-off-white/90 text-lg font-semibold">Зима 25/26</p>
               <p className="text-off-white/70 text-sm mt-2">Финальная версия с крутыми фичами</p>
             </div>
           </div>
