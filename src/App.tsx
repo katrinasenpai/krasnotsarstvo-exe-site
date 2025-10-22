@@ -29,6 +29,10 @@ import gallery4 from './assets/images/gallery-4.webp';
 import gallery5 from './assets/images/gallery-5.webp';
 import gallery6 from './assets/images/gallery-6.webp';
 import gallery7 from './assets/images/gallery-7.webp';
+import gallery8 from './assets/images/gallery-8.webp';
+import gallery9 from './assets/images/gallery-9.webp';
+import gallery10 from './assets/images/gallery-10.webp';
+import gallery11 from './assets/images/gallery-11.webp';
 import orgLogos1 from './assets/images/org-logos.webp';
 import orgLogos2 from './assets/images/org-logos_2.webp';
 
@@ -99,7 +103,11 @@ const galleryImages = [
   gallery4,
   gallery5,
   gallery6,
-  gallery7
+  gallery7,
+  gallery8,
+  gallery9,
+  gallery10,
+  gallery11
 ];
 
 function App() {
@@ -232,7 +240,9 @@ function App() {
           </div>
           <div className="absolute flex flex-col sm:flex-row gap-3 sm:gap-4 bottom-[10%] sm:bottom-[15%] left-4 sm:left-auto sm:right-[10%] right-4">
             <a 
-              href="#download" 
+              href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <i className="fas fa-heart mr-2"></i>
@@ -531,21 +541,62 @@ function App() {
             <BellIcon className="w-10 h-10" />
             СКОРО РЕЛИЗ
           </h2>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-off-white/80 mb-12 leading-relaxed">
-            Релиз запланирован на осень 2025 года. Чтобы не пропустить выход игры и поддержать наш проект, добавьте его в список желаемого и следите за новостями!
+          <p className="max-w-3xl mx-auto text-lg md:text-xl text-off-white/80 mb-8 leading-relaxed">
+            Игра уже размещена на VK Play! Добавьте её в избранное, чтобы не пропустить демо-релиз и полный релиз.
           </p>
 
-          {/* --- Новая единая панель --- */}
-          <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12">
+          {/* Информация о датах релизов */}
+          <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-8">
+            {/* Демо-релиз */}
+            <div className="bg-gold-leaf/10 border border-gold-leaf/30 rounded-xl p-6">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <i className="fas fa-calendar-alt text-gold-leaf text-2xl"></i>
+                <h3 className="font-serif text-xl text-gold-leaf">Расширенное демо</h3>
+              </div>
+              <p className="text-off-white/90 text-lg font-semibold">29 ноября 2025</p>
+              <p className="text-off-white/70 text-sm mt-2">Полноценная демо-версия игры</p>
+            </div>
+
+            {/* Полный релиз */}
+            <div className="bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-6">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <i className="fas fa-star text-gold-leaf text-2xl"></i>
+                <h3 className="font-serif text-xl text-gold-leaf">Полноценная версия</h3>
+              </div>
+              <p className="text-off-white/90 text-lg font-semibold">Зима 2025</p>
+              <p className="text-off-white/70 text-sm mt-2">Финальная версия с крутыми фичами</p>
+            </div>
+          </div>
+
+          {/* Кнопка VK Play */}
+          <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12 mb-8">
             <div className="text-center">
-              <h3 className="font-serif text-2xl text-gold-leaf mb-4">Следите за новостями</h3>
-              <p className="text-off-white/70 mb-6">Присоединяйтесь к нашему сообществу, чтобы быть в курсе всех событий и не пропустить релиз игры.</p>
+              <h3 className="font-serif text-2xl text-gold-leaf mb-4">Добавить в избранное</h3>
+              <p className="text-off-white/70 mb-6">Перейдите на VK Play, чтобы добавить игру в избранное и быть в курсе релизов!</p>
+              <a 
+                href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                <i className="fas fa-heart text-xl"></i>
+                <span>Добавить в избранное на VK Play</span>
+                <i className="fas fa-external-link-alt text-sm"></i>
+              </a>
+            </div>
+          </div>
+
+          {/* Социальные сети */}
+          <div className="max-w-2xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-6">
+            <div className="text-center">
+              <h3 className="font-serif text-xl text-gold-leaf mb-4">Следите за новостями</h3>
+              <p className="text-off-white/70 mb-4">Присоединяйтесь к нашему сообществу для получения обновлений о релизах.</p>
               <div className="flex items-center justify-center gap-8">
                 <a href="https://vk.com/rzhevka_lib" target="_blank" rel="noopener noreferrer" aria-label="Наша группа ВКонтакте" className="text-shadow-grey hover:text-blue-500 transition-all duration-300 transform hover:scale-110">
-                  <i className="fab fa-vk text-6xl"></i>
+                  <i className="fab fa-vk text-5xl"></i>
                 </a>
                 <a href="https://t.me/lib_rzhevka" target="_blank" rel="noopener noreferrer" aria-label="Наш Телеграм канал" className="text-shadow-grey hover:text-sky-500 transition-all duration-300 transform hover:scale-110">
-                  <i className="fab fa-telegram text-6xl"></i>
+                  <i className="fab fa-telegram text-5xl"></i>
                 </a>
               </div>
             </div>

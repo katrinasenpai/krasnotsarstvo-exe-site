@@ -1,6 +1,5 @@
 // src/components/Footer.tsx
 
-import React from 'react';
 
 type OrgLogo = {
   id: string;
@@ -88,6 +87,9 @@ export function Footer({ orgLogos = [] }: FooterProps) {
         <div className="container flex flex-col md:flex-row items-center justify-between gap-4 text-shadow-grey">
           <p className="text-sm">© {new Date().getFullYear()} КрасноЦарство.exe. ЦБС Красногвардейского района.</p>
           <div className="flex items-center gap-4 text-sm">
+            <a href="https://vkplay.ru/play/game/krasnocarstvoexe/" target="_blank" rel="noopener noreferrer" className="hover:text-gold-leaf transition-colors" aria-label="VK Play">
+              <i className="fas fa-gamepad"></i>
+            </a>
             <a href="https://vk.com/rzhevka_lib" target="_blank" rel="noopener noreferrer" className="hover:text-gold-leaf transition-colors" aria-label="ВКонтакте">
               <i className="fab fa-vk"></i>
             </a>
