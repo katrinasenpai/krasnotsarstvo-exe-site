@@ -55,7 +55,7 @@ const navLinks = [
   { href: 'map', IconComponent: MapIcon, label: 'Карта'},
   { href: 'features', IconComponent: FeaturesIcon, label: 'Особенности' },
   { href: 'gallery', IconComponent: GalleryIcon, label: 'Галерея' },
-  { href: 'download', IconComponent: BellIcon, label: 'Скоро релиз' },
+  { href: 'download', IconComponent: BellIcon, label: 'ДЕМО-ВЕРСИЯ ДОСТУПНА!' },
 ];
 
 const charactersData = [
@@ -539,31 +539,40 @@ function App() {
         <div className="container relative z-10 text-center">
           <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-6 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
             <BellIcon className="w-10 h-10" />
-            СКОРО РЕЛИЗ
+            ДЕМО-ВЕРСИЯ ДОСТУПНА!
           </h2>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-off-white/80 mb-8 leading-relaxed">
-            Игра уже размещена на VK Play! Добавьте её в избранное, чтобы не пропустить демо-релиз и полный релиз.
+            Познакомиться с миром КрасноЦарства можно уже сейчас. Демо-версия игры доступна на платформе VK Play. <br/>
+            Что внутри демо: <br/>
+            📖 Первая глава истории: знакомство с героями и миром; <br/>
+            🧩 Весёлые мини-игры и загадки; <br/>
+            🔦 Специальный квест «Катакомбы» (если ваш выбор туда приведёт).
           </p>
 
           {/* Информация о датах релизов */}
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-8">
             {/* Демо-релиз */}
-            <div className="bg-gold-leaf/10 border border-gold-leaf/30 rounded-xl p-6">
+            <a
+              href="https://vkplay.ru/play/game/krasnocarstvoexe-45540/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gold-leaf/10 border border-gold-leaf/30 rounded-xl p-6 transition-transform transform hover:scale-105 hover:bg-gold-leaf/20 cursor-pointer block"
+            >
               <div className="flex items-center justify-center gap-3 mb-4">
                 <i className="fas fa-calendar-alt text-gold-leaf text-2xl"></i>
-                <h3 className="font-serif text-xl text-gold-leaf">Расширенное демо</h3>
+                <h3 className="font-serif text-xl text-gold-leaf">Демо-релиз</h3>
               </div>
               <p className="text-off-white/90 text-lg font-semibold">29 ноября 2025</p>
               <p className="text-off-white/70 text-sm mt-2">Полноценная демо-версия игры</p>
-            </div>
+            </a>
 
             {/* Полный релиз */}
             <div className="bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-6">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <i className="fas fa-star text-gold-leaf text-2xl"></i>
-                <h3 className="font-serif text-xl text-gold-leaf">Полноценная версия</h3>
+                <h3 className="font-serif text-xl text-gold-leaf">Основной релиз</h3>
               </div>
-              <p className="text-off-white/90 text-lg font-semibold">Зима 25/26</p>
+              <p className="text-off-white/90 text-lg font-semibold">Лето 2026</p>
               <p className="text-off-white/70 text-sm mt-2">Финальная версия с крутыми фичами</p>
             </div>
           </div>
@@ -572,7 +581,7 @@ function App() {
           <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12 mb-8">
             <div className="text-center">
               <h3 className="font-serif text-2xl text-gold-leaf mb-4">Добавить в избранное</h3>
-              <p className="text-off-white/70 mb-6">Перейдите на VK Play, чтобы добавить игру в избранное и быть в курсе релизов!</p>
+              <p className="text-off-white/70 mb-6">Идет масштабная работа над проектом! Мир новеллы растет и меняется, поэтому полноценный релиз смещён на лето этого года. В расширенной версии вас ждет более детально проработанный лор и система выборов, а также вторая глава «Тени Гоголя». Следите за новостями!</p>
               <a 
                 href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
                 target="_blank" 
