@@ -541,13 +541,45 @@ function App() {
             <BellIcon className="w-10 h-10" />
             ДЕМО-ВЕРСИЯ ДОСТУПНА!
           </h2>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-off-white/80 mb-8 leading-relaxed">
-            Познакомиться с миром КрасноЦарства можно уже сейчас. Демо-версия игры доступна на платформе VK Play. <br/>
-            Что внутри демо: <br/>
-            📖 Первая глава истории: знакомство с героями и миром; <br/>
-            🧩 Весёлые мини-игры и загадки; <br/>
-            🔦 Специальный квест «Катакомбы» (если ваш выбор туда приведёт).
-          </p>
+          <div className="max-w-2xl mx-auto mb-10 text-left">
+            <p className="text-lg md:text-xl text-off-white/80 leading-relaxed mb-6">
+              Познакомиться с миром КрасноЦарства можно уже сейчас — полноценная демо-версия доступна на{' '}
+              <a
+                href="https://vkplay.ru/play/game/krasnocarstvoexe-45540/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gold-leaf/90 underline decoration-gold-leaf/40 underline-offset-2 hover:text-gold-leaf hover:decoration-gold-leaf transition-colors"
+              >
+                VK Play
+              </a>
+              .
+            </p>
+            <h3 className="font-serif text-xl md:text-2xl text-gold-leaf mb-4 tracking-tight">
+              Что внутри демо
+            </h3>
+            <ul className="space-y-3.5 text-lg md:text-xl text-off-white/85 leading-snug list-none pl-0">
+              <li className="flex gap-3">
+                <span className="shrink-0 select-none w-7 text-center" aria-hidden>
+                  📖
+                </span>
+                <span>Первая глава истории — знакомство с героями и миром</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="shrink-0 select-none w-7 text-center" aria-hidden>
+                  🧩
+                </span>
+                <span>Весёлые мини-игры и загадки</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="shrink-0 select-none w-7 text-center" aria-hidden>
+                  🔦
+                </span>
+                <span>
+                  Специальный квест «Катакомбы» — если ваш выбор приведёт вас туда
+                </span>
+              </li>
+            </ul>
+          </div>
 
           {/* Информация о датах релизов */}
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-8">
