@@ -46,9 +46,11 @@ export function Map() {
       {/* This is the simple container for the map */}
       <div ref={ref} className="relative w-full rounded-lg overflow-hidden md:aspect-[1.77]">
         {/* The map is visible immediately, without animations */}
-        <img 
-          src={mapImage} 
-          alt="Карта КрасноЦарства" 
+        <img
+          src={mapImage}
+          alt="Карта КрасноЦарства"
+          loading="lazy"
+          decoding="async"
           className="w-full h-auto md:h-full md:object-cover object-contain"
         />
 

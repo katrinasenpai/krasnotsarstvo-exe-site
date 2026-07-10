@@ -10,7 +10,7 @@ import { FeaturesTabs } from './components/FeaturesTabs';
 import { Footer } from './components/Footer';
 import { Quiz } from './components/Quiz';
 import { QuizBanner } from './components/QuizBanner';
-import heroVideo from './assets/videos/hero-animation.webm';
+import heroBg from './assets/backgrounds/hero-bg.webp';
 import playerImg from './assets/images/player.webp';
 import iskinImg from './assets/images/iskin.webp';
 import apprenticeImg from './assets/images/apprentice.webp';
@@ -233,9 +233,7 @@ function App() {
 
       {/* HERO */}
       <section id="home" className="relative h-screen overflow-hidden">
-        <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-contain md:object-cover z-0">
-          <source src={heroVideo} type="video/webm" />
-        </video>
+        <img src={heroBg} alt="Библиотека КрасноЦарства" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
         <div className="absolute inset-0 bg-black/50 z-10" />
         <div className="relative z-20 h-full px-4 sm:px-8 md:px-16 lg:px-24">
           <div className="absolute top-[12%] sm:top-[30%] md:top-[35%] left-1/2 -translate-x-1/2 w-[92%] sm:w-auto sm:left-8 sm:translate-x-0 md:left-24 md:right-16">
@@ -483,7 +481,7 @@ function App() {
                 className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold-leaf transition-all duration-300"
               >
                 <div className="aspect-video">
-                  <img src={image} alt={`Скриншот галереи ${index + 1}`} className="w-full h-full object-cover" />
+                  <img src={image} alt={`Скриншот галереи ${index + 1}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
               </button>
             ))}
@@ -615,17 +613,17 @@ function App() {
                 <i className="fas fa-calendar-alt text-gold-leaf text-2xl"></i>
                 <h3 className="font-serif text-xl text-gold-leaf">Демо-релиз</h3>
               </div>
-              <p className="text-off-white/90 text-lg font-semibold">29 ноября 2025</p>
-              <p className="text-off-white/70 text-sm mt-2">Полноценная демо-версия игры</p>
+              <p className="text-off-white/90 text-lg font-semibold">18 декабря 2025</p>
+              <p className="text-off-white/70 text-sm mt-2">Релиз 1 главы с сюжетными правками и три дополнительных побочных квеста (Квартал Четырёх Дураков, Катакомбы и Станция дирижаблей)</p>
             </a>
 
             {/* Полный релиз */}
             <div className="bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-6">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <i className="fas fa-star text-gold-leaf text-2xl"></i>
-                <h3 className="font-serif text-xl text-gold-leaf">Основной релиз</h3>
+                <h3 className="font-serif text-xl text-gold-leaf">Релиз 1 части</h3>
               </div>
-              <p className="text-off-white/90 text-lg font-semibold">Лето 2026</p>
+              <p className="text-off-white/90 text-lg font-semibold">Вторая половина 2026</p>
               <p className="text-off-white/70 text-sm mt-2">Финальная версия с крутыми фичами</p>
             </div>
           </div>

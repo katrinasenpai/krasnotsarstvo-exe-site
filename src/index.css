@@ -5,10 +5,12 @@
 @font-face {
   font-family: 'Kereru';
   src: url('/src/assets/fonts/Kereru.otf') format('opentype');
+  font-display: swap;
 }
 @font-face {
   font-family: 'PFDinTextPro';
   src: url('/src/assets/fonts/PFDinTextPro-Regular.ttf') format('truetype');
+  font-display: swap;
 }
 
 /* === 2. АНИМАЦИИ === */

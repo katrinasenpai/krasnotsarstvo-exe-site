@@ -27,9 +27,11 @@ export function CharacterCard({ image, name, status, role, description }: Charac
           <div className="flex-grow flex items-center justify-center relative">
             {/* Декоративная тень под персонажем */}
             <div className="absolute bottom-4 h-8 w-3/4 bg-black/50 rounded-full blur-xl"></div>
-            <img 
-              src={image} 
-              alt={name} 
+            <img
+              src={image}
+              alt={name}
+              loading="lazy"
+              decoding="async"
               className="max-h-64 object-contain z-10"
             />
           </div>
