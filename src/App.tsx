@@ -8,6 +8,8 @@ import { Map } from './components/Map';
 import { Separator } from './components/Separator'; 
 import { FeaturesTabs } from './components/FeaturesTabs';
 import { Footer } from './components/Footer';
+import { Quiz } from './components/Quiz';
+import { QuizBanner } from './components/QuizBanner';
 import heroVideo from './assets/videos/hero-animation.webm';
 import playerImg from './assets/images/player.webp';
 import iskinImg from './assets/images/iskin.webp';
@@ -44,6 +46,7 @@ import MapIcon from './assets/icons/map-icon.svg?react';
 import CharactersIcon from './assets/icons/characters-icon.svg?react';
 import FeaturesIcon from './assets/icons/features-icon.svg?react';
 import GalleryIcon from './assets/icons/gallery-icon.svg?react';
+import QuizIcon from './assets/icons/quiz-icon.svg?react';
 import BellIcon from './assets/icons/bell-icon.svg?react';
 
 // --- ЕДИНЫЙ ИСТОЧНИК ДАННЫХ ДЛЯ НАВИГАЦИИ ---
@@ -55,6 +58,7 @@ const navLinks = [
   { href: 'map', IconComponent: MapIcon, label: 'Карта'},
   { href: 'features', IconComponent: FeaturesIcon, label: 'Особенности' },
   { href: 'gallery', IconComponent: GalleryIcon, label: 'Галерея' },
+  { href: 'quiz', IconComponent: QuizIcon, label: 'Тест' },
   { href: 'download', IconComponent: BellIcon, label: 'ДЕМО-ВЕРСИЯ ДОСТУПНА!' },
 ];
 
@@ -225,7 +229,8 @@ function App() {
         />
       )}
       <Navbar navLinks={navLinks} />
-      
+      <QuizBanner />
+
       {/* HERO */}
       <section id="home" className="relative h-screen overflow-hidden">
         <video autoPlay loop muted playsInline className="absolute top-0 left-0 w-full h-full object-contain md:object-cover z-0">
@@ -526,6 +531,22 @@ function App() {
           />
         </div>
       )}
+
+      {/* QUIZ SECTION */}
+      <section
+        id="quiz"
+        className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
+        style={{ backgroundImage: `url(${bg4})` }}
+      >
+        <div className="absolute inset-0 bg-midnight-ink/85"></div>
+        <div className="container relative z-10">
+          <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
+            <QuizIcon className="w-10 h-10" />
+            КТО ТЫ ИЗ КРАСНОЦАРСТВА?
+          </h2>
+          <Quiz />
+        </div>
+      </section>
 
       <Separator />
 
