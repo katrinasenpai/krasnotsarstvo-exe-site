@@ -1,8 +1,10 @@
 // src/App.tsx
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, Suspense, lazy } from 'react';
 import { Navbar } from './components/Navbar';
-import SplashCursor from './components/SplashCursor';
+
+// Эффект дыма за курсором подгружается отдельно, чтобы не утяжелять основной бандл
+const SplashCursor = lazy(() => import('./components/SplashCursor'));
 import { CharacterCard } from './components/CharacterCard';
 import { Map } from './components/Map';
 import { Separator } from './components/Separator'; 
@@ -10,6 +12,7 @@ import { FeaturesTabs } from './components/FeaturesTabs';
 import { Footer } from './components/Footer';
 import { Quiz } from './components/Quiz';
 import { QuizBanner } from './components/QuizBanner';
+import { FaHeart, FaBookOpen, FaCodeBranch, FaMapMarkedAlt, FaBookReader, FaCalendarAlt, FaStar, FaExternalLinkAlt, FaVk, FaTelegram } from 'react-icons/fa';
 import heroBg from './assets/backgrounds/hero-bg.webp';
 import playerImg from './assets/images/player.webp';
 import iskinImg from './assets/images/iskin.webp';
@@ -159,12 +162,18 @@ function App() {
   const galleryScrollRef = useRef<HTMLDivElement>(null);
   const [galleryTouchStart, setGalleryTouchStart] = useState<number | null>(null);
   const [galleryTouchEnd, setGalleryTouchEnd] = useState<number | null>(null);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [showSplashCursor, setShowSplashCursor] = useState(false);
 
-  // Определение размера экрана для отключения курсора на мобильных
+  // Эффект дыма включаем только на десктопе и только на достаточно мощных устройствах
   useEffect(() => {
+    const nav = navigator as Navigator & { deviceMemory?: number };
+    const isWeakDevice =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      (nav.hardwareConcurrency !== undefined && nav.hardwareConcurrency <= 2) ||
+      (nav.deviceMemory !== undefined && nav.deviceMemory <= 4);
+
     const checkIsDesktop = () => {
-      setIsDesktop(window.matchMedia('(min-width: 768px)').matches);
+      setShowSplashCursor(window.matchMedia('(min-width: 768px)').matches && !isWeakDevice);
     };
 
     // Проверяем при загрузке
@@ -219,14 +228,16 @@ function App() {
   return (
     <>
     <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20"> 
-      {isDesktop && (
-        <SplashCursor
-          SPLAT_FORCE={2000}        // <-- Уменьшили силу (было 6000 по умолчанию)
-          DENSITY_DISSIPATION={4}   // <-- Как быстро исчезает "дым"
-          SPLAT_RADIUS={0.5}      // <-- Размер "кляксы" от курсора
-          CURL={10}                // <-- Степень "завихрения"
-          PRESSURE={0.2}           // <-- Сила "давления" жидкости
-        />
+      {showSplashCursor && (
+        <Suspense fallback={null}>
+          <SplashCursor
+            SPLAT_FORCE={2000}        // <-- Уменьшили силу (было 6000 по умолчанию)
+            DENSITY_DISSIPATION={4}   // <-- Как быстро исчезает "дым"
+            SPLAT_RADIUS={0.5}      // <-- Размер "кляксы" от курсора
+            CURL={10}                // <-- Степень "завихрения"
+            PRESSURE={0.2}           // <-- Сила "давления" жидкости
+          />
+        </Suspense>
       )}
       <Navbar navLinks={navLinks} />
       <QuizBanner />
@@ -248,14 +259,14 @@ function App() {
               rel="noopener noreferrer"
               className="bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
-              <i className="fas fa-heart mr-2"></i>
+              <FaHeart className="mr-2" />
               <span>Добавить в желаемое</span>
             </a>
             <a 
               href="#story" 
               className="border border-gold-leaf text-gold-leaf hover:bg-gold-leaf hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
-              <i className="fas fa-book-open mr-2"></i>
+              <FaBookOpen className="mr-2" />
               <span>Узнать больше</span>
             </a>
           </div>
@@ -287,21 +298,21 @@ function App() {
             <div>
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
-                  <div className="text-gold-leaf text-2xl mt-1"><i className="fas fa-code-branch"></i></div>
+                  <div className="text-gold-leaf text-2xl mt-1"><FaCodeBranch /></div>
                   <div>
                     <h3 className="font-serif text-xl font-bold">Нелинейный сюжет</h3>
                     <p className="text-off-white/70">Принимайте решения, которые влияют на историю и ведут к одной из концовок.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="text-gold-leaf text-2xl mt-1"><i className="fas fa-map-location-dot"></i></div>
+                  <div className="text-gold-leaf text-2xl mt-1"><FaMapMarkedAlt /></div>
                   <div>
                     <h3 className="font-serif text-xl font-bold">Два мира — одна история</h3>
                     <p className="text-off-white/70">Исследуйте фэнтезийное КрасноЦарство и узнавайте реальную историю его прототипов в Санкт-Петербурге.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <div className="text-gold-leaf text-2xl mt-1"><i className="fas fa-book-reader"></i></div>
+                  <div className="text-gold-leaf text-2xl mt-1"><FaBookReader /></div>
                   <div>
                     <h3 className="font-serif text-xl font-bold">Интерактивная карта</h3>
                     <p className="text-off-white/70">Путешествуйте по живой карте, открывайте новые локации и находите скрытые артефакты.</p>
@@ -610,7 +621,7 @@ function App() {
               className="bg-gold-leaf/10 border border-gold-leaf/30 rounded-xl p-6 transition-transform transform hover:scale-105 hover:bg-gold-leaf/20 cursor-pointer block"
             >
               <div className="flex items-center justify-center gap-3 mb-4">
-                <i className="fas fa-calendar-alt text-gold-leaf text-2xl"></i>
+                <FaCalendarAlt className="text-gold-leaf text-2xl" />
                 <h3 className="font-serif text-xl text-gold-leaf">Демо-релиз</h3>
               </div>
               <p className="text-off-white/90 text-lg font-semibold">18 декабря 2025</p>
@@ -620,7 +631,7 @@ function App() {
             {/* Полный релиз */}
             <div className="bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-6">
               <div className="flex items-center justify-center gap-3 mb-4">
-                <i className="fas fa-star text-gold-leaf text-2xl"></i>
+                <FaStar className="text-gold-leaf text-2xl" />
                 <h3 className="font-serif text-xl text-gold-leaf">Релиз 1 части</h3>
               </div>
               <p className="text-off-white/90 text-lg font-semibold">Вторая половина 2026</p>
@@ -632,16 +643,16 @@ function App() {
           <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12 mb-8">
             <div className="text-center">
               <h3 className="font-serif text-2xl text-gold-leaf mb-4">Добавить в избранное</h3>
-              <p className="text-off-white/70 mb-6">Идет масштабная работа над проектом! Мир новеллы растет и меняется, поэтому полноценный релиз смещён на лето этого года. В расширенной версии вас ждет более детально проработанный лор и система выборов, а также вторая глава «Тени Гоголя». Следите за новостями!</p>
+              <p className="text-off-white/70 mb-6">Идет масштабная работа над проектом! Мир новеллы растет и меняется, поэтому релиз смещён на вторую половину этого года. В первой части вас ждет более детально проработанный лор и система выборов, а также новые увлекательные квесты. Следите за новостями!</p>
               <a 
                 href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
-                <i className="fas fa-heart text-xl"></i>
+                <FaHeart className="text-xl" />
                 <span>Добавить в избранное на VK Play</span>
-                <i className="fas fa-external-link-alt text-sm"></i>
+                <FaExternalLinkAlt className="text-sm" />
               </a>
             </div>
           </div>
@@ -653,10 +664,10 @@ function App() {
               <p className="text-off-white/70 mb-4">Присоединяйтесь к нашему сообществу для получения обновлений о релизах.</p>
               <div className="flex items-center justify-center gap-8">
                 <a href="https://vk.com/rzhevka_lib" target="_blank" rel="noopener noreferrer" aria-label="Наша группа ВКонтакте" className="text-shadow-grey hover:text-blue-500 transition-all duration-300 transform hover:scale-110">
-                  <i className="fab fa-vk text-5xl"></i>
+                  <FaVk className="text-5xl" />
                 </a>
                 <a href="https://t.me/lib_rzhevka" target="_blank" rel="noopener noreferrer" aria-label="Наш Телеграм канал" className="text-shadow-grey hover:text-sky-500 transition-all duration-300 transform hover:scale-110">
-                  <i className="fab fa-telegram text-5xl"></i>
+                  <FaTelegram className="text-5xl" />
                 </a>
               </div>
             </div>

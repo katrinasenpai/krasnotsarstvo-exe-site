@@ -4,12 +4,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400&display=swap');
 @font-face {
   font-family: 'Kereru';
-  src: url('/src/assets/fonts/Kereru.otf') format('opentype');
+  src: url('/src/assets/fonts/Kereru.woff2') format('woff2');
   font-display: swap;
 }
 @font-face {
   font-family: 'PFDinTextPro';
-  src: url('/src/assets/fonts/PFDinTextPro-Regular.ttf') format('truetype');
+  src: url('/src/assets/fonts/PFDinTextPro-Regular.woff2') format('woff2');
   font-display: swap;
 }
 

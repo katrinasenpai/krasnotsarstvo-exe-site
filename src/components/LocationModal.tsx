@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 import { locationsData, LocationId } from '../data/locations';
 
 type LocationModalProps = {
@@ -43,7 +44,7 @@ export function LocationModal({ cardId, onClose }: LocationModalProps) {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 text-gold-leaf hover:text-gold-leaf/80 transition-colors font-medium"
                   >
-                    <i className="fas fa-external-link-alt"></i>
+                    <FaExternalLinkAlt />
                     Открыть на Краснакарте
                   </a>
                 </div>

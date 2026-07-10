@@ -1,7 +1,8 @@
 // src/components/Quiz.tsx
 // Тест «Кто ты из КрасноЦарства?»
 
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { FaHatWizard, FaRedo, FaGamepad } from 'react-icons/fa';
 import { quizQuestions, quizResults, QuizResultType } from '../data/quiz';
 
 type QuizScreen = 'start' | 'question' | 'loading' | 'result';
@@ -60,7 +61,7 @@ export function Quiz() {
             onClick={startTest}
             className="inline-flex items-center gap-3 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
-            <i className="fas fa-hat-wizard"></i>
+            <FaHatWizard />
             <span>Начать игру</span>
           </button>
         </div>
@@ -138,7 +139,7 @@ export function Quiz() {
               onClick={startTest}
               className="inline-flex items-center justify-center gap-2 border border-gold-leaf text-gold-leaf hover:bg-gold-leaf hover:text-black font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105"
             >
-              <i className="fas fa-rotate-right"></i>
+              <FaRedo />
               <span>Пройти ещё раз</span>
             </button>
             <a
@@ -147,7 +148,7 @@ export function Quiz() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
             >
-              <i className="fas fa-gamepad"></i>
+              <FaGamepad />
               <span>Играть в демо на VK Play</span>
             </a>
           </div>

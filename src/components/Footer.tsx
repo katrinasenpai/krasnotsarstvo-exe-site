@@ -1,5 +1,6 @@
 // src/components/Footer.tsx
 
+import { FaGamepad, FaVk, FaTelegram } from 'react-icons/fa';
 
 type OrgLogo = {
   id: string;
@@ -88,13 +89,13 @@ export function Footer({ orgLogos = [] }: FooterProps) {
           <p className="text-sm">© {new Date().getFullYear()} КрасноЦарство.exe. ЦБС Красногвардейского района.</p>
           <div className="flex items-center gap-4 text-sm">
             <a href="https://vkplay.ru/play/game/krasnocarstvoexe/" target="_blank" rel="noopener noreferrer" className="hover:text-gold-leaf transition-colors" aria-label="VK Play">
-              <i className="fas fa-gamepad"></i>
+              <FaGamepad />
             </a>
             <a href="https://vk.com/rzhevka_lib" target="_blank" rel="noopener noreferrer" className="hover:text-gold-leaf transition-colors" aria-label="ВКонтакте">
-              <i className="fab fa-vk"></i>
+              <FaVk />
             </a>
             <a href="https://t.me/lib_rzhevka" target="_blank" rel="noopener noreferrer" className="hover:text-gold-leaf transition-colors" aria-label="Telegram">
-              <i className="fab fa-telegram"></i>
+              <FaTelegram />
             </a>
           </div>
         </div>

@@ -1,6 +1,7 @@
 // src/components/FeaturesTabs.tsx
 
 import React, { useState } from 'react';
+import { FaComments, FaPuzzlePiece, FaBriefcase, FaBookDead, FaBoxOpen, FaKey, FaHandshake, FaMagic, FaLandmark, FaGem, FaTree } from 'react-icons/fa';
 
 type Tab = 'mechanics' | 'inventory' | 'world';
 
@@ -32,7 +33,7 @@ export function FeaturesTabs() {
             {/* Левая, главная колонка */}
             <div className="lg:w-1/2">
               <div className="flex items-start gap-4">
-                <i className="fas fa-comments text-gold-leaf text-3xl"></i>
+                <FaComments className="text-gold-leaf text-3xl shrink-0" />
                 <div>
                   <h3 className="font-serif text-2xl font-bold mb-3">Диалоги с выбором</h3>
                   <p className="text-off-white/80">
@@ -45,21 +46,21 @@ export function FeaturesTabs() {
             <div className="lg:w-1/2 w-full">
               <ul className="space-y-6">
                 <li className="flex items-start gap-4">
-                  <i className="fas fa-puzzle-piece text-gold-leaf/80 mt-1 text-xl"></i>
+                  <FaPuzzlePiece className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Мини-игры и загадки</h4>
                     <p className="text-sm text-off-white/70">Решайте головоломки: от загадок дракончиков в Крепости-Стакан до квеста на заброшенном пиратском дирижабле.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <i className="fas fa-briefcase text-gold-leaf/80 mt-1 text-xl"></i>
+                  <FaBriefcase className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Инвентарь и предметы</h4>
                     <p className="text-sm text-off-white/70">Собирайте десятки артефактов, которые применяются в диалогах, для решения загадок или обмена.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
-                  <i className="fas fa-book-skull text-gold-leaf/80 mt-1 text-xl"></i>
+                  <FaBookDead className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Проклятие как механика</h4>
                     <p className="text-sm text-off-white/70">Проклятие Забвения — не просто фон, а активный элемент, делающий порталы нестабильными и вызывающий сбои в работе гида Искина.</p>
@@ -78,7 +79,7 @@ export function FeaturesTabs() {
               {/* Карточка 1 */}
               <div className="p-6 bg-shadow-grey/10 rounded-lg border border-transparent hover:border-gold-leaf/30 transition-colors duration-300">
                 <div className="flex flex-col items-center text-center">
-                  <i className="fas fa-box-open text-3xl text-gold-leaf mb-3"></i>
+                  <FaBoxOpen className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Стартовые предметы</h4>
                   <p className="text-sm text-off-white/70">Выберите рюкзак, подкидывающий артефакты, или шоппер, усиливающий свойства вещей.</p>
                 </div>
@@ -86,7 +87,7 @@ export function FeaturesTabs() {
               {/* Карточка 2 */}
               <div className="p-6 bg-shadow-grey/10 rounded-lg border border-transparent hover:border-gold-leaf/30 transition-colors duration-300">
                 <div className="flex flex-col items-center text-center">
-                  <i className="fas fa-key text-3xl text-gold-leaf mb-3"></i>
+                  <FaKey className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Ключевые предметы</h4>
                   <p className="text-sm text-off-white/70">Соберите лодку или раздобудьте дирижабль, чтобы открыть доступ к новым локациям.</p>
                 </div>
@@ -94,7 +95,7 @@ export function FeaturesTabs() {
               {/* Карточка 3 */}
               <div className="p-6 bg-shadow-grey/10 rounded-lg border border-transparent hover:border-gold-leaf/30 transition-colors duration-300">
                 <div className="flex flex-col items-center text-center">
-                  <i className="fas fa-handshake text-3xl text-gold-leaf mb-3"></i>
+                  <FaHandshake className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Обменные предметы</h4>
                   <p className="text-sm text-off-white/70">Используйте зерно, чтобы приманить утку, но сначала обменяйте ведро у купца.</p>
                 </div>
@@ -102,7 +103,7 @@ export function FeaturesTabs() {
               {/* Карточка 4 */}
               <div className="p-6 bg-shadow-grey/10 rounded-lg border border-transparent hover:border-gold-leaf/30 transition-colors duration-300">
                 <div className="flex flex-col items-center text-center">
-                  <i className="fas fa-wand-sparkles text-3xl text-gold-leaf mb-3"></i>
+                  <FaMagic className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Редкие артефакты</h4>
                   <p className="text-sm text-off-white/70">Получите коготь грифона или зеркало истинных намерений, чтобы получить уникальные возможности.</p>
                 </div>
@@ -123,19 +124,19 @@ export function FeaturesTabs() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Карточка 1 */}
                   <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
-                    <i className="fas fa-landmark text-4xl text-gold-leaf/50 mb-4"></i>
+                    <FaLandmark className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
                     <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Библиотечные узлы</h5>
                     <p className="text-sm text-off-white/70">Ржевская, Гоголя, Сфера, ШКАФ, НОТА</p>
                   </div>
                   {/* Карточка 2 */}
                    <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
-                    <i className="fas fa-gem text-4xl text-gold-leaf/50 mb-4"></i>
+                    <FaGem className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
                     <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Артефактные зоны</h5>
                     <p className="text-sm text-off-white/70">Крепость-Стакан, Хранилище (Ладожская)</p>
                   </div>
                   {/* Карточка 3 */}
                    <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
-                    <i className="fas fa-tree text-4xl text-gold-leaf/50 mb-4"></i>
+                    <FaTree className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
                     <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Мирные / сельские</h5>
                     <p className="text-sm text-off-white/70">Молочные берега, Верфь, Рынок</p>
                   </div>

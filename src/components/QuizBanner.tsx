@@ -1,7 +1,8 @@
 // src/components/QuizBanner.tsx
 // Всплывающий при загрузке сайта баннер с призывом пройти тест
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { FaHatWizard } from 'react-icons/fa';
 import QuizIcon from '../assets/icons/quiz-icon.svg?react';
 
 const STORAGE_KEY = 'quizBannerShown';
@@ -61,7 +62,7 @@ export function QuizBanner() {
           onClick={goToQuiz}
           className="inline-flex items-center gap-3 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-3 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
         >
-          <i className="fas fa-hat-wizard"></i>
+          <FaHatWizard />
           <span>Пройти тест</span>
         </button>
       </div>
