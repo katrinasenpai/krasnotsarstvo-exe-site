@@ -614,7 +614,7 @@ function App() {
                 <h3 className="font-serif text-xl text-gold-leaf">Демо-релиз</h3>
               </div>
               <p className="text-off-white/90 text-lg font-semibold">18 декабря 2025</p>
-              <p className="text-off-white/70 text-sm mt-2">Релиз 1 главы с сюжетными правками и три дополнительных побочных квеста (Квартал Четырёх Дураков, Катакомбы и Станция дирижаблей)</p>
+              <p className="text-off-white/70 text-sm mt-2">Полноценная демо-версия игры</p>
             </a>
 
             {/* Полный релиз */}
@@ -624,7 +624,7 @@ function App() {
                 <h3 className="font-serif text-xl text-gold-leaf">Релиз 1 части</h3>
               </div>
               <p className="text-off-white/90 text-lg font-semibold">Вторая половина 2026</p>
-              <p className="text-off-white/70 text-sm mt-2">Финальная версия с крутыми фичами</p>
+              <p className="text-off-white/70 text-sm mt-2">Релиз 1 главы с сюжетными правками и три дополнительных побочных квеста (Квартал Четырёх Дураков, Катакомбы и Станция дирижаблей)</p>
             </div>
           </div>
 
