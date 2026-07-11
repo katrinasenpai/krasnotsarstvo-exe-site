@@ -14,13 +14,13 @@
   ],
   "author": "ЦБС Красногвардейского района",
   "license": "MIT",
-  "homepage": "https://yourusername.github.io/krasnotsarstvo-exe-site",
+  "homepage": "https://krasnotsarstvo.ru/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/krasnotsarstvo-exe-site.git"
+    "url": "https://github.com/katrinasenpai/krasnotsarstvo-exe-site.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/krasnotsarstvo-exe-site/issues"
+    "url": "https://github.com/katrinasenpai/krasnotsarstvo-exe-site/issues"
   },
   "scripts": {
     "dev": "vite",
