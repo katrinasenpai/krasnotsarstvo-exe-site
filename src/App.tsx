@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar';
 // Эффект дыма за курсором подгружается отдельно, чтобы не утяжелять основной бандл
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
 import { CharacterCard } from './components/CharacterCard';
+import { IskinWidget } from './components/IskinWidget';
 import { Map } from './components/Map';
 import { Separator } from './components/Separator'; 
 import { FeaturesTabs } from './components/FeaturesTabs';
@@ -243,16 +244,10 @@ function App() {
       <QuizBanner />
 
       {/* HERO */}
-      <section id="home" className="relative h-screen overflow-hidden">
-        <img src={heroBg} alt="Библиотека КрасноЦарства" className="absolute top-0 left-0 w-full h-full object-cover z-0" />
-        <div className="absolute inset-0 bg-black/50 z-10" />
-        <div className="relative z-20 h-full px-4 sm:px-8 md:px-16 lg:px-24">
-          <div className="absolute top-[12%] sm:top-[30%] md:top-[35%] left-1/2 -translate-x-1/2 w-[92%] sm:w-auto sm:left-8 sm:translate-x-0 md:left-24 md:right-16">
-            <p className="font-handwriting text-xl sm:text-2xl md:text-2xl lg:text-3xl font-extralight max-w-md sm:max-w-md md:max-w-lg text-gold-leaf opacity-50 leading-relaxed text-center sm:text-left [text-shadow:0_0_2px_var(--gold-leaf)] tracking-wide">
-              ✨ Помоги восстановить утраченные знания — исследуй мистические локации КрасноЦарства и&nbsp;открывай реальную историю их прототипов в Красногвардейском районе <span className="whitespace-nowrap">Санкт-Петербурга</span> 
-            </p>
-          </div>
-          <div className="absolute flex flex-col sm:flex-row gap-3 sm:gap-4 bottom-[10%] sm:bottom-[15%] left-4 sm:left-auto sm:right-[10%] right-4">
+      <section id="home" className="relative min-h-[30rem] overflow-hidden bg-midnight-ink sm:h-screen sm:min-h-0">
+        <img src={heroBg} alt="Библиотека КрасноЦарства" className="absolute inset-0 z-0 h-full w-full object-contain object-center sm:object-cover" />
+        <div className="relative z-10 flex min-h-[30rem] items-end px-4 pb-8 sm:h-full sm:min-h-0 sm:px-8 sm:pb-0 md:px-16 lg:px-24">
+          <div className="flex w-full flex-col gap-3 sm:absolute sm:bottom-[15%] sm:right-[10%] sm:left-auto sm:w-auto sm:flex-row sm:gap-4">
             <a 
               href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
               target="_blank"
@@ -427,7 +422,12 @@ function App() {
               className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300" 
             />
           </button>
-          
+
+        </div>
+
+        <div className="container">
+          {/* Интерактивный 2D-слой Искина: готов к подключению внешних QR/AR-событий. */}
+          <IskinWidget />
         </div>
       </section>
 
