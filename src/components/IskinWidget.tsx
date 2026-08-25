@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import {
   BookOpen,
   CircleOff,
@@ -15,6 +16,7 @@ import iskinNoMonocle from '../assets/images/iskin-states/iskin-no-monocle.webp'
 import iskinProjection from '../assets/images/iskin-states/iskin-projection.webp';
 import iskinReading from '../assets/images/iskin-states/iskin-reading.webp';
 import iskinWarm from '../assets/images/iskin-states/iskin-warm.webp';
+import { getIskinProjectionUrl } from '../utils/iskinProjectionUrl';
 import './IskinWidget.css';
 
 export type IskinEmotion = 'calm' | 'warm' | 'focused' | 'indignant';
@@ -73,6 +75,7 @@ const initialScene: IskinScene = {
  */
 export function IskinWidget({ className = '', onSceneChange }: IskinWidgetProps) {
   const [scene, setScene] = useState<IskinScene>(initialScene);
+  const projectionLink = getIskinProjectionUrl();
 
   const commitScene = (patch: Partial<IskinScene>, source: IskinEmotion | IskinAction) => {
     const nextScene = { ...scene, ...patch };
@@ -231,6 +234,35 @@ export function IskinWidget({ className = '', onSceneChange }: IskinWidgetProps)
         <output className="iskin-widget__status" aria-live="polite">
           {portrait.description}
         </output>
+
+        <aside className="iskin-widget__qr" aria-labelledby="iskin-qr-title">
+          <div>
+            <span className="iskin-widget__group-label">QR-проверка</span>
+            <h4 id="iskin-qr-title">Открыть проекцию на телефоне</h4>
+            {projectionLink.isNetworkAddress ? (
+              <p>Наведите камеру телефона на код: откроется лёгкая мобильная сцена Искина.</p>
+            ) : (
+              <p>
+                Откройте сайт по LAN-адресу компьютера или задайте <code>VITE_ISKIN_QR_BASE_URL</code> —
+                тогда QR станет доступен телефону.
+              </p>
+            )}
+          </div>
+          {projectionLink.isNetworkAddress && (
+            <div className="iskin-widget__qr-code">
+              <QRCodeSVG
+                value={projectionLink.url}
+                size={132}
+                level="M"
+                includeMargin
+                bgColor="#eefeff"
+                fgColor="#071226"
+                title="QR-код для мобильной проекции Искина"
+              />
+              <span>{projectionLink.url}</span>
+            </div>
+          )}
+        </aside>
       </div>
 
       <div className="iskin-stage" data-pose={portrait.state}>
