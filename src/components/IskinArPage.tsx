@@ -7,12 +7,30 @@ import './IskinArPage.css';
 const arModel = '/ar/iskin-projection-billboard.glb';
 const quickLookModel = '/ar/iskin-projection-billboard.usdz';
 
+function createSceneViewerIntent(modelUrl: string, fallbackUrl: string) {
+  const query = [
+    `file=${encodeURIComponent(modelUrl)}`,
+    'mode=ar_only',
+    `title=${encodeURIComponent('Искин — голографическая проекция')}`,
+    'resizable=false',
+  ].join('&');
+
+  return `intent://arvr.google.com/scene-viewer/1.0?${query}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
+}
+
 /**
  * Первый AR-пилот: не 3D-аватар, а 2D-проекция на прозрачной вертикальной плоскости.
- * model-viewer выбирает WebXR, Android Scene Viewer или iOS Quick Look по возможностям телефона.
+ * На Android кнопка явно вызывает Scene Viewer / ARCore; на iOS остаётся нативный Quick Look.
  */
 export default function IskinArPage() {
   const isSecure = useMemo(() => window.isSecureContext, []);
+  const isAndroid = useMemo(() => /android/i.test(window.navigator.userAgent), []);
+  const sceneViewerIntent = useMemo(() => {
+    const modelUrl = new URL(arModel, window.location.origin).toString();
+    const fallbackUrl = new URL('/iskin-ar?scene-viewer=unavailable', window.location.origin).toString();
+    return createSceneViewerIntent(modelUrl, fallbackUrl);
+  }, []);
+  const isSceneViewerFallback = new URLSearchParams(window.location.search).get('scene-viewer') === 'unavailable';
 
   return (
     <main className="iskin-ar-page">
@@ -39,7 +57,7 @@ export default function IskinArPage() {
             ios-src={quickLookModel}
             alt="Вертикальная голографическая 2D-проекция Искина для размещения в помещении"
             ar=""
-            ar-modes="webxr scene-viewer quick-look"
+            ar-modes="scene-viewer webxr quick-look"
             ar-placement="floor"
             ar-scale="fixed"
             quick-look-browsers="safari chrome"
@@ -55,29 +73,48 @@ export default function IskinArPage() {
             loading="eager"
           >
             <img slot="poster" src={iskinProjection} alt="" aria-hidden="true" />
-            <button
-              className="iskin-ar-page__ar-button"
-              slot="ar-button"
-              type="button"
-              disabled={!isSecure}
-              aria-describedby="iskin-ar-security-note"
-            >
-              <Camera size={18} aria-hidden="true" />
-              Посмотреть в пространстве
-            </button>
+            {isAndroid ? (
+              <span slot="ar-button" className="iskin-ar-page__hidden-ar-button" aria-hidden="true" />
+            ) : (
+              <button
+                className="iskin-ar-page__ar-button"
+                slot="ar-button"
+                type="button"
+                disabled={!isSecure}
+                aria-describedby="iskin-ar-security-note"
+              >
+                <Camera size={18} aria-hidden="true" />
+                Посмотреть в пространстве
+              </button>
+            )}
           </model-viewer>
         </div>
 
+        {isAndroid && isSecure && (
+          <a className="iskin-ar-page__scene-viewer-link" href={sceneViewerIntent}>
+            <Camera size={18} aria-hidden="true" />
+            Посмотреть в пространстве
+          </a>
+        )}
+
         <p id="iskin-ar-security-note" className={`iskin-ar-page__security ${isSecure ? 'is-ready' : ''}`}>
           <ShieldCheck size={17} aria-hidden="true" />
-          {isSecure
+          {isAndroid && isSecure
+            ? 'Android обнаружен: кнопка запускает нативный Scene Viewer через ARCore. Если ARCore недоступен, откроется этот веб-предпросмотр.'
+            : isSecure
             ? 'Защищённое соединение обнаружено: кнопка передаст модель в AR-режим, если он поддерживается устройством.'
             : 'Это локальный предпросмотр модели. Запуск камеры и AR доступен только по опубликованному HTTPS-адресу.'}
         </p>
 
+        {isSceneViewerFallback && (
+          <p className="iskin-ar-page__scene-viewer-fallback" role="status">
+            Scene Viewer не запущен. Обновите Google Play Services for AR и повторите попытку в Chrome.
+          </p>
+        )}
+
         <div className="iskin-ar-page__facts" aria-label="Возможности AR-пилота">
           <p><Box size={17} aria-hidden="true" /> Прозрачный 2D-билборд высотой 1,72 м, закреплённый у пола.</p>
-          <p><Camera size={17} aria-hidden="true" /> Android: WebXR или Scene Viewer; iPhone/iPad: Quick Look.</p>
+          <p><Camera size={17} aria-hidden="true" /> Android: Scene Viewer / ARCore; iPhone/iPad: Quick Look.</p>
         </div>
 
         <details className="iskin-ar-page__fallback">

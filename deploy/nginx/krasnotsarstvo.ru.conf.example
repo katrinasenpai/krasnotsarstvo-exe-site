@@ -16,13 +16,19 @@ server {
     root /var/www/krasnotsarstvo/dist;
     index index.html;
 
-    # MIME-типы нужны Scene Viewer и Quick Look для моделей Искина.
-    types {
-        model/gltf-binary glb;
-        model/vnd.usdz+zip usdz;
+    # Не переопределяйте здесь блок `types`: он содержит обычные HTML/JS/CSS-типы
+    # из /etc/nginx/mime.types. Для AR задаём типы только точечным location.
+    location ~* ^/ar/.*\.glb$ {
+        default_type model/gltf-binary;
+        try_files $uri =404;
     }
 
-    # Модели не должны превращаться в HTML при опечатке URL.
+    location ~* ^/ar/.*\.usdz$ {
+        default_type model/vnd.usdz+zip;
+        try_files $uri =404;
+    }
+
+    # Остальные файлы AR не должны превращаться в HTML при опечатке URL.
     location /ar/ {
         try_files $uri =404;
     }
