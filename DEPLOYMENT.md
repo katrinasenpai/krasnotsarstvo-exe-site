@@ -1,5 +1,15 @@
 # 🚀 Руководство по развертыванию
 
+## Текущий production-домен и маршруты Искина
+
+- Основной адрес: `https://krasnotsarstvo.ru`.
+- Production QR-код Искина собирается с этим HTTPS-адресом из `.env.production`.
+- Сервер должен возвращать `index.html` для `/iskin-projection` и `/iskin-ar`; готовый
+  Nginx-пример находится в `deploy/nginx/krasnotsarstvo.ru.conf.example`.
+- После обычного `git pull` на сервере выполните `npm ci` и `npm run build`, затем
+  обновите содержимое web-root из `dist`. Для AR нужны HTTPS и MIME-типы `.glb`/`.usdz`
+  из примера Nginx.
+
 ## 📋 Подготовка к развертыванию
 
 ### 1. Проверка проекта
@@ -18,9 +28,9 @@ npm run type-check   # Проверка типов
 #### package.json
 ```json
 {
-  "homepage": "https://spellkatrina.github.io/krasnotsarstvo-exe-site",
+  "homepage": "https://krasnotsarstvo.ru/",
   "repository": {
-    "url": "https://github.com/spellkatrina/krasnotsarstvo-exe-site.git"
+    "url": "https://github.com/katrinasenpai/krasnotsarstvo-exe-site.git"
   }
 }
 ```

@@ -1,0 +1,34 @@
+# Пример для существующего HTTPS server block Nginx.
+# Замените /var/www/krasnotsarstvo/dist на фактический путь к production-сборке.
+# SSL-сертификаты и их директивы остаются в уже настроенной конфигурации сервера.
+
+server {
+    listen 80;
+    server_name krasnotsarstvo.ru www.krasnotsarstvo.ru;
+    return 301 https://krasnotsarstvo.ru$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name krasnotsarstvo.ru www.krasnotsarstvo.ru;
+
+    # ssl_certificate и ssl_certificate_key задаются вашим существующим TLS-настроем.
+    root /var/www/krasnotsarstvo/dist;
+    index index.html;
+
+    # MIME-типы нужны Scene Viewer и Quick Look для моделей Искина.
+    types {
+        model/gltf-binary glb;
+        model/vnd.usdz+zip usdz;
+    }
+
+    # Модели не должны превращаться в HTML при опечатке URL.
+    location /ar/ {
+        try_files $uri =404;
+    }
+
+    # Поддерживает прямое открытие QR/AR-маршрутов после server pull и build.
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
