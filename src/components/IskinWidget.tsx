@@ -158,7 +158,7 @@ export function IskinWidget({ className = '', onSceneChange }: IskinWidgetProps)
         <h3 id="iskin-console-title">КОНСОЛЬ ИСКИНА</h3>
         <p>
           Выберите настроение или действие. Каждый режим меняет сам 2D-аватар Искина и
-          остаётся готовым к будущим QR- и AR-сценариям.
+          открывает новые грани его проекции.
         </p>
 
         <div className="iskin-widget__controls">
@@ -237,14 +237,13 @@ export function IskinWidget({ className = '', onSceneChange }: IskinWidgetProps)
 
         <aside className="iskin-widget__qr" aria-labelledby="iskin-qr-title">
           <div>
-            <span className="iskin-widget__group-label">QR-проверка</span>
+            <span className="iskin-widget__group-label">Проекция Искина</span>
             <h4 id="iskin-qr-title">Открыть проекцию на телефоне</h4>
             {projectionLink.isNetworkAddress ? (
-              <p>Наведите камеру телефона на код: откроется лёгкая мобильная сцена Искина.</p>
+              <p>Наведите камеру телефона на код, чтобы открыть проекцию Искина.</p>
             ) : (
               <p>
-                Откройте сайт по LAN-адресу компьютера или задайте <code>VITE_ISKIN_QR_BASE_URL</code> —
-                тогда QR станет доступен телефону.
+                Откройте сайт по адресу, доступному с телефона, — и здесь появится код для проекции.
               </p>
             )}
           </div>
@@ -257,7 +256,7 @@ export function IskinWidget({ className = '', onSceneChange }: IskinWidgetProps)
                 includeMargin
                 bgColor="#eefeff"
                 fgColor="#071226"
-                title="QR-код для мобильной проекции Искина"
+                title="Код для проекции Искина на телефоне"
               />
               <span>{projectionLink.url}</span>
             </div>

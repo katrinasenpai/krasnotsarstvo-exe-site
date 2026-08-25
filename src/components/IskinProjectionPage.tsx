@@ -2,7 +2,7 @@ import { ArrowLeft, Box, Radio, Sparkles } from 'lucide-react';
 import iskinProjection from '../assets/images/iskin-states/iskin-projection.webp';
 import './IskinProjectionPage.css';
 
-/** Лёгкая самостоятельная сцена для QR-перехода; не является AR-режимом. */
+/** Лёгкая самостоятельная сцена для перехода к проекции Искина. */
 export default function IskinProjectionPage() {
   return (
     <main className="iskin-projection-page">
@@ -36,11 +36,11 @@ export default function IskinProjectionPage() {
         </figure>
 
         <p className="iskin-projection-page__note">
-          Это локальная 2D-проекция для QR-проверки. Полноценные AR- и 3D-режимы сюда не входят.
+          Проекция устойчива. Откройте режим размещения, чтобы увидеть Искина в своей комнате.
         </p>
         <a className="iskin-projection-page__ar-link" href="/iskin-ar">
           <Box size={17} aria-hidden="true" />
-          Открыть AR-пилот
+          Открыть AR
         </a>
       </section>
     </main>

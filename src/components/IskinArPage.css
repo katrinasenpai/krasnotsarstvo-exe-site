@@ -26,6 +26,7 @@
 
 .iskin-ar-page__back:focus-visible,
 .iskin-ar-page__ar-button:focus-visible,
+.iskin-ar-page__scene-viewer-button:focus-visible,
 .iskin-ar-page__fallback summary:focus-visible {
   outline: 3px solid #f0b65a;
   outline-offset: 3px;
@@ -127,7 +128,9 @@
   display: none;
 }
 
-.iskin-ar-page__scene-viewer-link {
+.iskin-ar-page__scene-viewer-button {
+  position: relative;
+  z-index: 5;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -141,11 +144,12 @@
   color: #061426;
   background: var(--ar-cyan);
   box-shadow: 0 0 1.4rem rgb(99 248 253 / 38%);
+  cursor: pointer;
   font-weight: 700;
-  text-decoration: none;
+  touch-action: manipulation;
 }
 
-.iskin-ar-page__scene-viewer-link:focus-visible {
+.iskin-ar-page__scene-viewer-button:focus-visible {
   outline: 3px solid #f0b65a;
   outline-offset: 3px;
 }
