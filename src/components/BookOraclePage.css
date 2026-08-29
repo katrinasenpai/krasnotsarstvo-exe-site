@@ -89,6 +89,11 @@
   line-height: 1.45;
 }
 
+@media (min-width: 45rem) {
+  .book-oracle-page__heading { max-width: 58rem; }
+  .book-oracle-page__heading > p:last-child { max-width: 52rem; }
+}
+
 .book-oracle-page__ritual {
   display: grid;
   grid-template-columns: minmax(12.5rem, 0.68fr) minmax(0, 1.35fr);

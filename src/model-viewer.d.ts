@@ -22,6 +22,8 @@ declare global {
         'environment-image'?: string;
         exposure?: string;
         loading?: string;
+        autoplay?: string;
+        'animation-name'?: string;
         'interaction-prompt'?: string;
         'touch-action'?: string;
       };

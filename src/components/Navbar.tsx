@@ -41,6 +41,12 @@ export function Navbar({ navLinks }: NavbarProps) {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const isPageRoute = (href: string) => href.startsWith('/');
+
+  const closeMobileMenuForRoute = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       {/* Десктопная навигация - скрыта на мобильных */}
@@ -61,8 +67,8 @@ export function Navbar({ navLinks }: NavbarProps) {
           {navLinks.map((link) => (
             <li key={link.href} className="navbar-item group">
               <a 
-                href={`#${link.href}`} 
-                onClick={(e) => handleScroll(e, link.href)}
+                href={isPageRoute(link.href) ? link.href : `#${link.href}`}
+                onClick={isPageRoute(link.href) ? closeMobileMenuForRoute : (e) => handleScroll(e, link.href)}
                 className="nav-link text-shadow-grey hover:text-gold-leaf transition-colors duration-300"
                 aria-label={link.label}
               >
@@ -123,8 +129,8 @@ export function Navbar({ navLinks }: NavbarProps) {
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a 
-                    href={`#${link.href}`} 
-                    onClick={(e) => handleScroll(e, link.href)}
+                    href={isPageRoute(link.href) ? link.href : `#${link.href}`}
+                    onClick={isPageRoute(link.href) ? closeMobileMenuForRoute : (e) => handleScroll(e, link.href)}
                     className="flex items-center gap-4 px-6 py-4 text-shadow-grey hover:text-gold-leaf hover:bg-shadow-grey/20 transition-colors duration-300"
                   >
                     <link.IconComponent className="w-6 h-6" />

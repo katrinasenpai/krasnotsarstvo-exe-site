@@ -12,7 +12,7 @@ import { Separator } from './components/Separator';
 import { FeaturesTabs } from './components/FeaturesTabs';
 import { Footer } from './components/Footer';
 import { Quiz } from './components/Quiz';
-import { QuizBanner } from './components/QuizBanner';
+import { HeroOracleInvite } from './components/HeroOracleInvite';
 import { FaHeart, FaBookOpen, FaCodeBranch, FaMapMarkedAlt, FaBookReader, FaCalendarAlt, FaStar, FaExternalLinkAlt, FaVk, FaTelegram } from 'react-icons/fa';
 import heroBg from './assets/backgrounds/hero-bg.webp';
 import playerImg from './assets/images/player.webp';
@@ -51,6 +51,7 @@ import CharactersIcon from './assets/icons/characters-icon.svg?react';
 import FeaturesIcon from './assets/icons/features-icon.svg?react';
 import GalleryIcon from './assets/icons/gallery-icon.svg?react';
 import QuizIcon from './assets/icons/quiz-icon.svg?react';
+import OracleIcon from './assets/icons/oracle-icon.svg?react';
 import BellIcon from './assets/icons/bell-icon.svg?react';
 
 // --- ЕДИНЫЙ ИСТОЧНИК ДАННЫХ ДЛЯ НАВИГАЦИИ ---
@@ -63,6 +64,7 @@ const navLinks = [
   { href: 'features', IconComponent: FeaturesIcon, label: 'Особенности' },
   { href: 'gallery', IconComponent: GalleryIcon, label: 'Галерея' },
   { href: 'quiz', IconComponent: QuizIcon, label: 'Тест' },
+  { href: '/book-oracle', IconComponent: OracleIcon, label: 'Книжный оракул' },
   { href: 'download', IconComponent: BellIcon, label: 'ДЕМО-ВЕРСИЯ ДОСТУПНА!' },
 ];
 
@@ -241,25 +243,25 @@ function App() {
         </Suspense>
       )}
       <Navbar navLinks={navLinks} />
-      <QuizBanner />
 
       {/* HERO */}
-      <section id="home" className="relative min-h-[30rem] overflow-hidden bg-midnight-ink sm:h-screen sm:min-h-0">
-        <img src={heroBg} alt="Библиотека КрасноЦарства" className="absolute inset-0 z-0 h-full w-full object-contain object-center sm:object-cover" />
-        <div className="relative z-10 flex min-h-[30rem] items-end px-4 pb-8 sm:h-full sm:min-h-0 sm:px-8 sm:pb-0 md:px-16 lg:px-24">
-          <div className="flex w-full flex-col gap-3 sm:absolute sm:bottom-[15%] sm:right-[10%] sm:left-auto sm:w-auto sm:flex-row sm:gap-4">
+      <section id="home" className="hero-shell relative overflow-hidden bg-midnight-ink sm:h-screen sm:min-h-[41rem]">
+        <img src={heroBg} alt="Библиотека КрасноЦарства" className="hero-shell__background absolute inset-0 z-0 h-full w-full object-cover" />
+        <div className="hero-shell__content relative z-10 px-4 sm:h-full sm:px-8 md:px-16 lg:px-24">
+          <HeroOracleInvite />
+          <div className="hero-shell__actions" aria-label="Основные действия КрасноЦарства">
             <a 
               href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
+              className="min-h-12 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <FaHeart className="mr-2" />
               <span>Добавить в желаемое</span>
             </a>
             <a 
               href="#story" 
-              className="border border-gold-leaf text-gold-leaf hover:bg-gold-leaf hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
+              className="min-h-12 border border-gold-leaf text-gold-leaf hover:bg-gold-leaf hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <FaBookOpen className="mr-2" />
               <span>Узнать больше</span>

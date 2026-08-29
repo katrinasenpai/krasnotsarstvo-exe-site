@@ -69,6 +69,7 @@
 }
 
 .iskin-ar-page__viewer-wrap {
+  position: relative;
   width: min(100%, 28rem);
   min-height: min(49svh, 31rem);
   margin-top: 0.75rem;
@@ -83,6 +84,8 @@
 }
 
 .iskin-ar-page__viewer {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: min(49svh, 31rem);
   min-height: 21rem;
@@ -99,6 +102,81 @@
   object-fit: contain;
   mix-blend-mode: screen;
   filter: drop-shadow(0 0 1.4rem rgb(99 248 253 / 75%));
+}
+
+.iskin-ar-page__pose-preview {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 180ms ease, visibility 0s linear 180ms;
+}
+
+.iskin-ar-page__pose-preview.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.iskin-ar-page__pose {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 1.5rem rgb(99 248 253 / 78%));
+  transform-origin: 50% 100%;
+}
+
+.iskin-ar-page__pose.is-idle {
+  animation: iskin-ar-pose-idle 9.6s linear infinite, iskin-ar-preview-float 4.8s ease-in-out infinite;
+}
+
+.iskin-ar-page__pose.is-thinking {
+  animation: iskin-ar-pose-thinking 9.6s linear infinite, iskin-ar-preview-float 4.8s ease-in-out infinite;
+}
+
+.iskin-ar-page__pose.is-adjust-monocle {
+  animation: iskin-ar-pose-adjust-monocle 9.6s linear infinite, iskin-ar-preview-float 4.8s ease-in-out infinite;
+}
+
+.iskin-ar-page__pose.is-resting {
+  animation: iskin-ar-pose-resting 9.6s linear infinite, iskin-ar-preview-float 4.8s ease-in-out infinite;
+}
+
+@keyframes iskin-ar-pose-idle {
+  0%, 18.958% { opacity: 1; }
+  18.959%, 35.103% { opacity: 0; }
+  35.104%, 50.729% { opacity: 1; }
+  50.73%, 66.353% { opacity: 0; }
+  66.354%, 77.812% { opacity: 1; }
+  77.813%, 84.061% { opacity: 0; }
+  84.062%, 100% { opacity: 1; }
+}
+
+@keyframes iskin-ar-pose-thinking {
+  0%, 18.958% { opacity: 0; }
+  18.959%, 34.895% { opacity: 1; }
+  34.896%, 100% { opacity: 0; }
+}
+
+@keyframes iskin-ar-pose-adjust-monocle {
+  0%, 50.729% { opacity: 0; }
+  50.73%, 66.145% { opacity: 1; }
+  66.146%, 100% { opacity: 0; }
+}
+
+@keyframes iskin-ar-pose-resting {
+  0%, 77.812% { opacity: 0; }
+  77.813%, 83.854% { opacity: 1; }
+  83.855%, 100% { opacity: 0; }
+}
+
+@keyframes iskin-ar-preview-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-0.45rem) scale(1.012); }
 }
 
 .iskin-ar-page__ar-button {
@@ -257,5 +335,9 @@
   .iskin-ar-page *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .iskin-ar-page__pose.is-idle {
+    opacity: 1;
   }
 }

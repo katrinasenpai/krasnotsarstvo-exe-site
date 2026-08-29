@@ -2,10 +2,20 @@ import { ArrowLeft, Box, Camera, ShieldCheck, Sparkles } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import '@google/model-viewer';
 import iskinProjection from '../assets/images/iskin-states/iskin-projection.webp';
+import iskinArAdjustMonocle from '../assets/images/iskin-ar-sequence/iskin-ar-adjust-monocle.png';
+import iskinArIdle from '../assets/images/iskin-ar-sequence/iskin-ar-idle.png';
+import iskinArResting from '../assets/images/iskin-ar-sequence/iskin-ar-resting.png';
+import iskinArThinking from '../assets/images/iskin-ar-sequence/iskin-ar-thinking.png';
 import './IskinArPage.css';
 
 const arModel = '/ar/iskin-projection-billboard.glb';
 const quickLookModel = '/ar/iskin-projection-billboard.usdz';
+const posePreview = [
+  { id: 'idle', src: iskinArIdle },
+  { id: 'thinking', src: iskinArThinking },
+  { id: 'adjust-monocle', src: iskinArAdjustMonocle },
+  { id: 'resting', src: iskinArResting },
+] as const;
 
 type NavigatorWithClientHints = Navigator & {
   userAgentData?: { platform?: string };
@@ -29,6 +39,7 @@ function createSceneViewerIntent(modelUrl: string, fallbackUrl: string) {
 
 /**
  * Голографическая 2D-проекция на прозрачной вертикальной плоскости.
+ * В нативном AR доступен короткий loop спокойных 2D-поз; сложные сцены остаются на канале.
  * На Android кнопка явно вызывает Scene Viewer / ARCore; на iOS остаётся нативный Quick Look.
  */
 export default function IskinArPage() {
@@ -41,6 +52,7 @@ export default function IskinArPage() {
   }, []);
   const isSceneViewerFallback = new URLSearchParams(window.location.search).get('scene-viewer') === 'unavailable';
   const [launchMessage, setLaunchMessage] = useState<string | null>(null);
+  const [modelLoaded, setModelLoaded] = useState(false);
 
   const launchSceneViewer = () => {
     if (!isSecure) {
@@ -69,10 +81,15 @@ export default function IskinArPage() {
         </p>
         <h1 id="iskin-ar-title">Поместите Искина рядом</h1>
         <p className="iskin-ar-page__lead">
-          Здесь используется статичная 2D-голограмма Искина. Анимированные действия остаются на голографическом канале.
+          Здесь используется 2D-голограмма Искина: она мягко парит и меняет спокойные позы, а сцены с книгой, шляпой и задачами остаются на голографическом канале.
         </p>
 
         <div className="iskin-ar-page__viewer-wrap">
+          <div className={`iskin-ar-page__pose-preview ${modelLoaded ? 'is-hidden' : ''}`} aria-hidden="true">
+            {posePreview.map((pose) => (
+              <img key={pose.id} className={`iskin-ar-page__pose is-${pose.id}`} src={pose.src} alt="" />
+            ))}
+          </div>
           <model-viewer
             className="iskin-ar-page__viewer"
             src={arModel}
@@ -93,6 +110,12 @@ export default function IskinArPage() {
             interaction-prompt="auto"
             touch-action="pan-y"
             loading="eager"
+            autoplay=""
+            animation-name="Holographic pose sequence loop"
+            onLoad={(event) => {
+              // React также получает load от poster-изображения; скрываем резерв только после load самого model-viewer.
+              if (event.target === event.currentTarget) setModelLoaded(true);
+            }}
           >
             <img slot="poster" src={iskinProjection} alt="" aria-hidden="true" />
             {isAndroid ? (
@@ -127,7 +150,7 @@ export default function IskinArPage() {
         <p id="iskin-ar-security-note" className={`iskin-ar-page__security ${isSecure ? 'is-ready' : ''}`}>
           <ShieldCheck size={17} aria-hidden="true" />
           {isAndroid && isSecure
-            ? 'Кнопка откроет камеру и позволит разместить статичную голографическую проекцию Искина на полу.'
+            ? 'Кнопка откроет камеру и позволит разместить мягко парящую голографическую проекцию Искина на полу.'
             : isSecure
             ? 'Защищённое соединение обнаружено: кнопка передаст модель в AR-режим, если он поддерживается устройством.'
             : 'Откройте страницу на сайте по защищённому адресу, чтобы разместить проекцию в комнате.'}
@@ -146,7 +169,7 @@ export default function IskinArPage() {
         )}
 
         <div className="iskin-ar-page__facts" aria-label="Возможности проекции в пространстве">
-          <p><Box size={17} aria-hidden="true" /> Статичная голографическая проекция Искина высотой 1,72 м закрепляется у пола.</p>
+          <p><Box size={17} aria-hidden="true" /> Голографическая проекция Искина высотой 1,72 м закрепляется у пола, мягко парит и проходит короткий цикл поз.</p>
           <p><Camera size={17} aria-hidden="true" /> На Android откроется режим размещения, на iPhone/iPad — Quick Look.</p>
         </div>
 
