@@ -1,0 +1,451 @@
+.book-oracle-page {
+  --oracle-cyan: #63f8fd;
+  --oracle-gold: #f0b65a;
+  box-sizing: border-box;
+  min-height: 100svh;
+  padding: clamp(0.9rem, 3vw, 1.6rem);
+  overflow: hidden;
+  color: #eefeff;
+  background:
+    radial-gradient(circle at 52% 28%, rgb(58 219 234 / 28%), transparent 32rem),
+    radial-gradient(circle at 85% 83%, rgb(125 67 189 / 20%), transparent 31rem),
+    radial-gradient(circle at 9% 92%, rgb(240 182 90 / 12%), transparent 23rem),
+    #071226;
+  font-family: PFDinTextPro, sans-serif;
+}
+
+.book-oracle-page::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(160 255 255 / 38%) 0 1px, transparent 1.6px);
+  background-position: 3% 8%;
+  background-size: 5.25rem 5.25rem;
+  mask-image: radial-gradient(circle at 50% 45%, black, transparent 73%);
+  opacity: 0.32;
+  content: '';
+}
+
+.book-oracle-page__back,
+.book-oracle-page__content { position: relative; z-index: 1; }
+
+.book-oracle-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgb(99 248 253 / 24%);
+  border-radius: 0.5rem;
+  color: rgb(238 254 255 / 86%);
+  background: rgb(5 19 39 / 66%);
+  text-decoration: none;
+}
+
+.book-oracle-page__back:focus-visible,
+.book-oracle-page button:focus-visible {
+  outline: 3px solid var(--oracle-gold);
+  outline-offset: 3px;
+}
+
+.book-oracle-page__content {
+  width: min(100%, 70rem);
+  margin: 0.75rem auto 0;
+}
+
+.book-oracle-page__heading {
+  max-width: 43rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.book-oracle-page__eyebrow,
+.book-oracle-page__result-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  margin: 0;
+  color: var(--oracle-cyan);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
+.book-oracle-page h1 {
+  margin: 0.55rem 0 0;
+  color: #f5e9d3;
+  font-family: Kereru, serif;
+  font-size: clamp(2.35rem, 6vw, 4.5rem);
+  font-weight: 400;
+  line-height: 0.96;
+  text-shadow: 0 0 1.6rem rgb(99 248 253 / 31%);
+}
+
+.book-oracle-page__heading > p:last-child {
+  max-width: 38rem;
+  margin: 0.9rem auto 0;
+  color: rgb(238 254 255 / 79%);
+  line-height: 1.45;
+}
+
+.book-oracle-page__ritual {
+  display: grid;
+  grid-template-columns: minmax(12.5rem, 0.68fr) minmax(0, 1.35fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 3rem);
+  margin: clamp(1rem, 3vw, 2rem) auto 0;
+}
+
+.book-oracle-page__guide {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.book-oracle-page__guide-glow {
+  position: absolute;
+  z-index: 0;
+  width: min(100%, 19rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(99 248 253 / 34%), rgb(92 67 188 / 12%) 48%, transparent 70%);
+  filter: blur(1rem);
+  animation: oracle-guide-glow 4.8s ease-in-out infinite;
+}
+
+.book-oracle-page__guide img {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 18rem);
+  max-height: 25rem;
+  object-fit: contain;
+  filter: drop-shadow(0 0 1.3rem rgb(99 248 253 / 60%));
+  animation: oracle-guide-float 5.2s ease-in-out infinite;
+}
+
+.book-oracle-page__guide p {
+  position: relative;
+  z-index: 2;
+  max-width: 18rem;
+  margin: -1.15rem 0 0;
+  padding: 0.68rem 0.78rem;
+  border-left: 2px solid var(--oracle-cyan);
+  color: rgb(238 254 255 / 83%);
+  background: rgb(5 23 45 / 72%);
+  font-size: 0.9rem;
+  line-height: 1.36;
+  text-align: left;
+}
+
+.book-oracle-page__table {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid rgb(240 182 90 / 32%);
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(145deg, rgb(8 39 65 / 92%), rgb(18 14 52 / 86%)),
+    #071226;
+  box-shadow: inset 0 0 3rem rgb(99 248 253 / 8%), 0 1.2rem 3.7rem rgb(0 0 0 / 28%);
+  text-align: center;
+}
+
+.book-oracle-page__table::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0.65rem;
+  border: 1px solid rgb(99 248 253 / 13%);
+  border-radius: 0.75rem;
+  content: '';
+}
+
+.book-oracle-page__runes {
+  color: var(--oracle-gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.22em;
+  text-shadow: 0 0 0.8rem rgb(240 182 90 / 62%);
+}
+
+.book-oracle-page__prompt {
+  min-height: 2.9rem;
+  max-width: 32rem;
+  margin: 0.72rem auto 0;
+  color: rgb(245 233 211 / 92%);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.35;
+}
+
+.book-oracle-page__live-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.book-oracle-page__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(0.5rem, 2.1vw, 1.15rem);
+  width: min(100%, 39rem);
+  margin: 0.5rem auto 1.15rem;
+}
+
+.book-oracle-page__card {
+  min-width: 0;
+  perspective: 70rem;
+  animation: oracle-card-enter 620ms cubic-bezier(0.2, 0.88, 0.28, 1) both;
+  animation-delay: calc(var(--card-index) * 90ms);
+}
+
+.is-drawing .book-oracle-page__card {
+  animation-name: oracle-card-draw;
+  animation-duration: 1.12s;
+  animation-delay: calc(var(--card-index) * 120ms);
+}
+
+.book-oracle-page__card-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 242 / 498;
+  transform-style: preserve-3d;
+  transition: transform 720ms cubic-bezier(0.2, 0.76, 0.26, 1);
+}
+
+.book-oracle-page__card.is-revealed .book-oracle-page__card-inner { transform: rotateY(180deg); }
+
+.book-oracle-page__card img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.36rem;
+  object-fit: cover;
+  backface-visibility: hidden;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 32%), 0 0 1rem rgb(99 248 253 / 18%);
+}
+
+.book-oracle-page__card-face { transform: rotateY(180deg); }
+.book-oracle-page__card.is-revealed .book-oracle-page__card-face { box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 38%), 0 0 1.5rem rgb(99 248 253 / 38%); }
+
+.book-oracle-page__card-label {
+  position: absolute;
+  z-index: 2;
+  right: 0.22rem;
+  bottom: 0.22rem;
+  left: 0.22rem;
+  box-sizing: border-box;
+  padding: clamp(0.25rem, 1.1vw, 0.48rem);
+  border: 1px solid rgb(240 182 90 / 58%);
+  border-radius: 0.18rem;
+  color: #fff5dd;
+  background: linear-gradient(135deg, rgb(4 19 40 / 92%), rgb(18 10 43 / 88%));
+  box-shadow: 0 0 0.8rem rgb(0 0 0 / 42%);
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  text-align: left;
+}
+
+.book-oracle-page__card-label span {
+  display: block;
+  color: var(--oracle-cyan);
+  font-size: clamp(0.35rem, 1.05vw, 0.56rem);
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+}
+
+.book-oracle-page__card-label strong {
+  display: block;
+  margin-top: 0.18rem;
+  color: #f5e9d3;
+  font-family: Kereru, serif;
+  font-size: clamp(0.55rem, 1.65vw, 0.94rem);
+  font-weight: 400;
+  line-height: 1.02;
+}
+
+.book-oracle-page__card p {
+  min-height: 1.75rem;
+  margin: 0.45rem 0 0;
+  color: rgb(185 255 255 / 78%);
+  font-size: clamp(0.56rem, 1.5vw, 0.78rem);
+  line-height: 1.18;
+}
+
+.book-oracle-page__card h2 {
+  min-height: 2.2rem;
+  margin: 0.1rem 0 0;
+  color: #f5e9d3;
+  font-family: Kereru, serif;
+  font-size: clamp(0.78rem, 2.2vw, 1.12rem);
+  font-weight: 400;
+  line-height: 1.02;
+}
+
+.book-oracle-page__primary,
+.book-oracle-page__sharing button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  min-height: 3rem;
+  border: 1px solid var(--oracle-cyan);
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.book-oracle-page__primary {
+  width: min(100%, 26rem);
+  color: #061426;
+  background: var(--oracle-cyan);
+  box-shadow: 0 0 1.5rem rgb(99 248 253 / 35%);
+}
+
+.book-oracle-page__primary:hover:not(:disabled) { filter: brightness(1.07); }
+.book-oracle-page__primary:disabled { cursor: wait; opacity: 0.84; }
+.book-oracle-page__primary.is-waiting svg { animation: oracle-waiting-star 1.25s linear infinite; }
+
+.book-oracle-page__reading {
+  width: min(100%, 57rem);
+  margin: clamp(1.5rem, 4vw, 3rem) auto 0;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 1px solid rgb(240 182 90 / 35%);
+  border-radius: 1.1rem;
+  background: linear-gradient(135deg, rgb(16 14 50 / 88%), rgb(4 43 65 / 83%));
+  box-shadow: inset 0 0 2.5rem rgb(99 248 253 / 6%), 0 1.2rem 3.8rem rgb(0 0 0 / 25%);
+}
+
+.book-oracle-page__reading > h2 {
+  margin: 0.5rem 0 0;
+  color: #f5e9d3;
+  font-family: Kereru, serif;
+  font-size: clamp(2rem, 5vw, 3.35rem);
+  font-weight: 400;
+  line-height: 0.96;
+}
+
+.book-oracle-page__interpretations {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.book-oracle-page__interpretations article {
+  min-width: 0;
+  padding: 0.8rem;
+  border-top: 2px solid rgb(99 248 253 / 68%);
+  background: rgb(4 20 42 / 58%);
+}
+
+.book-oracle-page__interpretations p,
+.book-oracle-page__book > div > p {
+  margin: 0;
+  color: var(--oracle-cyan);
+  font-size: 0.65rem;
+  letter-spacing: 0.09em;
+}
+
+.book-oracle-page__interpretations h3,
+.book-oracle-page__book h3 {
+  margin: 0.4rem 0 0;
+  color: #f5e9d3;
+  font-family: Kereru, serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.book-oracle-page__interpretations span,
+.book-oracle-page__book span {
+  display: block;
+  margin-top: 0.52rem;
+  color: rgb(238 254 255 / 82%);
+  font-size: 0.9rem;
+  line-height: 1.42;
+}
+
+.book-oracle-page__interpretations em {
+  display: block;
+  margin-top: 0.48rem;
+  color: rgb(240 182 90 / 88%);
+  font-size: 0.77rem;
+  font-style: normal;
+  line-height: 1.25;
+}
+
+.book-oracle-page__summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border-left: 2px solid var(--oracle-gold);
+  background: rgb(240 182 90 / 8%);
+}
+
+.book-oracle-page__summary svg,
+.book-oracle-page__book > svg { color: var(--oracle-gold); }
+.book-oracle-page__summary p { margin: 0; color: rgb(245 233 211 / 92%); line-height: 1.48; }
+
+.book-oracle-page__book {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid rgb(99 248 253 / 26%);
+  background: rgb(3 26 47 / 65%);
+}
+
+.book-oracle-page__book strong { display: block; margin-top: 0.35rem; color: rgb(238 254 255 / 83%); }
+.book-oracle-page__book small { display: block; margin-top: 0.62rem; color: rgb(185 255 255 / 74%); font-size: 0.76rem; line-height: 1.3; }
+
+.book-oracle-page__reading-actions { display: grid; gap: 0.7rem; justify-items: center; margin-top: 1rem; }
+.book-oracle-page__sharing { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; width: min(100%, 26rem); }
+.book-oracle-page__sharing button { color: #e9feff; background: rgb(7 32 55 / 80%); }
+.book-oracle-page__notice { margin: 0.7rem 0 0; color: rgb(238 254 255 / 72%); font-size: 0.9rem; text-align: center; }
+
+@keyframes oracle-guide-glow { 50% { opacity: 0.62; transform: scale(1.08); } }
+@keyframes oracle-guide-float { 50% { transform: translateY(-0.4rem) rotate(-0.4deg); } }
+@keyframes oracle-card-enter { from { opacity: 0; transform: translateY(1.2rem) scale(0.94); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes oracle-card-draw { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-0.6rem) rotate(-2.4deg); } 66% { transform: translateY(-0.2rem) rotate(2deg); } }
+@keyframes oracle-waiting-star { to { transform: rotate(360deg); } }
+
+@media (max-width: 44rem) {
+  .book-oracle-page__ritual { grid-template-columns: 1fr; gap: 0.65rem; }
+  .book-oracle-page__guide { grid-template-columns: minmax(5.6rem, 8.2rem) minmax(0, 1fr); align-items: center; padding: 0.25rem 0; text-align: left; }
+  .book-oracle-page__guide-glow { width: 10rem; left: -1rem; }
+  .book-oracle-page__guide img { width: 100%; max-height: 9.4rem; }
+  .book-oracle-page__guide p { max-width: none; margin: 0; font-size: 0.82rem; }
+  .book-oracle-page__table { padding: 1rem 0.75rem; }
+}
+
+@media (max-width: 31rem) {
+  .book-oracle-page { padding: 0.85rem; }
+  .book-oracle-page__content { margin-top: 0.55rem; }
+  .book-oracle-page__cards { gap: 0.42rem; }
+  .book-oracle-page__card p { min-height: 1.45rem; }
+  .book-oracle-page__card h2 { min-height: 1.95rem; }
+  .book-oracle-page__interpretations { grid-template-columns: 1fr; gap: 0.55rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-oracle-page__guide-glow,
+  .book-oracle-page__guide img { animation: none; }
+  .book-oracle-page__card,
+  .is-drawing .book-oracle-page__card { animation-duration: 180ms; }
+  .book-oracle-page__card-inner { transition-duration: 180ms; }
+  .book-oracle-page__primary.is-waiting svg { animation-duration: 1.8s; }
+}

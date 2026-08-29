@@ -151,6 +151,39 @@
   font-size: 0.78rem;
 }
 
+.iskin-widget__channel-links {
+  display: grid;
+  gap: 0.48rem;
+  margin-top: 0.72rem;
+}
+
+.iskin-widget__channel-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.42rem 0.65rem;
+  border: 1px solid rgb(99 248 253 / 38%);
+  border-radius: 0.45rem;
+  color: var(--iskin-cyan);
+  background: rgb(3 26 45 / 65%);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.iskin-widget__channel-links a:last-child {
+  border-color: rgb(240 182 90 / 42%);
+  color: rgb(245 233 211 / 88%);
+}
+
+.iskin-widget__channel-links a:focus-visible {
+  outline: 3px solid #f0b65a;
+  outline-offset: 3px;
+}
+
 .iskin-widget__qr-code {
   display: grid;
   flex: 0 0 auto;

@@ -1,5 +1,6 @@
 export const iskinProjectionPath = 'iskin-projection';
 export const iskinArPath = 'iskin-ar';
+export const bookOraclePath = 'book-oracle';
 
 const localhostNames = new Set(['localhost', '127.0.0.1', '::1', '[::1]']);
 

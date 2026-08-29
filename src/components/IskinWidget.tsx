@@ -246,6 +246,10 @@ export function IskinWidget({ className = '', onSceneChange }: IskinWidgetProps)
                 Откройте сайт по адресу, доступному с телефона, — и здесь появится код для проекции.
               </p>
             )}
+            <div className="iskin-widget__channel-links">
+              <a href={projectionLink.url}>Открыть голографический канал Искина</a>
+              <a href="/book-oracle">Книжный оракул</a>
+            </div>
           </div>
           {projectionLink.isNetworkAddress && (
             <div className="iskin-widget__qr-code">

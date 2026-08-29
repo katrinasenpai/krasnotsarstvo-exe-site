@@ -57,9 +57,9 @@ export default function IskinArPage() {
 
   return (
     <main className="iskin-ar-page">
-      <a className="iskin-ar-page__back" href="/iskin-projection" aria-label="Вернуться к проекции Искина">
+      <a className="iskin-ar-page__back" href="/iskin-projection" aria-label="Вернуться к голографическому каналу Искина">
         <ArrowLeft size={18} aria-hidden="true" />
-        К проекции Искина
+        К голографическому каналу
       </a>
 
       <section className="iskin-ar-page__content" aria-labelledby="iskin-ar-title">
@@ -67,9 +67,9 @@ export default function IskinArPage() {
           <Sparkles size={15} aria-hidden="true" />
           ПРОЕКЦИЯ В ПРОСТРАНСТВЕ
         </p>
-        <h1 id="iskin-ar-title">Поставьте Искина в пространство</h1>
+        <h1 id="iskin-ar-title">Поместите Искина рядом</h1>
         <p className="iskin-ar-page__lead">
-          Поместите голографический образ Искина в комнату и посмотрите, как он оживает в пространстве.
+          Здесь используется статичная 2D-голограмма Искина. Анимированные действия остаются на голографическом канале.
         </p>
 
         <div className="iskin-ar-page__viewer-wrap">
@@ -120,14 +120,14 @@ export default function IskinArPage() {
             aria-describedby="iskin-ar-security-note"
           >
             <Camera size={18} aria-hidden="true" />
-            Открыть AR
+            Разместить проекцию
           </button>
         )}
 
         <p id="iskin-ar-security-note" className={`iskin-ar-page__security ${isSecure ? 'is-ready' : ''}`}>
           <ShieldCheck size={17} aria-hidden="true" />
           {isAndroid && isSecure
-            ? 'Кнопка откроет камеру и позволит разместить голографическую проекцию Искина на полу.'
+            ? 'Кнопка откроет камеру и позволит разместить статичную голографическую проекцию Искина на полу.'
             : isSecure
             ? 'Защищённое соединение обнаружено: кнопка передаст модель в AR-режим, если он поддерживается устройством.'
             : 'Откройте страницу на сайте по защищённому адресу, чтобы разместить проекцию в комнате.'}
@@ -146,7 +146,7 @@ export default function IskinArPage() {
         )}
 
         <div className="iskin-ar-page__facts" aria-label="Возможности проекции в пространстве">
-          <p><Box size={17} aria-hidden="true" /> Голографическая проекция Искина высотой 1,72 м закрепляется у пола.</p>
+          <p><Box size={17} aria-hidden="true" /> Статичная голографическая проекция Искина высотой 1,72 м закрепляется у пола.</p>
           <p><Camera size={17} aria-hidden="true" /> На Android откроется режим размещения, на iPhone/iPad — Quick Look.</p>
         </div>
 
