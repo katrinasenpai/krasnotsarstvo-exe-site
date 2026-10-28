@@ -10,7 +10,7 @@ import iskinArThinking from '../assets/images/iskin-ar-sequence/iskin-ar-thinkin
 import './IskinArPage.css';
 
 // Файлы в public/ не получают хеш в имени: при перегенерации меняйте версию, иначе Safari и Quick Look покажут старую модель из кэша.
-const arAssetVersion = '2';
+const arAssetVersion = '3';
 const arModel = `/ar/iskin-projection-billboard.glb?v=${arAssetVersion}`;
 const quickLookModel = `/ar/iskin-projection-billboard.usdz?v=${arAssetVersion}`;
 const posePreview = [

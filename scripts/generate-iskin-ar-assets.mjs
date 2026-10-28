@@ -12,6 +12,7 @@ const modelHeightMetres = 1.72;
 const animationName = 'Holographic pose sequence loop';
 const animationDurationSeconds = 9.6;
 const hiddenScale = 0.001;
+const quickLookOpacityThreshold = 0.4;
 
 const poses = [
   { id: 'idle', nodeName: 'Искин · поза ожидания', fileName: 'iskin-ar-idle.png', materialName: 'IdleMaterial' },
@@ -336,8 +337,10 @@ function usdaPoseScaleSamples(poseId) {
 /**
  * В USD начало координат текстуры — левый нижний угол (в glTF — левый верхний),
  * поэтому st здесь не совпадает с UV в GLB: иначе Quick Look показывает Искина вверх ногами.
- * Материал светится через emissive без диффуза и бликов: прозрачная плоскость с бликами
- * в RealityKit видна как стеклянная рамка вокруг проекции.
+ * RealityKit рисует блики окружения и на полностью прозрачных участках плоскости — это видно
+ * как стеклянная рамка вокруг Искина, а specularColor Apple не поддерживает. Поэтому почти
+ * прозрачные пиксели отсекаются через opacityThreshold и не рисуются вовсе.
+ * Emissive не используется: в Quick Look он пересвечивает белую рубашку до сплошного белого.
  */
 function createUsda(width, height) {
   const modelWidthMetres = Number((modelHeightMetres * width / height).toFixed(6));
@@ -396,11 +399,10 @@ ${usdaPoseScaleSamples(pose.id)}
         def Shader "PreviewSurface"
         {
             uniform token info:id = "UsdPreviewSurface"
-            color3f inputs:diffuseColor = (0, 0, 0)
-            color3f inputs:emissiveColor.connect = </Materials/${pose.materialName}/Texture.outputs:rgb>
+            color3f inputs:diffuseColor.connect = </Materials/${pose.materialName}/Texture.outputs:rgb>
             float inputs:opacity.connect = </Materials/${pose.materialName}/Texture.outputs:a>
-            int inputs:useSpecularWorkflow = 1
-            color3f inputs:specularColor = (0, 0, 0)
+            float inputs:opacityThreshold = ${quickLookOpacityThreshold}
+            float inputs:metallic = 0
             float inputs:roughness = 1
             token outputs:surface
         }
