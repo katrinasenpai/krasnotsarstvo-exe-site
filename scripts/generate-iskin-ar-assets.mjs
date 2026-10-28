@@ -333,6 +333,12 @@ function usdaPoseScaleSamples(poseId) {
   }).join(',\n');
 }
 
+/**
+ * В USD начало координат текстуры — левый нижний угол (в glTF — левый верхний),
+ * поэтому st здесь не совпадает с UV в GLB: иначе Quick Look показывает Искина вверх ногами.
+ * Материал светится через emissive без диффуза и бликов: прозрачная плоскость с бликами
+ * в RealityKit видна как стеклянная рамка вокруг проекции.
+ */
 function createUsda(width, height) {
   const modelWidthMetres = Number((modelHeightMetres * width / height).toFixed(6));
   const halfWidth = Number((modelWidthMetres / 2).toFixed(6));
@@ -355,7 +361,7 @@ ${usdaPoseScaleSamples(pose.id)}
                 normal3f[] normals = [(0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)] (
                     interpolation = "vertex"
                 )
-                texCoord2f[] primvars:st = [(0, 1), (1, 1), (1, 0), (0, 0)] (
+                texCoord2f[] primvars:st = [(0, 0), (1, 0), (1, 1), (0, 1)] (
                     interpolation = "vertex"
                 )
                 uniform bool doubleSided = true
@@ -371,7 +377,7 @@ ${usdaPoseScaleSamples(pose.id)}
         def Shader "PrimvarReader_st"
         {
             uniform token info:id = "UsdPrimvarReader_float2"
-            token inputs:varname = "st"
+            string inputs:varname = "st"
             float2 outputs:result
         }
 
@@ -381,6 +387,8 @@ ${usdaPoseScaleSamples(pose.id)}
             asset inputs:file = @textures/${pose.fileName}@
             float2 inputs:st.connect = </Materials/${pose.materialName}/PrimvarReader_st.outputs:result>
             token inputs:sourceColorSpace = "sRGB"
+            token inputs:wrapS = "clamp"
+            token inputs:wrapT = "clamp"
             float3 outputs:rgb
             float outputs:a
         }
@@ -388,9 +396,11 @@ ${usdaPoseScaleSamples(pose.id)}
         def Shader "PreviewSurface"
         {
             uniform token info:id = "UsdPreviewSurface"
-            color3f inputs:diffuseColor.connect = </Materials/${pose.materialName}/Texture.outputs:rgb>
+            color3f inputs:diffuseColor = (0, 0, 0)
+            color3f inputs:emissiveColor.connect = </Materials/${pose.materialName}/Texture.outputs:rgb>
             float inputs:opacity.connect = </Materials/${pose.materialName}/Texture.outputs:a>
-            float inputs:metallic = 0
+            int inputs:useSpecularWorkflow = 1
+            color3f inputs:specularColor = (0, 0, 0)
             float inputs:roughness = 1
             token outputs:surface
         }

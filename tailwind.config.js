@@ -3,6 +3,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  // На тач-экранах hover «залипает» после тапа, поэтому hover-стили включаются только там, где есть курсор.
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       // Цветовая палитра

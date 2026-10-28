@@ -5,6 +5,8 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'model-viewer': DetailedHTMLProps<HTMLAttributes<ModelViewerElement>, ModelViewerElement> & {
+        // React 18 передаёт веб-компонентам атрибуты как есть: className превратился бы в атрибут «classname».
+        class?: string;
         src?: string;
         poster?: string;
         alt?: string;

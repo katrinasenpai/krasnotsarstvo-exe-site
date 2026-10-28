@@ -1,5 +1,6 @@
 import { ArrowLeft, Box, Camera, ShieldCheck, Sparkles } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { ModelViewerElement } from '@google/model-viewer';
 import '@google/model-viewer';
 import iskinProjection from '../assets/images/iskin-states/iskin-projection.webp';
 import iskinArAdjustMonocle from '../assets/images/iskin-ar-sequence/iskin-ar-adjust-monocle.png';
@@ -53,6 +54,20 @@ export default function IskinArPage() {
   const isSceneViewerFallback = new URLSearchParams(window.location.search).get('scene-viewer') === 'unavailable';
   const [launchMessage, setLaunchMessage] = useState<string | null>(null);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const viewerRef = useRef<ModelViewerElement>(null);
+
+  // React 18 не подписывает onLoad на веб-компоненты, поэтому событие load слушаем напрямую.
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (!viewer) return;
+    if (viewer.loaded) {
+      setModelLoaded(true);
+      return;
+    }
+    const handleLoad = () => setModelLoaded(true);
+    viewer.addEventListener('load', handleLoad);
+    return () => viewer.removeEventListener('load', handleLoad);
+  }, []);
 
   const launchSceneViewer = () => {
     if (!isSecure) {
@@ -91,7 +106,8 @@ export default function IskinArPage() {
             ))}
           </div>
           <model-viewer
-            className="iskin-ar-page__viewer"
+            ref={viewerRef}
+            class="iskin-ar-page__viewer"
             src={arModel}
             ios-src={quickLookModel}
             alt="Вертикальная голографическая 2D-проекция Искина для размещения в помещении"
@@ -112,10 +128,6 @@ export default function IskinArPage() {
             loading="eager"
             autoplay=""
             animation-name="Holographic pose sequence loop"
-            onLoad={(event) => {
-              // React также получает load от poster-изображения; скрываем резерв только после load самого model-viewer.
-              if (event.target === event.currentTarget) setModelLoaded(true);
-            }}
           >
             <img slot="poster" src={iskinProjection} alt="" aria-hidden="true" />
             {isAndroid ? (

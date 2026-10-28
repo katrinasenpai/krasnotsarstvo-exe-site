@@ -104,3 +104,8 @@
 
   /* (удалено) индивидуальная настройка пинов переносится в tailwind-классы */
 }
+
+/* iOS Safari не поддерживает background-attachment: fixed и растягивает фон на всю секцию. */
+@media (hover: none) and (pointer: coarse) {
+  .bg-fixed { background-attachment: scroll; }
+}

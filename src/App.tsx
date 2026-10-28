@@ -245,7 +245,7 @@ function App() {
       <Navbar navLinks={navLinks} />
 
       {/* HERO */}
-      <section id="home" className="hero-shell relative overflow-hidden bg-midnight-ink sm:h-screen sm:min-h-[41rem]">
+      <section id="home" className="hero-shell relative overflow-hidden bg-midnight-ink sm:h-svh sm:min-h-[41rem]">
         <img src={heroBg} alt="Библиотека КрасноЦарства" className="hero-shell__background absolute inset-0 z-0 h-full w-full object-cover" />
         <div className="hero-shell__content relative z-10 px-4 sm:h-full sm:px-8 md:px-16 lg:px-24">
           <HeroOracleInvite />
@@ -537,7 +537,7 @@ function App() {
           <img 
             src={selectedImage} 
             alt="Увеличенный скриншот" 
-            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg"
+            className="max-w-[90vw] max-h-[90dvh] object-contain rounded-lg"
             onClick={(e) => e.stopPropagation()} 
           />
         </div>
