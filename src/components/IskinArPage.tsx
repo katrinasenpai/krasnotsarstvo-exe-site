@@ -9,8 +9,10 @@ import iskinArResting from '../assets/images/iskin-ar-sequence/iskin-ar-resting.
 import iskinArThinking from '../assets/images/iskin-ar-sequence/iskin-ar-thinking.png';
 import './IskinArPage.css';
 
-const arModel = '/ar/iskin-projection-billboard.glb';
-const quickLookModel = '/ar/iskin-projection-billboard.usdz';
+// Файлы в public/ не получают хеш в имени: при перегенерации меняйте версию, иначе Safari и Quick Look покажут старую модель из кэша.
+const arAssetVersion = '2';
+const arModel = `/ar/iskin-projection-billboard.glb?v=${arAssetVersion}`;
+const quickLookModel = `/ar/iskin-projection-billboard.usdz?v=${arAssetVersion}`;
 const posePreview = [
   { id: 'idle', src: iskinArIdle },
   { id: 'thinking', src: iskinArThinking },
