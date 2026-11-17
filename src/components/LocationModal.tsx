@@ -1,62 +1,27 @@
-// src/components/LocationModal.tsx
-
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { locationsData, LocationId } from '../data/locations';
-
-type LocationModalProps = {
-  cardId: LocationId;
-  onClose: () => void;
-};
-
-export function LocationModal({ cardId, onClose }: LocationModalProps) {
+export function LocationModal({ cardId, onClose }: { cardId: LocationId; onClose: () => void }) {
   const [view, setView] = useState<'fantasy' | 'real'>('fantasy');
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const location = locationsData[cardId];
   const info = view === 'real' ? location.real_info : location.fantasy_info;
-
-  return createPortal(
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[99999] p-4 lightbox-fade-in" onClick={onClose} style={{zIndex: 99999, isolation: 'isolate'}}>
-      <div className="relative bg-ancient-parchment text-deep-blue-ink w-full max-w-5xl h-[90dvh] rounded-lg p-6 md:p-8 flex flex-col gap-4 overflow-hidden" onClick={(e) => e.stopPropagation()}>
-        
-        <button onClick={onClose} className="absolute top-2 right-3 text-4xl text-deep-blue-ink/50 hover:text-deep-blue-ink transition-colors">&times;</button>
-        
-        <h2 className="text-center font-serif text-3xl md:text-4xl">{location.title}</h2>
-        
-        <div className="flex justify-center gap-4 border-b-2 border-deep-blue-ink/10 pb-4">
-          <button onClick={() => setView('fantasy')} className={`font-bold py-2 px-4 rounded transition-colors ${view === 'fantasy' ? 'bg-deep-blue-ink/20' : 'hover:bg-deep-blue-ink/10'}`}>Фэнтезийная версия</button>
-          <button onClick={() => setView('real')} className={`font-bold py-2 px-4 rounded transition-colors ${view === 'real' ? 'bg-deep-blue-ink/20' : 'hover:bg-deep-blue-ink/10'}`}>Реальная история</button>
-        </div>
-
-        <div className="flex-grow flex flex-col md:flex-row gap-8 overflow-y-auto pr-2 will-change-transform">
-          <div className="md:w-1/2">
-            <h3 className="font-serif text-2xl mb-4">{info.title}</h3>
-            <div className="space-y-4">
-              <p className="whitespace-pre-wrap leading-relaxed text-sm sm:text-base">{info.description}</p>
-              
-              {/* Ссылка на внешний ресурс для реальных объектов */}
-              {view === 'real' && info.external_link && (
-                <div className="mt-6 p-4 bg-gold-leaf/10 rounded-lg border border-gold-leaf/20">
-                  <h4 className="font-serif text-lg mb-2 text-gold-leaf">Узнать больше</h4>
-                  <a 
-                    href={info.external_link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-gold-leaf hover:text-gold-leaf/80 transition-colors font-medium"
-                  >
-                    <FaExternalLinkAlt />
-                    Открыть на Краснакарте
-                  </a>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="md:w-1/2 flex items-center justify-center">
-            <img src={info.image} alt={info.title} className="max-w-full max-h-full object-contain rounded-md" />
-          </div>
-        </div>
+  useEffect(() => {
+    const previous = document.activeElement as HTMLElement | null;
+    const overflow = document.body.style.overflow;
+    dialogRef.current?.showModal();
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = overflow; previous?.focus(); };
+  }, []);
+  return createPortal(<dialog ref={dialogRef} aria-labelledby="atlas-place-title" onCancel={onClose} onClick={e => { if (e.target === e.currentTarget) onClose(); }} className="atlas-dialog">
+    <div className="atlas-dialog__inner">
+      <button type="button" onClick={onClose} className="atlas-dialog__close" aria-label="Закрыть карточку">×</button>
+      <p className="atlas-dialog__eyebrow">АТЛАС КРАСНОЦАРСТВА</p><h2 id="atlas-place-title">{location.title}</h2>
+      <div className="atlas-dialog__tabs" aria-label="Сторона карточки">
+        <button type="button" onClick={() => setView('fantasy')} aria-pressed={view === 'fantasy'}>КрасноЦарство</button>
+        <button type="button" onClick={() => setView('real')} aria-pressed={view === 'real'}>Петербург</button>
       </div>
-    </div>,
-    document.body
-  );
+      <div className="atlas-dialog__body"><img key={info.image} src={info.image} alt={info.title} /><div><h3>{info.title}</h3><p>{info.description}</p></div></div>
+    </div>
+  </dialog>, document.body);
 }

@@ -1,6 +1,6 @@
 import { ArrowLeft, BookOpen, Copy, Share2, Sparkles } from 'lucide-react';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
-import iskinHat from '../assets/images/iskin-states/iskin-hat.webp';
+const iskinHat = '/characters/iskin-reading.webp';
 import oracleCardBack from '../assets/images/oracle-deck/oracle-card-back.webp';
 import {
   createOracleReading,
@@ -120,23 +120,23 @@ export default function BookOraclePage() {
 
   return (
     <main className={`book-oracle-page is-${phase}`}>
-      <a className="book-oracle-page__back" href="/iskin-projection">
+      <a className="book-oracle-page__back" href="/">
         <ArrowLeft size={18} aria-hidden="true" />
-        К голографическому каналу
+        На сайт КрасноЦарства
       </a>
 
       <section className="book-oracle-page__content" aria-labelledby="book-oracle-title">
         <header className="book-oracle-page__heading">
           <p className="book-oracle-page__eyebrow"><Sparkles size={15} aria-hidden="true" /> КНИЖНЫЙ ОРАКУЛ</p>
           <h1 id="book-oracle-title">Синхронизация с магико-информационным потоком</h1>
-          <p>Расклад будет произведён с помощью «ХРОНОКАРТ» — Книжного оракула КрасноЦарства: уникальной колоды из 22 старших арканов, разработанной Архимагом и его Подмастерьем. Архимаг отвечал за смыслы, Подмастерье — предположительно за сбои. Толкованием занимается Искин: он создан для виртуозного управления магико-информационными потоками и сохраняет нейтралитет, поэтому выдаёт объективные, но не абсолютные интерпретации. Если, конечно, Проклятие Забвения не добавило в систему новых артефактов.</p>
+          <p>Расклад будет произведён с помощью «ХРОНОКАРТ» — Книжного оракула КрасноЦарства: уникальной колоды из 22 старших арканов, разработанной Архимагом и его Подмастерьем. Архимаг отвечал за смыслы, Подмастерье — предположительно за сбои. Толкованием занимается Искин: он создан для виртуозного управления магико-информационными потоками и сохраняет нейтралитет, поэтому выдаёт объективные, но не абсолютные интерпретации. Если, конечно, Заклятие Забвения не добавило в систему новых артефактов.</p>
         </header>
 
         <div className="book-oracle-page__ritual" aria-busy={phase === 'drawing'}>
           <aside className="book-oracle-page__guide" aria-label="Искин ведёт ритуал">
             <div className="book-oracle-page__guide-glow" aria-hidden="true" />
             <img src={iskinHat} alt="Искин в чёрной остроконечной магической шляпе ведёт Книжный оракул" />
-            <p>«Благодарю за использование системы „Книжный оракул“. Мысленно сформулируйте вопрос и сделайте расклад — я расшифрую три карты. Возможны незначительные отклонения интерпретации: я всё-таки искусственный интеллект, а Проклятие Забвения не проходит сертификацию».</p>
+            <p>«Благодарю за использование системы „Книжный оракул“. Мысленно сформулируйте вопрос и сделайте расклад — я расшифрую три карты. Возможны незначительные отклонения интерпретации: я всё-таки искусственный интеллект, а Заклятие Забвения не проходит сертификацию».</p>
           </aside>
 
           <section className="book-oracle-page__table" aria-label="Расклад из трёх карт">

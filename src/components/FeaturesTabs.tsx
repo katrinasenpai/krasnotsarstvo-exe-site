@@ -1,6 +1,6 @@
 // src/components/FeaturesTabs.tsx
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaComments, FaPuzzlePiece, FaBriefcase, FaBookDead, FaBoxOpen, FaKey, FaHandshake, FaMagic, FaLandmark, FaGem, FaTree } from 'react-icons/fa';
 
 type Tab = 'mechanics' | 'inventory' | 'world';
@@ -49,7 +49,7 @@ export function FeaturesTabs() {
                   <FaPuzzlePiece className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Мини-игры и загадки</h4>
-                    <p className="text-sm text-off-white/70">Решайте головоломки: от загадок дракончиков в Крепости-Стакан до квеста на заброшенном пиратском дирижабле.</p>
+                    <p className="text-sm text-off-white/70">Решайте головоломки: от загадок дракончиков в Крепости-Стакане до квеста на заброшенном пиратском дирижабле.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
@@ -62,8 +62,8 @@ export function FeaturesTabs() {
                 <li className="flex items-start gap-4">
                   <FaBookDead className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
-                    <h4 className="font-serif text-xl font-bold">Проклятие как механика</h4>
-                    <p className="text-sm text-off-white/70">Проклятие Забвения — не просто фон, а активный элемент, делающий порталы нестабильными и вызывающий сбои в работе гида Искина.</p>
+                    <h4 className="font-serif text-xl font-bold">Заклятие как механика</h4>
+                    <p className="text-sm text-off-white/70">Заклятие Забвения стирает записи, нарушает работу порталов и затрагивает память Искина. Внимательное чтение помогает замечать его следы.</p>
                   </div>
                 </li>
               </ul>
@@ -105,7 +105,7 @@ export function FeaturesTabs() {
                 <div className="flex flex-col items-center text-center">
                   <FaMagic className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Редкие артефакты</h4>
-                  <p className="text-sm text-off-white/70">Получите коготь грифона или зеркало истинных намерений, чтобы получить уникальные возможности.</p>
+                  <p className="text-sm text-off-white/70">Значимые артефакты входят в зелье против Заклятия. С каждым из них приходит строка заклинания, которое пробудит зелье.</p>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@ export function FeaturesTabs() {
            <div className="animate-fade-in">
               <div className="text-center max-w-3xl mx-auto">
                 <h3 className="font-serif text-2xl text-gold-leaf mb-3">Переходы и связи</h3>
-                <p className="text-off-white/80 mb-10">Все основные локации связаны порталами, которые становятся активными по мере прохождения сюжета. Некоторые из них нестабильны из-за Проклятия и требуют особых артефактов для использования. Ваш гид Искин всегда объяснит связь каждой локации с реальным миром.</p>
+                <p className="text-off-white/80 mb-10">Все основные локации связаны порталами, которые становятся активными по мере прохождения сюжета. Некоторые из них нестабильны из-за Заклятия и требуют особых артефактов для использования. Ваш гид Искин всегда объяснит связь каждой локации с реальным миром.</p>
               </div>
               <div>
                 <h4 className="font-serif text-2xl text-center text-gold-leaf mb-6">Тематические зоны</h4>
@@ -126,7 +126,7 @@ export function FeaturesTabs() {
                   <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
                     <FaLandmark className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
                     <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Библиотечные узлы</h5>
-                    <p className="text-sm text-off-white/70">Ржевская, Гоголя, Сфера, ШКАФ, НОТА</p>
+                    <p className="text-sm text-off-white/70">14 библиотек: от Узла миров до Листотеки и Переплётного куба</p>
                   </div>
                   {/* Карточка 2 */}
                    <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">

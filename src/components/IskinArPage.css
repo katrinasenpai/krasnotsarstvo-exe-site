@@ -36,7 +36,7 @@
   display: grid;
   justify-items: center;
   width: min(100%, 33rem);
-  margin: -1rem auto 0;
+  margin: .8rem auto 0;
   text-align: center;
 }
 

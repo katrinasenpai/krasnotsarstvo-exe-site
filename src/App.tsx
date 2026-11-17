@@ -5,21 +5,18 @@ import { Navbar } from './components/Navbar';
 
 // Эффект дыма за курсором подгружается отдельно, чтобы не утяжелять основной бандл
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
+import { charactersData } from './data/characters';
+import './refresh.css';
 import { CharacterCard } from './components/CharacterCard';
 import { IskinWidget } from './components/IskinWidget';
 import { Map } from './components/Map';
-import { Separator } from './components/Separator'; 
+import { Separator } from './components/Separator';
 import { FeaturesTabs } from './components/FeaturesTabs';
 import { Footer } from './components/Footer';
 import { Quiz } from './components/Quiz';
 import { HeroOracleInvite } from './components/HeroOracleInvite';
 import { FaHeart, FaBookOpen, FaCodeBranch, FaMapMarkedAlt, FaBookReader, FaCalendarAlt, FaStar, FaExternalLinkAlt, FaVk, FaTelegram } from 'react-icons/fa';
 import heroBg from './assets/backgrounds/hero-bg.webp';
-import playerImg from './assets/images/player.webp';
-import iskinImg from './assets/images/iskin.webp';
-import apprenticeImg from './assets/images/apprentice.webp';
-import archmageImg from './assets/images/archmage.webp';
-import elfImg from './assets/images/elf.webp';
 import ArrowLeftIcon from './assets/icons/arrow-left.svg?react';
 import ArrowRightIcon from './assets/icons/arrow-right.svg?react';
 import bg1 from './assets/backgrounds/bg1.webp';
@@ -65,46 +62,10 @@ const navLinks = [
   { href: 'gallery', IconComponent: GalleryIcon, label: 'Галерея' },
   { href: 'quiz', IconComponent: QuizIcon, label: 'Тест' },
   { href: '/book-oracle', IconComponent: OracleIcon, label: 'Книжный оракул' },
-  { href: 'download', IconComponent: BellIcon, label: 'ДЕМО-ВЕРСИЯ ДОСТУПНА!' },
+  { href: 'download', IconComponent: BellIcon, label: 'Релиз и демо' },
 ];
 
-const charactersData = [
-  {
-    image: playerImg,
-    name: 'Игрок',
-    status: 'Герой',
-    role: 'Хранитель знания, избранный, путешественник между мирами',
-    description: 'Ты — главный герой/героиня. Выбрав облик и имя, попадаешь в параллельную реальность мира КрасноЦарства через библиотеку «Ржевская», чтобы победить Проклятие Забвения.'
-  },
-  {
-    image: archmageImg,
-    name: 'Архимаг',
-    status: 'Союзник',
-    role: 'Верховный маг, мудрый наставник, основатель магической сети библиотек',
-    description: 'Загадочный создатель централизованной системы магических библиотек, который теряет контроль над миром из-за Проклятия Забвения. Редко появляется лично, но его влияние ощущается повсюду.'
-  },
-  {
-    image: apprenticeImg,
-    name: 'Подмастерье',
-    status: 'Союзник',
-    role: 'Ученик Архимага, молодой волшебник, помощник героя',
-    description: 'Немного забывчивый помощник Архимага – стажёр с доступом ко всей системе… хотя, возможно, по ошибке. Даёт игроку карту мира и вводит в курс миссии.'
-  },
-  {
-    image: iskinImg,
-    name: 'Искин',
-    status: 'Нейтралитет',
-    role: 'Искусственный интеллект, цифровой гид, консультант',
-    description: 'Разработан Архимагом для управления магико-информационными потоками в КрасноЦарстве. Поясняет лор, даёт саркастические подсказки. Наблюдаются баги в работе из-за проклятия.'
-  },
-  {
-    image: elfImg,
-    name: 'Эльфы-альбиносы',
-    status: 'Нейтралитет',
-    role: 'Торговцы-монополисты, коллекционеры, искусные маги',
-    description: 'Раса предпринимателей и коллекционеров древних артефактов. Живут глубоко под землёй и являются монополистами в торговле. В их лавках продаются самые могущественные предметы КрасноЦарства.'
-  }
-];
+
 
 const galleryImages = [
   gallery1,
@@ -122,9 +83,6 @@ const galleryImages = [
 
 function App() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft -= 320;
@@ -134,31 +92,6 @@ function App() {
   const scrollRight = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft += 320;
-    }
-  };
-
-  // Обработчики для свайпа
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      scrollRight();
-    }
-    if (isRightSwipe) {
-      scrollLeft();
     }
   };
 
@@ -213,7 +146,7 @@ function App() {
 
   const handleGalleryTouchEnd = () => {
     if (!galleryTouchStart || !galleryTouchEnd) return;
-    
+
     const distance = galleryTouchStart - galleryTouchEnd;
     const isLeftSwipe = distance > 50;
     const isRightSwipe = distance < -50;
@@ -230,7 +163,7 @@ function App() {
 
   return (
     <>
-    <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20"> 
+    <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20">
       {showSplashCursor && (
         <Suspense fallback={null}>
           <SplashCursor
@@ -245,13 +178,13 @@ function App() {
       <Navbar navLinks={navLinks} />
 
       {/* HERO */}
-      <section id="home" className="hero-shell relative overflow-hidden bg-midnight-ink sm:h-svh sm:min-h-[41rem]">
+      <section id="home" className="hero-shell relative overflow-hidden bg-midnight-ink ">
         <img src={heroBg} alt="Библиотека КрасноЦарства" className="hero-shell__background absolute inset-0 z-0 h-full w-full object-cover" />
-        <div className="hero-shell__content relative z-10 px-4 sm:h-full sm:px-8 md:px-16 lg:px-24">
-          <HeroOracleInvite />
+        <div className="hero-shell__content relative z-10 px-6 sm:px-10 md:px-16 lg:px-20">
+          <div className="hero-story"><p className="hero-story__eyebrow">МИСТИЧЕСКАЯ ВИЗУАЛЬНАЯ НОВЕЛЛА</p><h1>КрасноЦарство<span>.exe</span></h1><p className="hero-story__lead">У каждого места есть другая сторона.<br />У каждой истории есть тот, кто её помнит.</p><a className="hero-story__release" href="#download">Первая часть · первая половина декабря 2026</a></div>
           <div className="hero-shell__actions" aria-label="Основные действия КрасноЦарства">
-            <a 
-              href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
+            <a
+              href="https://vkplay.ru/play/game/krasnocarstvoexe/"
               target="_blank"
               rel="noopener noreferrer"
               className="min-h-12 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 shadow-lg transition-transform transform hover:scale-105 text-sm sm:text-base"
@@ -259,8 +192,8 @@ function App() {
               <FaHeart className="mr-2" />
               <span>Добавить в желаемое</span>
             </a>
-            <a 
-              href="#story" 
+            <a
+              href="#story"
               className="min-h-12 border border-gold-leaf text-gold-leaf hover:bg-gold-leaf hover:text-black font-bold py-2 sm:py-3 px-4 sm:px-6 rounded flex items-center justify-center gap-2 transition-transform transform hover:scale-105 text-sm sm:text-base"
             >
               <FaBookOpen className="mr-2" />
@@ -269,6 +202,7 @@ function App() {
           </div>
         </div>
       </section>
+      <div className="container"><HeroOracleInvite /></div>
 
       {/* ABOUT THE GAME SECTION (бывший STORY) */}
       <section id="story" className="py-20 md:py-32 bg-midnight-ink">
@@ -280,14 +214,14 @@ function App() {
 
           {/* Двух-колоночная структура */}
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            
+
             {/* Левая колонка: Описание */}
             <div className="text-lg text-off-white/80 leading-relaxed">
               <p>
-                «КрасноЦарство.exe» — это мистическая визуальная новелла, где реальная история Красногвардейского района Санкт-Петербурга переплетается с магическим миром КрасноЦарства.
+                «КрасноЦарство.exe» приглашает в мистическую визуальную новеллу, где реальная история Красногвардейского района Санкт-Петербурга переплетается с магическим миром КрасноЦарства.
               </p>
               <p className="mt-4">
-                Вы — обычный читатель, который случайно активирует портал в библиотеке «Ржевская» и оказывается втянут в борьбу с Проклятием Забвения, стирающим память целого мира. Ваши решения определят судьбу героев, исход истории и то, какие тайны вам удастся раскрыть.
+                Ваш путь начинается с обычного визита в библиотеку. Прикосновение к странной книге открывает портал в библиотеке «Ржевская» и приводит в мир, охваченный Заклятием Забвения, стирающим память целого мира. Ваши решения определят судьбу героев, исход истории и то, какие тайны вам удастся раскрыть.
               </p>
             </div>
 
@@ -304,7 +238,7 @@ function App() {
                 <li className="flex items-start gap-4">
                   <div className="text-gold-leaf text-2xl mt-1"><FaMapMarkedAlt /></div>
                   <div>
-                    <h3 className="font-serif text-xl font-bold">Два мира — одна история</h3>
+                    <h3 className="font-serif text-xl font-bold">Два мира, одна история</h3>
                     <p className="text-off-white/70">Исследуйте фэнтезийное КрасноЦарство и узнавайте реальную историю его прототипов в Санкт-Петербурге.</p>
                   </div>
                 </li>
@@ -312,7 +246,7 @@ function App() {
                   <div className="text-gold-leaf text-2xl mt-1"><FaBookReader /></div>
                   <div>
                     <h3 className="font-serif text-xl font-bold">Интерактивная карта</h3>
-                    <p className="text-off-white/70">Путешествуйте по живой карте, открывайте новые локации и находите скрытые артефакты.</p>
+                    <p className="text-off-white/70">Рассмотрите 35 мест, сравните две стороны знакомых адресов и узнайте легенды 14 библиотек.</p>
                   </div>
                 </li>
               </ul>
@@ -322,8 +256,8 @@ function App() {
         </div>
       </section>
 
-      <section 
-        id="teaser" 
+      <section
+        id="teaser"
         className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${bg4})` }} // <-- Используем ваш новый фон
       >
@@ -333,7 +267,7 @@ function App() {
         {/* Контейнер для контента должен быть 'relative', чтобы быть поверх затемнения */}
         <div className="container relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
-            
+
             {/* Левая колонка с текстом */}
             <div className="lg:w-1/2 text-center lg:text-left">
               <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-left gap-4">
@@ -341,7 +275,7 @@ function App() {
                 ТРЕЙЛЕР
               </h2>
               <p className="text-lg text-off-white/80 leading-relaxed">
-                Погрузитесь в атмосферу КрасноЦарства с первым трейлером игры. Мир охвачен Проклятием Забвения: страницы пустеют, порталы рушатся, память исчезает. И только ты, случайный посетитель библиотеки, можешь восстановить утраченные знания...
+                Первый трейлер знакомит с атмосферой КрасноЦарства. Он снят по ранней версии; новую рисовку можно увидеть в галерее ниже. Мир охвачен Заклятием Забвения: страницы пустеют, порталы рушатся, память исчезает. И только ты, случайный посетитель библиотеки, можешь восстановить утраченные знания...
               </p>
             </div>
 
@@ -351,14 +285,15 @@ function App() {
               <div className="p-2 border-2 border-gold-leaf/50 rounded-lg shadow-lg">
                 {/* Адаптивный контейнер для видео */}
                 <div className="aspect-video">
-                  
+
                   {/* --- ВК ВИДЕО IFRAME --- */}
-                  <iframe 
-                    src="https://vkvideo.ru/video_ext.php?oid=-17047312&id=456240243&hd=2&autoplay=1" 
-                    className="w-full h-full rounded-md" 
+                  <iframe
+                    src="https://vkvideo.ru/video_ext.php?oid=-17047312&id=456240243&hd=2&autoplay=0"
+                    title="Первый трейлер КрасноЦарства"
+                    className="w-full h-full rounded-md"
                     style={{backgroundColor: '#000'}}
-                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" 
-                    frameBorder="0" 
+                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+                    frameBorder="0"
                     allowFullScreen>
                   </iframe>
 
@@ -380,20 +315,18 @@ function App() {
 
           {/* ТЕКСТ */}
           <p className="text-center max-w-4xl mx-auto mb-12 text-lg text-off-white/80 leading-relaxed">
-            Познакомьтесь c персонажами и лором фэнтези мира КрасноЦарства, узнайте о реальных местах Красногвардейского района Санкт-Петербурга и профессиях, которые существовали на Охте.
-          </p> 
+            Кого встретит путник по ту сторону знакомых адресов? Выберите облик главного героя и познакомьтесь с жителями КрасноЦарства. Карточки можно листать, а истории раскрывать нажатием.
+          </p>
 
-          <div 
-            ref={scrollContainerRef} 
-            className="flex overflow-x-hidden gap-8 pb-4 scroll-smooth no-scrollbar"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
+          <div
+            ref={scrollContainerRef}
+            className="flex overflow-x-auto gap-6 pb-4 scroll-smooth character-list"
           >
             {charactersData.map((char) => (
               // --- ИЗМЕНЕНИЯ ТОЛЬКО ЗДЕСЬ ---
-              <CharacterCard 
-                key={char.name}
+              <CharacterCard
+                key={char.id}
+                variants={char.variants}
                 image={char.image}
                 name={char.name}
                 status={char.status}      // <-- Добавили статус
@@ -403,25 +336,25 @@ function App() {
             ))}
           </div>
 
-          <button 
-            onClick={scrollLeft} 
+          <button
+            onClick={scrollLeft}
             // Добавляем классы для плавного увеличения
             className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить влево"
           >
-            <ArrowLeftIcon 
-              className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300" 
+            <ArrowLeftIcon
+              className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300"
             />
           </button>
 
-          <button 
-            onClick={scrollRight} 
+          <button
+            onClick={scrollRight}
             // Добавляем классы для плавного увеличения
             className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить вправо"
           >
-            <ArrowRightIcon 
-              className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300" 
+            <ArrowRightIcon
+              className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300"
             />
           </button>
 
@@ -434,26 +367,26 @@ function App() {
       </section>
 
       {/* MAP SECTION */}
-      <section 
-        id="map" 
+      <section
+        id="map"
         className="relative py-12 md:py-32 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${bg1})` }}
       >
         <div className="absolute inset-0 bg-midnight-ink/75"></div>
         <div className="container relative z-10">
-          <div> 
+          <div>
             <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
               <MapIcon className="w-10 h-10" />
               КАРТА КРАСНОЦАРСТВА
             </h2>
-          </div> 
+          </div>
           <Map />
         </div>
       </section>
-      
+
       {/* FEATURES SECTION */}
-      <section 
-        id="features" 
+      <section
+        id="features"
         className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${bg2})` }}
       >
@@ -463,7 +396,7 @@ function App() {
             <FeaturesIcon className="w-10 h-10" />
             ОСОБЕННОСТИ ИГРЫ
           </h2>
-          
+
           {/* Вставляем наш новый компонент с табами */}
           <FeaturesTabs />
 
@@ -479,7 +412,7 @@ function App() {
           </h2>
 
           {/* Контейнер для изображений с прокруткой */}
-          <div 
+          <div
             ref={galleryScrollRef}
             className="flex overflow-x-auto gap-6 pb-4 scroll-smooth no-scrollbar"
             onTouchStart={handleGalleryTouchStart}
@@ -488,8 +421,8 @@ function App() {
           >
             {galleryImages.map((image, index) => (
               // 1. Каждое изображение теперь - это кнопка
-              <button 
-                key={index} 
+              <button
+                key={index}
                 onClick={() => setSelectedImage(image)} // 2. По клику - запоминаем картинку
                 className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold-leaf transition-all duration-300"
               >
@@ -501,15 +434,15 @@ function App() {
           </div>
 
           {/* Кнопки-стрелки для галереи остаются без изменений */}
-          <button 
-            onClick={galleryScrollLeft} 
+          <button
+            onClick={galleryScrollLeft}
             className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить галерею влево"
           >
             <ArrowLeftIcon className="w-8 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300" />
           </button>
-          <button 
-            onClick={galleryScrollRight} 
+          <button
+            onClick={galleryScrollRight}
             className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
             aria-label="Прокрутить галерею вправо"
           >
@@ -521,24 +454,24 @@ function App() {
       {/* --- БЛОК ЛАЙТБОКСА ДЛЯ УВЕЛИЧЕННОГО ИЗОБРАЖЕНИЯ --- */}
       {/* Он появится, только если выбрана какая-то картинка */}
       {selectedImage && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 lightbox-fade-in"
           onClick={() => setSelectedImage(null)} // Закрыть по клику на фон
         >
           {/* Кнопка "Закрыть" */}
-          <button 
+          <button
             className="absolute top-4 right-4 text-white text-4xl hover:text-gold-leaf transition-colors"
             onClick={() => setSelectedImage(null)}
           >
             &times;
           </button>
-          
+
           {/* Само изображение */}
-          <img 
-            src={selectedImage} 
-            alt="Увеличенный скриншот" 
+          <img
+            src={selectedImage}
+            alt="Увеличенный скриншот"
             className="max-w-[90vw] max-h-[90dvh] object-contain rounded-lg"
-            onClick={(e) => e.stopPropagation()} 
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
@@ -562,8 +495,8 @@ function App() {
       <Separator />
 
       {/* RELEASE SECTION (бывший DOWNLOAD) */}
-      <section 
-        id="download" 
+      <section
+        id="download"
         className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${bg3})` }}
       >
@@ -571,11 +504,11 @@ function App() {
         <div className="container relative z-10 text-center">
           <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-6 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
             <BellIcon className="w-10 h-10" />
-            ДЕМО-ВЕРСИЯ ДОСТУПНА!
+            ПЕРВАЯ ЧАСТЬ УЖЕ БЛИЗКО
           </h2>
           <div className="max-w-2xl mx-auto mb-10 text-left">
             <p className="text-lg md:text-xl text-off-white/80 leading-relaxed mb-6">
-              Познакомиться с миром КрасноЦарства можно уже сейчас — полноценная демо-версия доступна на{' '}
+              Познакомиться с миром КрасноЦарства можно уже сейчас: демо-версия доступна на{' '}
               <a
                 href="https://vkplay.ru/play/game/krasnocarstvoexe-45540/"
                 target="_blank"
@@ -594,7 +527,7 @@ function App() {
                 <span className="shrink-0 select-none w-7 text-center" aria-hidden>
                   📖
                 </span>
-                <span>Первая глава истории — знакомство с героями и миром</span>
+                <span>Знакомство с героями и миром в ранней версии первой главы</span>
               </li>
               <li className="flex gap-3">
                 <span className="shrink-0 select-none w-7 text-center" aria-hidden>
@@ -607,7 +540,7 @@ function App() {
                   🔦
                 </span>
                 <span>
-                  Специальный квест «Катакомбы» — если ваш выбор приведёт вас туда
+                  Квест «Катакомбы», если ваш выбор приведёт вас туда
                 </span>
               </li>
             </ul>
@@ -636,7 +569,7 @@ function App() {
                 <FaStar className="text-gold-leaf text-2xl" />
                 <h3 className="font-serif text-xl text-gold-leaf">Релиз 1 части</h3>
               </div>
-              <p className="text-off-white/90 text-lg font-semibold">Вторая половина 2026</p>
+              <p className="text-off-white/90 text-lg font-semibold">Первая половина декабря 2026</p>
               <p className="text-off-white/70 text-sm mt-2">Релиз 1 главы с сюжетными правками и три дополнительных побочных квеста (Квартал Четырёх Дураков, Катакомбы и Станция дирижаблей)</p>
             </div>
           </div>
@@ -645,10 +578,10 @@ function App() {
           <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12 mb-8">
             <div className="text-center">
               <h3 className="font-serif text-2xl text-gold-leaf mb-4">Добавить в избранное</h3>
-              <p className="text-off-white/70 mb-6">Идет масштабная работа над проектом! Мир новеллы растет и меняется, поэтому релиз смещён на вторую половину этого года. В первой части вас ждет более детально проработанный лор и система выборов, а также новые увлекательные квесты. Следите за новостями!</p>
-              <a 
-                href="https://vkplay.ru/play/game/krasnocarstvoexe/" 
-                target="_blank" 
+              <p className="text-off-white/70 mb-6">Первая часть выйдет в первой половине декабря 2026 года: обновлённая первая глава, новая рисовка и три побочных квеста. Продолжение истории, вторая часть, запланировано на 2027 год. Добавьте новеллу в избранное, чтобы следить за выходом.</p>
+              <a
+                href="https://vkplay.ru/play/game/krasnocarstvoexe/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-gold-leaf hover:bg-gold-leaf/90 text-black font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
@@ -674,24 +607,24 @@ function App() {
               </div>
             </div>
           </div>
-          
+
         </div>
       </section>
 
       {/* FOOTER */}
-      <Footer 
+      <Footer
         orgLogos={[
-          { 
-            id: 'org1', 
-            src: orgLogos1, 
-            alt: 'ЦБС Красногвардейского района', 
-            href: 'https://kr-cbs.ru/' 
+          {
+            id: 'org1',
+            src: orgLogos1,
+            alt: 'ЦБС Красногвардейского района',
+            href: 'https://kr-cbs.ru/'
           },
-          { 
-            id: 'org2', 
-            src: orgLogos2, 
-            alt: 'Библиотека «Ржевская»', 
-            href: 'https://kr-cbs.ru/libraries/rzhevskaya' 
+          {
+            id: 'org2',
+            src: orgLogos2,
+            alt: 'Библиотека «Ржевская»',
+            href: 'https://kr-cbs.ru/libraries/rzhevskaya'
           }
         ]}
       />

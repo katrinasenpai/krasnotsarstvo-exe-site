@@ -2,7 +2,7 @@ import { ArrowLeft, Box, Camera, ShieldCheck, Sparkles } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ModelViewerElement } from '@google/model-viewer';
 import '@google/model-viewer';
-import iskinProjection from '../assets/images/iskin-states/iskin-projection.webp';
+const iskinProjection = '/characters/iskin.webp';
 import iskinArAdjustMonocle from '../assets/images/iskin-ar-sequence/iskin-ar-adjust-monocle.png';
 import iskinArIdle from '../assets/images/iskin-ar-sequence/iskin-ar-idle.png';
 import iskinArResting from '../assets/images/iskin-ar-sequence/iskin-ar-resting.png';
@@ -10,7 +10,7 @@ import iskinArThinking from '../assets/images/iskin-ar-sequence/iskin-ar-thinkin
 import './IskinArPage.css';
 
 // Файлы в public/ не получают хеш в имени: при перегенерации меняйте версию, иначе Safari и Quick Look покажут старую модель из кэша.
-const arAssetVersion = '3';
+const arAssetVersion = '2026-11-17';
 const arModel = `/ar/iskin-projection-billboard.glb?v=${arAssetVersion}`;
 const quickLookModel = `/ar/iskin-projection-billboard.usdz?v=${arAssetVersion}`;
 const posePreview = [
@@ -33,7 +33,7 @@ function createSceneViewerIntent(modelUrl: string, fallbackUrl: string) {
   const query = [
     `file=${encodeURIComponent(modelUrl)}`,
     'mode=ar_only',
-    `title=${encodeURIComponent('Искин — голографическая проекция')}`,
+    `title=${encodeURIComponent('Искин: голографическая проекция')}`,
     'resizable=false',
   ].join('&');
 
@@ -86,9 +86,9 @@ export default function IskinArPage() {
 
   return (
     <main className="iskin-ar-page">
-      <a className="iskin-ar-page__back" href="/iskin-projection" aria-label="Вернуться к голографическому каналу Искина">
+      <a className="iskin-ar-page__back" href="/#iskin" aria-label="Вернуться на сайт">
         <ArrowLeft size={18} aria-hidden="true" />
-        К голографическому каналу
+        На сайт КрасноЦарства
       </a>
 
       <section className="iskin-ar-page__content" aria-labelledby="iskin-ar-title">
@@ -98,7 +98,7 @@ export default function IskinArPage() {
         </p>
         <h1 id="iskin-ar-title">Поместите Искина рядом</h1>
         <p className="iskin-ar-page__lead">
-          Здесь используется 2D-голограмма Искина: она мягко парит и меняет спокойные позы, а сцены с книгой, шляпой и задачами остаются на голографическом канале.
+          Проводник КрасноЦарства в новой рисовке. Откройте эту страницу на телефоне, найдите свободное место и пригласите Искина в свой мир.
         </p>
 
         <div className="iskin-ar-page__viewer-wrap">
@@ -119,7 +119,7 @@ export default function IskinArPage() {
             ar-scale="fixed"
             quick-look-browsers="safari chrome"
             camera-controls=""
-            camera-orbit="0deg 75deg 2.8m"
+            camera-orbit="0deg 90deg 3.8m"
             camera-target="0m 0.86m 0m"
             field-of-view="32deg"
             shadow-intensity="0"
@@ -183,15 +183,15 @@ export default function IskinArPage() {
         )}
 
         <div className="iskin-ar-page__facts" aria-label="Возможности проекции в пространстве">
-          <p><Box size={17} aria-hidden="true" /> Голографическая проекция Искина высотой 1,72 м закрепляется у пола, мягко парит и проходит короткий цикл поз.</p>
-          <p><Camera size={17} aria-hidden="true" /> На Android откроется режим размещения, на iPhone/iPad — Quick Look.</p>
+          <p><Box size={17} aria-hidden="true" /> Иллюстрированная проекция мягко парит и меняет позы. Рассматривать Искина лучше спереди.</p>
+          <p><Camera size={17} aria-hidden="true" /> На Android откроется режим размещения, на iPhone/iPad: Quick Look.</p>
         </div>
 
         <details className="iskin-ar-page__fallback">
           <summary>Нужна помощь с размещением?</summary>
           <p>
             Откройте страницу в Chrome на Android или Safari на iPhone/iPad по HTTPS и разрешите доступ к камере.
-            Если режим размещения не открылся, обновите Google Play Services for AR.
+            Если кнопка размещения не появилась, проверьте, поддерживает ли устройство AR. На Android может понадобиться обновить Google Play Services for AR. На компьютере доступен просмотр проекции.
           </p>
         </details>
       </section>

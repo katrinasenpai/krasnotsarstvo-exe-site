@@ -22,7 +22,7 @@ export function Footer({ orgLogos = [] }: FooterProps) {
     { href: '#map', label: 'Карта' },
     { href: '#features', label: 'Особенности' },
     { href: '#gallery', label: 'Галерея' },
-    { href: '#download', label: 'ДЕМО-ВЕРСИЯ ДОСТУПНА!' },
+    { href: '#download', label: 'Релиз и демо' },
   ];
 
   return (
