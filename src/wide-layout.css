@@ -32,9 +32,6 @@
   .site-page .atlas__list { height: 25rem; }
   .site-page .atlas__list button { min-height: 3.6rem; }
   .site-page .atlas__list img { width: 2.8rem; height: 3rem; }
-  .site-page .iskin-invite__portrait { height: 24rem; }
-  .site-page .iskin-invite__qr { width: 12rem; }
-  .site-page .iskin-invite__qr svg { width: 100%; height: auto; }
   .book-oracle-page .book-oracle-page__content { width: 90%; max-width: none; }
   .book-oracle-page .book-oracle-page__heading { max-width: 68rem; }
   .book-oracle-page .book-oracle-page__cards { width: min(100%, 46rem); }

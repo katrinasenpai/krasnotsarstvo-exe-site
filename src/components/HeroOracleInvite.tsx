@@ -1,8 +1,10 @@
 import { useState, type CSSProperties } from 'react';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { ArrowUpRight, Camera, Sparkles } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 import oracleCardBack from '../assets/images/oracle-deck/oracle-card-back.webp';
 import { oracleCards } from '../data/bookOracle';
 import { preloadOracle } from '../utils/oracleRoute';
+import { getIskinArUrl } from '../utils/iskinProjectionUrl';
 import './HeroOracleInvite.css';
 
 const glimpses = [
@@ -14,18 +16,19 @@ const glimpses = [
 export function HeroOracleInvite() {
   const [selected, setSelected] = useState<number | null>(null);
   const glimpse = selected === null ? null : glimpses[selected];
+  const arLink = getIskinArUrl();
 
   return (
-    <section id="chronocards" className="oracle-teaser" aria-labelledby="hero-oracle-title">
-      <div className="oracle-teaser__mist" aria-hidden="true" />
+    <section id="iskin" className="oracle-teaser" aria-labelledby="hero-oracle-title">
+      <span id="chronocards" className="oracle-teaser__anchor" aria-hidden="true" />
       <div className="container oracle-teaser__stage">
         <div className="oracle-teaser__guide">
           <div className="oracle-teaser__halo" aria-hidden="true" />
           <img src={`/characters/iskin-${glimpse?.pose ?? 'wry'}.webp`} alt="Искин приглашает познакомиться с хронокартами" loading="lazy" decoding="async" />
-          <p className="oracle-teaser__signature"><strong>Искин</strong><span>Толкователь хронокарт</span></p>
+          <p className="oracle-teaser__signature"><strong>Искин</strong><span>Ваш проводник между мирами</span></p>
         </div>
         <div className="oracle-teaser__copy">
-          <p className="oracle-teaser__eyebrow"><Sparkles size={17} aria-hidden="true" /> ХРОНОКАРТЫ</p>
+          <p className="oracle-teaser__eyebrow"><Sparkles size={17} aria-hidden="true" /> ИСКИН РЯДОМ</p>
           <h2 id="hero-oracle-title">У каждой карты<br />есть что рассказать</h2>
           <p className="oracle-teaser__intro">Задайте вопрос Книжному оракулу. Три карты свяжут след прошлого, ключ настоящего и дорогу впереди.</p>
           <div className="oracle-teaser__voice" aria-live="polite">
@@ -52,6 +55,18 @@ export function HeroOracleInvite() {
           </div>
           <p className="oracle-teaser__hint">Коснитесь любой карты</p>
         </div>
+        <aside className="oracle-teaser__ar" aria-labelledby="iskin-ar-invite-title">
+          <div className="oracle-teaser__ar-copy">
+            <h3 id="iskin-ar-invite-title"><Camera size={18} aria-hidden="true" /> За пределами страницы</h3>
+            <p>Пригласите Искина в своё пространство через камеру телефона.</p>
+            <a href="/iskin-ar">Открыть дополненную реальность <ArrowUpRight size={17} aria-hidden="true" /></a>
+            <small>На совместимом смартфоне.</small>
+          </div>
+          <div className="oracle-teaser__qr">
+            <QRCodeSVG value={arLink.url} size={112} bgColor="#f3e6c8" fgColor="#142632" marginSize={2} title="Искин в дополненной реальности" />
+            <p>Наведите камеру телефона</p>
+          </div>
+        </aside>
       </div>
     </section>
   );
