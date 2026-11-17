@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import LogoIcon from '../assets/icons/logo.svg?react';
+import './Navbar.css';
 
 // Определяем типы для наших данных, чтобы всё было строго
 type NavLink = {
@@ -50,9 +51,9 @@ export function Navbar({ navLinks }: NavbarProps) {
   return (
     <>
       {/* Десктопная навигация - скрыта на мобильных */}
-      <nav className="hidden md:flex fixed top-0 left-0 h-full w-20 bg-midnight-ink/80 backdrop-blur-lg border-r border-shadow-grey/20 flex-col items-center z-50">
+      <nav aria-label="Основное меню" className="site-navbar hidden md:flex fixed top-0 left-0 h-full w-20 bg-midnight-ink/80 backdrop-blur-lg border-r border-shadow-grey/20 flex-col items-center z-50">
         {/* Логотип */}
-        <div className="mt-8 mb-16">
+        <div className="site-navbar__logo">
           <a 
             href="#home" 
             onClick={handleLogoClick}
@@ -63,7 +64,7 @@ export function Navbar({ navLinks }: NavbarProps) {
           </a>
         </div>
         
-        <ul className="flex flex-col items-center gap-6">
+        <ul className="site-navbar__links flex flex-col items-center">
           {navLinks.map((link) => (
             <li key={link.href} className="navbar-item group">
               <a 
@@ -88,13 +89,15 @@ export function Navbar({ navLinks }: NavbarProps) {
         <button
           onClick={toggleMobileMenu}
           className="fixed top-4 left-4 z-50 p-2 bg-midnight-ink/80 backdrop-blur-lg border border-shadow-grey/20 rounded-lg group hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
-          aria-label="Открыть меню"
+          aria-label={isMobileMenuOpen ? 'Свернуть меню' : 'Открыть меню'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-navigation"
         >
           <LogoIcon className="w-8 h-8 text-gold-leaf group-hover:logo-glow transition-all duration-300" />
         </button>
 
         {/* Выдвижное боковое меню */}
-        <div className={`fixed top-0 left-0 h-full w-80 bg-midnight-ink/95 backdrop-blur-lg border-r border-shadow-grey/20 transform transition-transform duration-300 z-40 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <nav id="mobile-navigation" aria-label="Мобильное меню" aria-hidden={!isMobileMenuOpen} className={`fixed top-0 left-0 h-full w-80 bg-midnight-ink/95 backdrop-blur-lg border-r border-shadow-grey/20 transform transition-transform duration-300 z-40 ${isMobileMenuOpen ? 'visible translate-x-0' : 'invisible -translate-x-full'}`}>
           <div className="flex flex-col h-full">
             {/* Заголовок с логотипом и кнопкой закрытия */}
             <div className="p-6 border-b border-shadow-grey/20 relative">
@@ -125,7 +128,7 @@ export function Navbar({ navLinks }: NavbarProps) {
             </div>
             
             {/* Список ссылок */}
-            <ul className="flex-1 py-6">
+            <ul className="flex-1 min-h-0 overflow-y-auto py-6">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a 
@@ -140,7 +143,7 @@ export function Navbar({ navLinks }: NavbarProps) {
               ))}
             </ul>
           </div>
-        </div>
+        </nav>
 
         {/* Затемняющий фон */}
         {isMobileMenuOpen && (

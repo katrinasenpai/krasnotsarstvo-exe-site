@@ -1,6 +1,7 @@
 // src/App.tsx
 
 import React, { useRef, useState, useEffect, Suspense, lazy } from 'react';
+import { Camera } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 
 // Эффект дыма за курсором подгружается отдельно, чтобы не утяжелять основной бандл
@@ -58,10 +59,11 @@ const navLinks = [
   { href: 'teaser', IconComponent: TeaserIcon, label: 'Трейлер'},
   { href: 'characters', IconComponent: CharactersIcon, label: 'Персонажи' },
   { href: 'map', IconComponent: MapIcon, label: 'Карта'},
+  { href: 'iskin', IconComponent: Camera, label: 'Искин рядом' },
+  { href: 'chronocards', IconComponent: OracleIcon, label: 'Хронокарты' },
   { href: 'features', IconComponent: FeaturesIcon, label: 'Особенности' },
   { href: 'gallery', IconComponent: GalleryIcon, label: 'Галерея' },
   { href: 'quiz', IconComponent: QuizIcon, label: 'Тест' },
-  { href: '/book-oracle', IconComponent: OracleIcon, label: 'Книжный оракул' },
   { href: 'download', IconComponent: BellIcon, label: 'Релиз и демо' },
 ];
 
@@ -199,8 +201,6 @@ function App() {
           </div>
         </div>
       </section>
-      <HeroOracleInvite />
-
       {/* ABOUT THE GAME SECTION (бывший STORY) */}
       <section id="story" className="py-20 md:py-32 bg-midnight-ink">
         <div className="container">
@@ -310,10 +310,6 @@ function App() {
           <CharacterShowcase />
         </div>
 
-        <div className="container">
-          {/* Интерактивный 2D-слой Искина: готов к подключению внешних QR/AR-событий. */}
-          <IskinWidget />
-        </div>
       </section>
 
       {/* MAP SECTION */}
@@ -333,6 +329,15 @@ function App() {
           <Map />
         </div>
       </section>
+
+      {/* ISKIN AR SECTION */}
+      <section id="iskin" className="py-20 md:py-24 bg-midnight-ink" aria-labelledby="iskin-invite-title">
+        <div className="container">
+          <IskinWidget />
+        </div>
+      </section>
+
+      <HeroOracleInvite />
 
       {/* FEATURES SECTION */}
       <section
@@ -560,6 +565,7 @@ function App() {
 
       {/* FOOTER */}
       <Footer
+        navLinks={navLinks}
         orgLogos={[
           {
             id: 'org1',

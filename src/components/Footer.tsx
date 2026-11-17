@@ -11,19 +11,10 @@ type OrgLogo = {
 
 type FooterProps = {
   orgLogos?: OrgLogo[];
+  navLinks: { href: string; label: string }[];
 };
 
-export function Footer({ orgLogos = [] }: FooterProps) {
-  const navSections = [
-    { href: '#home', label: 'Главная' },
-    { href: '#story', label: 'Об игре' },
-    { href: '#teaser', label: 'Трейлер' },
-    { href: '#characters', label: 'Персонажи' },
-    { href: '#map', label: 'Карта' },
-    { href: '#features', label: 'Особенности' },
-    { href: '#gallery', label: 'Галерея' },
-    { href: '#download', label: 'Релиз и демо' },
-  ];
+export function Footer({ orgLogos = [], navLinks }: FooterProps) {
 
   return (
     <footer className="mt-0 border-t border-shadow-grey/20 bg-midnight-ink">
@@ -45,12 +36,12 @@ export function Footer({ orgLogos = [] }: FooterProps) {
         </div>
 
         {/* Блок навигации по разделам */}
-        <nav>
+        <nav aria-label="Разделы сайта">
           <h3 className="font-serif text-2xl text-gold-leaf mb-4">Разделы сайта</h3>
           <ul className="grid grid-cols-2 gap-3 text-off-white/80">
-            {navSections.map((s) => (
+            {navLinks.map((s) => (
               <li key={s.href}>
-                <a href={s.href} className="hover:text-gold-leaf transition-colors">
+                <a href={s.href.startsWith('/') ? s.href : `#${s.href}`} className="hover:text-gold-leaf transition-colors">
                   {s.label}
                 </a>
               </li>
