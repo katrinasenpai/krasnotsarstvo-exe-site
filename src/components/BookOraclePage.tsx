@@ -1,6 +1,6 @@
 import { ArrowLeft, BookOpen, Copy, Share2, Sparkles } from 'lucide-react';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
-const iskinHat = '/characters/iskin-reading.webp';
+const iskinPortrait = '/characters/iskin-wry.webp';
 import oracleCardBack from '../assets/images/oracle-deck/oracle-card-back.webp';
 import {
   createOracleReading,
@@ -135,7 +135,7 @@ export default function BookOraclePage() {
         <div className="book-oracle-page__ritual" aria-busy={phase === 'drawing'}>
           <aside className="book-oracle-page__guide" aria-label="Искин ведёт ритуал">
             <div className="book-oracle-page__guide-glow" aria-hidden="true" />
-            <img src={iskinHat} alt="Искин в чёрной остроконечной магической шляпе ведёт Книжный оракул" />
+            <img src={phase === 'drawing' ? '/characters/iskin-thinking.webp' : iskinPortrait} alt="Искин с моноклем ведёт Книжный оракул" />
             <p>«Благодарю за использование системы „Книжный оракул“. Мысленно сформулируйте вопрос и сделайте расклад — я расшифрую три карты. Возможны незначительные отклонения интерпретации: я всё-таки искусственный интеллект, а Заклятие Забвения не проходит сертификацию».</p>
           </aside>
 

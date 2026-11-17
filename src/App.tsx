@@ -22,6 +22,7 @@ import bg1 from './assets/backgrounds/bg1.webp';
 import bg2 from './assets/backgrounds/bg2.webp';
 import bg3 from './assets/backgrounds/bg3.webp';
 import bg4 from './assets/backgrounds/bg4.webp';
+import bg5 from './assets/backgrounds/bg5.webp';
 
 // ИМПОРТЫ ДЛЯ ГАЛЕРЕИ
 import gallery1 from './assets/images/gallery-1.webp';
@@ -86,6 +87,16 @@ function App() {
   const [galleryTouchEnd, setGalleryTouchEnd] = useState<number | null>(null);
   const [showSplashCursor, setShowSplashCursor] = useState(false);
 
+  // The home page is lazy loaded, so its section may not exist when the browser
+  // first resolves an incoming fragment link.
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      const section = document.getElementById(window.location.hash.slice(1));
+      section?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
   // Эффект дыма включаем только на десктопе и только на достаточно мощных устройствах
   useEffect(() => {
     const nav = navigator as Navigator & { deviceMemory?: number };
@@ -149,7 +160,7 @@ function App() {
 
   return (
     <>
-    <div className="min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20">
+    <div className="site-page min-h-screen bg-midnight-ink text-off-white pl-0 md:pl-20">
       {showSplashCursor && (
         <Suspense fallback={null}>
           <SplashCursor
@@ -188,7 +199,7 @@ function App() {
           </div>
         </div>
       </section>
-      <div className="container"><HeroOracleInvite /></div>
+      <HeroOracleInvite />
 
       {/* ABOUT THE GAME SECTION (бывший STORY) */}
       <section id="story" className="py-20 md:py-32 bg-midnight-ink">
@@ -244,8 +255,8 @@ function App() {
 
       <section
         id="teaser"
-        className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
-        style={{ backgroundImage: `url(${bg4})` }} // <-- Используем ваш новый фон
+        className="scene-section relative py-20 md:py-32 bg-cover bg-center"
+        style={{ backgroundImage: `url(${bg5})` }}
       >
         {/* Затемняющий слой для читаемости */}
         <div className="absolute inset-0 bg-midnight-ink/70"></div>
@@ -308,7 +319,7 @@ function App() {
       {/* MAP SECTION */}
       <section
         id="map"
-        className="relative py-12 md:py-32 bg-cover bg-center bg-fixed"
+        className="scene-section relative py-12 md:py-32 bg-cover bg-center"
         style={{ backgroundImage: `url(${bg1})` }}
       >
         <div className="absolute inset-0 bg-midnight-ink/75"></div>
@@ -326,7 +337,7 @@ function App() {
       {/* FEATURES SECTION */}
       <section
         id="features"
-        className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
+        className="scene-section relative py-20 md:py-32 bg-cover bg-center"
         style={{ backgroundImage: `url(${bg2})` }}
       >
         <div className="absolute inset-0 bg-midnight-ink/90"></div>
@@ -418,7 +429,7 @@ function App() {
       {/* QUIZ SECTION */}
       <section
         id="quiz"
-        className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
+        className="scene-section relative py-20 md:py-32 bg-cover bg-center"
         style={{ backgroundImage: `url(${bg4})` }}
       >
         <div className="absolute inset-0 bg-midnight-ink/85"></div>
@@ -433,7 +444,7 @@ function App() {
       {/* RELEASE SECTION (бывший DOWNLOAD) */}
       <section
         id="download"
-        className="relative py-20 md:py-32 bg-cover bg-center bg-fixed"
+        className="scene-section relative py-20 md:py-32 bg-cover bg-center"
         style={{ backgroundImage: `url(${bg3})` }}
       >
         <div className="absolute inset-0 bg-midnight-ink/90"></div>
