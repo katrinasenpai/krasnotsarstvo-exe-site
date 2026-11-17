@@ -1,0 +1,55 @@
+.cast-intro { text-align: center; color: #bda471; font-size: .7rem; letter-spacing: .2em; margin-bottom: 1rem; }
+.cast-heading { font-family: Kereru, serif; color: #f2e5cc; font-size: clamp(2.3rem,4.5vw,3.7rem); line-height: 1.12; text-align: center; margin-bottom: 3rem; }
+.cast-showcase { --cast-gold: #dcc18b; max-width: 1100px; margin: auto; }
+.cast-tabs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #d5b87c45; border-bottom: 1px solid #d5b87c45; }
+.cast-tabs button { display: flex; align-items: center; gap: 1rem; min-width: 0; min-height: 94px; padding: 1.1rem 1rem; text-align: left; color: #98a8b2; position: relative; transition: background .2s, color .2s; }
+.cast-tabs button::after { content: ''; position: absolute; bottom: -1px; left: 1rem; right: 1rem; height: 2px; background: transparent; }
+.cast-tabs button:hover { color: #eadfc8; background: #ffffff04; }
+.cast-tabs button[aria-selected=true] { color: #f4e4c7; background: linear-gradient(0deg, #c2a46c16, transparent); }
+.cast-tabs button[aria-selected=true]::after { background: var(--cast-gold); }
+.cast-tabs__number { font-size: .7rem; letter-spacing: .1em; color: #bda471; }
+.cast-tabs strong { font-family: Kereru, serif; display: block; font-size: 1.55rem; font-weight: normal; }
+.cast-tabs small { display: block; margin-top: .25rem; font-size: .72rem; color: #a1acb2; }
+.cast-story { display: grid; grid-template-columns: 1fr 1fr; min-height: 550px; background: #0d1722; overflow: hidden; }
+.cast-story:focus-visible { outline: 2px solid var(--cast-gold); outline-offset: 4px; }
+.cast-portrait { position: relative; display: grid; place-items: end center; min-width: 0; isolation: isolate; background-size: cover; background-position: 48% center; overflow: hidden; }
+.cast-portrait::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#0d1722b8,#0d172288 60%,#0d1722), linear-gradient(0deg,#0d1722,transparent 30%,#0d172288); }
+.cast-portrait__orbit { position: absolute; width: 72%; height: 80%; border: 1px solid #d5b87c55; border-radius: 50% 50% 0 0; bottom: 0; z-index: -1; box-shadow: 0 0 75px #78b6b51c inset; }
+.cast-portrait__figure { display: block; height: 540px; width: 100%; max-width: 440px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 8px 18px #04080d80); mask-image: linear-gradient(#000 86%, transparent 100%); animation: cast-reveal .35s ease-out; }
+.cast-copy { align-self: center; padding: 2.7rem 3rem 2.7rem 1.5rem; animation: cast-reveal .3s ease-out; }
+.cast-copy__eyebrow { text-transform: uppercase; font-size: .68rem; letter-spacing: .2em; color: var(--cast-gold); margin-bottom: 1.25rem; }
+.cast-copy h3 { font-family: Kereru, serif; font-size: clamp(2.3rem,4.2vw,3.5rem); line-height: 1.07; color: #f2e5cc; }
+.cast-copy__role { color: #9baebc; margin-top: .8rem; font-size: .9rem; }
+.cast-copy__rule { height: 1px; width: 4rem; background: var(--cast-gold); margin: 1.6rem 0; }
+.cast-copy__description { color: #d0d6d7; font-size: 1rem; line-height: 1.75; max-width: 27rem; }
+.cast-appearances { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); padding: .7rem 1rem; background: #0b1723dc; border: 1px solid #bda47144; }
+.cast-appearances p { color: #d3d8d5; font-size: .72rem; margin-bottom: .5rem; text-align: center; }
+.cast-appearances > div { display: flex; gap: .65rem; }
+.cast-appearances button { position: relative; width: 45px; height: 54px; overflow: hidden; border: 1px solid #70818c66; background: #1a2632; transition: border-color .2s; }
+.cast-appearances button[aria-pressed=true] { border: 2px solid var(--cast-gold); }
+.cast-appearances img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.cast-appearances span { position: absolute; inset: auto 0 0; color: #fff3d9; background: linear-gradient(transparent,#050c17); font-size: .6rem; padding: .5rem 0 .1rem; }
+.cast-epilogue { display: flex; justify-content: space-between; align-items: center; gap: 2rem; padding: 1.3rem 0; border-top: 1px solid #d5b87c45; color: #96a8b4; font-size: .85rem; }
+.cast-epilogue p { max-width: 33rem; line-height: 1.6; }
+.cast-epilogue a { display: inline-flex; align-items: center; gap: .5rem; color: var(--cast-gold); flex-shrink: 0; min-height: 44px; }
+@keyframes cast-reveal { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media(max-width: 900px) { .cast-tabs button { padding: 1rem .6rem; gap: .6rem; } .cast-tabs strong { font-size: 1.25rem; } .cast-tabs small { font-size: .65rem; } .cast-copy { padding: 2rem 1.4rem 2rem .5rem; } .cast-portrait__figure { height: 510px; } }
+@media(max-width: 600px) {
+  .cast-tabs { grid-template-columns: 1fr 1fr; }
+  .cast-tabs button { min-height: 78px; padding: .8rem; }
+  .cast-tabs strong { font-size: 1.4rem; }
+  .cast-tabs small { font-size: .7rem; }
+  .cast-story { grid-template-columns: 1fr; }
+  .cast-portrait { height: 340px; }
+  .cast-portrait::before { background: linear-gradient(0deg,#0d1722,transparent 45%),#0d172277; }
+  .cast-portrait__figure { height: 350px; max-width: 280px; }
+  .cast-portrait__orbit { width: 65%; }
+  .cast-copy { padding: 1.1rem 1.25rem 2rem; }
+  .cast-copy__eyebrow { margin-bottom: .75rem; }
+  .cast-copy h3 { font-size: 2.4rem; }
+  .cast-copy__rule { margin: 1.25rem 0; }
+  .cast-copy__description { font-size: .95rem; }
+  .cast-epilogue { display: block; padding: 1.1rem .2rem; }
+  .cast-epilogue a { margin-top: .4rem; }
+}
+@media(prefers-reduced-motion: reduce) { .cast-copy, .cast-portrait__figure { animation: none; } }

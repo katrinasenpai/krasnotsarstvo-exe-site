@@ -5,9 +5,8 @@ import { Navbar } from './components/Navbar';
 
 // Эффект дыма за курсором подгружается отдельно, чтобы не утяжелять основной бандл
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
-import { charactersData } from './data/characters';
 import './refresh.css';
-import { CharacterCard } from './components/CharacterCard';
+import { CharacterShowcase } from './components/CharacterShowcase';
 import { IskinWidget } from './components/IskinWidget';
 import { Map } from './components/Map';
 import { Separator } from './components/Separator';
@@ -82,19 +81,6 @@ const galleryImages = [
 ];
 
 function App() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= 320;
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft += 320;
-    }
-  };
-
   const galleryScrollRef = useRef<HTMLDivElement>(null);
   const [galleryTouchStart, setGalleryTouchStart] = useState<number | null>(null);
   const [galleryTouchEnd, setGalleryTouchEnd] = useState<number | null>(null);
@@ -308,56 +294,9 @@ function App() {
       {/* CHARACTERS SECTION */}
       <section id="characters" className="py-20 md:py-32 bg-midnight-ink">
         <div className="container relative">
-          <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
-            <CharactersIcon className="w-10 h-10" />
-            ПЕРСОНАЖИ
-          </h2>
-
-          {/* ТЕКСТ */}
-          <p className="text-center max-w-4xl mx-auto mb-12 text-lg text-off-white/80 leading-relaxed">
-            Кого встретит путник по ту сторону знакомых адресов? Выберите облик главного героя и познакомьтесь с жителями КрасноЦарства. Карточки можно листать, а истории раскрывать нажатием.
-          </p>
-
-          <div
-            ref={scrollContainerRef}
-            className="flex overflow-x-auto gap-6 pb-4 scroll-smooth character-list"
-          >
-            {charactersData.map((char) => (
-              // --- ИЗМЕНЕНИЯ ТОЛЬКО ЗДЕСЬ ---
-              <CharacterCard
-                key={char.id}
-                variants={char.variants}
-                image={char.image}
-                name={char.name}
-                status={char.status}      // <-- Добавили статус
-                role={char.role}          // <-- Добавили роль
-                description={char.description}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={scrollLeft}
-            // Добавляем классы для плавного увеличения
-            className="group absolute top-1/2 -translate-y-1/2 left-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
-            aria-label="Прокрутить влево"
-          >
-            <ArrowLeftIcon
-              className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300"
-            />
-          </button>
-
-          <button
-            onClick={scrollRight}
-            // Добавляем классы для плавного увеличения
-            className="group absolute top-1/2 -translate-y-1/2 right-[-1.5rem] z-10 p-2 transition-transform duration-300 hover:scale-125 hidden md:block"
-            aria-label="Прокрутить вправо"
-          >
-            <ArrowRightIcon
-              className="w-17 h-8 text-shadow-grey group-hover:text-gold-leaf transition-colors duration-300"
-            />
-          </button>
-
+          <p className="cast-intro">ГЕРОИ ПЕРВОЙ ВСТРЕЧИ</p>
+          <h2 className="cast-heading">С них начинается история</h2>
+          <CharacterShowcase />
         </div>
 
         <div className="container">
@@ -484,10 +423,7 @@ function App() {
       >
         <div className="absolute inset-0 bg-midnight-ink/85"></div>
         <div className="container relative z-10">
-          <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
-            <QuizIcon className="w-10 h-10" />
-            КТО ТЫ ИЗ КРАСНОЦАРСТВА?
-          </h2>
+          <h2 className="sr-only">Тест: кто вы из КрасноЦарства?</h2>
           <Quiz />
         </div>
       </section>

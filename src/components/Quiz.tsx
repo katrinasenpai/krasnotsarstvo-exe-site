@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowLeft, ArrowRight, Sparkles, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
 import { quizQuestions, quizResults, quizTypes, scoreAnswers, QuizResultType } from '../data/quiz';
+import './QuizInvitation.css';
 type Screen = 'start' | 'question' | 'tie' | 'result';
 export function Quiz() {
   const [screen, setScreen] = useState<Screen>('start');
@@ -22,14 +23,18 @@ export function Quiz() {
   };
   const question = quizQuestions[current];
   const result = quizResults[resultType];
-  return <div className="quiz-shell">
-    {screen === 'start' && <div className="quiz-start">
-      <p className="quiz-eyebrow">8 СИТУАЦИЙ · 10 ХАРАКТЕРОВ · ОКОЛО 3 МИНУТ</p>
-      <h3 ref={title} tabIndex={-1}>Кому вы близки по духу?</h3>
-      <p>В КрасноЦарстве нужны и решительность, и любопытство, и умение заботиться. Выберите, как поступили бы вы, и найдите близкого по характеру собеседника.</p>
-      <div className="quiz-faces" aria-hidden="true">{['iskin', 'cow', 'pilot', 'apprentice', 'fool'].map(id => <img key={id} src={quizResults[id as QuizResultType].img} alt="" loading="lazy" />)}</div>
-      <button type="button" className="quiz-primary" onClick={start}><Sparkles size={18} /> Начать тест</button>
-      <small>Без правильных ответов и сюжетных спойлеров. Развлекательный тест.</small>
+  return <div className={`quiz-shell${screen === 'start' ? ' quiz-shell--invitation' : ''}`}>
+    {screen === 'start' && <div className="quiz-invitation">
+      <div className="quiz-invitation__letter">
+        <p className="quiz-invitation__eyebrow">ПРИГЛАШЕНИЕ ОТ ИСКИНА</p>
+        <h3 ref={title} tabIndex={-1}>Кто вы по ту<br />сторону книги?</h3>
+        <div className="quiz-invitation__ornament" aria-hidden="true">✦</div>
+        <p className="quiz-invitation__lead">Портал уже открыт. Что вы возьмёте с собой: любопытство, решительность или умение слышать других?</p>
+        <p className="quiz-invitation__description">Пройдите небольшой путь из восьми ситуаций и узнайте, с кем из жителей КрасноЦарства вам легче найти общий язык.</p>
+        <button type="button" className="quiz-primary" onClick={start}>Начать свою историю<ArrowRight size={19} /></button>
+        <p className="quiz-invitation__meta">8 вопросов · около 3 минут · без спойлеров</p>
+      </div>
+      <div className="quiz-invitation__portrait"><span className="quiz-invitation__arch" aria-hidden="true" /><img src="/characters/iskin.webp" alt="Искин приглашает в КрасноЦарство" loading="lazy" /><p>Искин<span>Ваш проводник по ту сторону книги</span></p></div>
     </div>}
     {screen === 'question' && <div>
       <p className="quiz-eyebrow">ВОПРОС {current + 1} ИЗ {quizQuestions.length}</p>
