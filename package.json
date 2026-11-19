@@ -32,7 +32,8 @@
     "generate:iskin-ar": "node scripts/generate-iskin-ar-assets.mjs",
     "deploy": "npm run build && gh-pages -d dist",
     "postbuild": "node scripts/prepare-static-routes.mjs",
-    "check:refresh": "node scripts/check-site-refresh.mjs"
+    "check:refresh": "node scripts/check-site-refresh.mjs",
+    "check:chronocards": "node scripts/check-chronocards.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.3.1",

@@ -1,238 +1,98 @@
-import { ArrowLeft, BookOpen, Copy, Share2, Sparkles } from 'lucide-react';
-import { type CSSProperties, useEffect, useRef, useState } from 'react';
-const iskinPortrait = '/characters/iskin-wry.webp';
-import oracleCardBack from '../assets/images/oracle-deck/oracle-card-back.webp';
-import {
-  createOracleReading,
-  drawOracleCards,
-  oracleCards,
-  oraclePositionLabels,
-  type OracleCard,
-  type OraclePosition,
-  type OracleReading,
-} from '../data/bookOracle';
+import { BookOpen, Copy, RotateCcw, Shuffle } from 'lucide-react';
+import { useEffect, useReducer, useRef, useState } from 'react';
+import { cardBack, chronocards, chronicleReducer, createChronicleState, positions, questions, readingPrompts, shuffleRemaining } from '../data/chronocards';
 import './BookOraclePage.css';
 
-type OraclePhase = 'ready' | 'drawing' | 'reading';
-
-const positions: OraclePosition[] = ['past', 'present', 'future'];
-
 export default function BookOraclePage() {
-  const [phase, setPhase] = useState<OraclePhase>('ready');
-  const [cards, setCards] = useState<OracleCard[]>([]);
-  const [revealedCount, setRevealedCount] = useState(0);
-  const [reading, setReading] = useState<OracleReading | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
-  const [ritualStatus, setRitualStatus] = useState('Магико-информационный поток ждёт вопроса.');
-  const timersRef = useRef<number[]>([]);
+  const [state, dispatch] = useReducer(chronicleReducer, undefined, createChronicleState);
+  const [notice, setNotice] = useState('');
+  const heading = useRef<HTMLHeadingElement>(null);
+  const cardButtons = useRef<(HTMLButtonElement | null)[]>([]);
+  const firstRender = useRef(true);
+  const { phase, hand, spread, position, shuffles } = state;
+  const current = chronocards[spread[position]];
+  const remaining = hand.filter(card => !spread.includes(card));
+  const pose = phase === 'read' || phase === 'book' ? 'read' : spread.length || shuffles ? 'deal' : 'welcome';
+  const title = phase === 'choose' ? positions[spread.length] : phase === 'select' ? 'Какой карте доверить закладку?' : phase === 'book' ? 'Книга в дорогу' : positions[position];
 
-  const clearTimers = () => {
-    timersRef.current.forEach((timer) => window.clearTimeout(timer));
-    timersRef.current = [];
+  useEffect(() => {
+    if (firstRender.current) { firstRender.current = false; return; }
+    heading.current?.focus({ preventScroll: true });
+    setNotice('');
+  }, [phase, spread.length]);
+
+  const reset = () => dispatch({ type: 'reset', hand: createChronicleState().hand });
+  const copy = async () => {
+    if (phase !== 'book' || !current) return;
+    const text = ['Хронокарты КрасноЦарства. Шатёр гадалки', ...spread.map((number, index) => `${positions[index]}: ${chronocards[number].title}. ${chronocards[number].reading[index]}`),
+      `Карта для чтения: ${current.title}. Книга: «${current.book[0]}», ${current.book[1]}. ${current.book[2]}`, readingPrompts[position]].join('\n\n');
+    try { await navigator.clipboard.writeText(text); setNotice('Расклад и книга скопированы.'); }
+    catch { setNotice('Не удалось скопировать. Текст можно выделить на странице.'); }
   };
 
-  useEffect(() => () => {
-    timersRef.current.forEach((timer) => window.clearTimeout(timer));
-  }, []);
-
-  const resetReading = () => {
-    clearTimers();
-    setPhase('ready');
-    setCards([]);
-    setRevealedCount(0);
-    setReading(null);
-    setNotice(null);
-    setRitualStatus('Магико-информационный поток ждёт вопроса.');
-  };
-
-  const startReading = () => {
-    if (phase === 'drawing') return;
-
-    clearTimers();
-    const nextCards = drawOracleCards();
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const timings = reducedMotion ? [260, 620, 980, 1450] : [700, 1600, 2550, 3650];
-
-    setCards(nextCards);
-    setReading(null);
-    setNotice(null);
-    setRevealedCount(0);
-    setPhase('drawing');
-    setRitualStatus('Искин переворачивает первую карту…');
-
-    timersRef.current = [
-      window.setTimeout(() => {
-        setRevealedCount(1);
-        setRitualStatus('След прошлого проявился. Искин читает вторую карту…');
-      }, timings[0]),
-      window.setTimeout(() => {
-        setRevealedCount(2);
-        setRitualStatus('Ключ настоящего найден. Осталась дорога впереди…');
-      }, timings[1]),
-      window.setTimeout(() => {
-        setRevealedCount(3);
-        setRitualStatus('Три карты легли рядом. Книга собирает их общий мотив…');
-      }, timings[2]),
-      window.setTimeout(() => {
-        setReading(createOracleReading(nextCards));
-        setPhase('reading');
-        setRitualStatus('Расклад готов.');
-        timersRef.current = [];
-      }, timings[3]),
-    ];
-  };
-
-  const shareText = reading
-    ? [
-      'Книжный оракул КрасноЦарства',
-      ...reading.entries.map(({ card, interpretation, position }) => `${oraclePositionLabels[position]}: ${card.number} «${card.title}» — ${interpretation}`),
-      `Общий мотив: ${reading.summary}`,
-      `Книга к раскладу: «${reading.book.title}», ${reading.book.author}. ${reading.book.why} Рекомендация выбрана картой «${reading.book.sourceCard}».`,
-      'Это игровой ритуал, а не предсказание реальности.',
-    ].join('\n\n')
-    : '';
-
-  const copyReading = async () => {
-    if (!reading) return;
-    try {
-      await navigator.clipboard.writeText(shareText);
-      setNotice('Расклад скопирован.');
-    } catch {
-      setNotice('Не удалось скопировать текст — его можно выделить вручную.');
-    }
-  };
-
-  const shareReading = async () => {
-    if (!reading) return;
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'Книжный оракул КрасноЦарства', text: shareText });
-        setNotice('Расклад отправлен.');
-      } catch {
-        // Closing the native sharing panel is an expected cancellation.
-      }
-      return;
-    }
-    await copyReading();
-  };
-
-  const displayedCards = cards.length === 3 ? cards : oracleCards.slice(0, 3);
-
-  return (
-    <main className={`book-oracle-page is-${phase}`}>
-      <a className="book-oracle-page__back" href="/">
-        <ArrowLeft size={18} aria-hidden="true" />
-        На сайт КрасноЦарства
-      </a>
-
-      <section className="book-oracle-page__content" aria-labelledby="book-oracle-title">
-        <header className="book-oracle-page__heading">
-          <p className="book-oracle-page__eyebrow"><Sparkles size={15} aria-hidden="true" /> КНИЖНЫЙ ОРАКУЛ</p>
-          <h1 id="book-oracle-title">Синхронизация с магико-информационным потоком</h1>
-          <p>Расклад будет произведён с помощью «ХРОНОКАРТ» — Книжного оракула КрасноЦарства: уникальной колоды из 22 старших арканов, разработанной Архимагом и его Подмастерьем. Архимаг отвечал за смыслы, Подмастерье — предположительно за сбои. Толкованием занимается Искин: он создан для виртуозного управления магико-информационными потоками и сохраняет нейтралитет, поэтому выдаёт объективные, но не абсолютные интерпретации. Если, конечно, Заклятие Забвения не добавило в систему новых артефактов.</p>
-        </header>
-
-        <div className="book-oracle-page__ritual" aria-busy={phase === 'drawing'}>
-          <aside className="book-oracle-page__guide" aria-label="Искин ведёт ритуал">
-            <div className="book-oracle-page__guide-glow" aria-hidden="true" />
-            <img src={phase === 'drawing' ? '/characters/iskin-thinking.webp' : iskinPortrait} alt="Искин с моноклем ведёт Книжный оракул" />
-            <p>«Благодарю за использование системы „Книжный оракул“. Мысленно сформулируйте вопрос и сделайте расклад — я расшифрую три карты. Возможны незначительные отклонения интерпретации: я всё-таки искусственный интеллект, а Заклятие Забвения не проходит сертификацию».</p>
-          </aside>
-
-          <section className="book-oracle-page__table" aria-label="Расклад из трёх карт">
-            <div className="book-oracle-page__runes" aria-hidden="true">✦ · ⟡ · ✦</div>
-            <p className="book-oracle-page__prompt">{phase === 'ready' ? 'Мысленно сформулируйте вопрос и нажмите «Сделать расклад». Искин расшифрует для вас три карты. Важное уведомление: если заметите баги в работе Оракула, пожалуйста, сообщите в техподдержку магико-информационного центра «Ржевская».' : ritualStatus}</p>
-            <p className="book-oracle-page__live-status" aria-live="polite">{ritualStatus}</p>
-
-            <div className="book-oracle-page__cards">
-              {displayedCards.map((card, index) => {
-                const position = positions[index];
-                const isRevealed = phase === 'reading' || revealedCount > index;
-                const cardStyle = { '--card-index': index } as CSSProperties;
-
-                return (
-                  <article
-                    key={`${card.id}-${index}`}
-                    className={`book-oracle-page__card ${isRevealed ? 'is-revealed' : ''}`}
-                    style={cardStyle}
-                    aria-label={isRevealed ? `${oraclePositionLabels[position]}: ${card.title}` : `${oraclePositionLabels[position]}: закрытая карта`}
-                  >
-                    <div className="book-oracle-page__card-inner">
-                      <img className="book-oracle-page__card-back" src={oracleCardBack} alt="" />
-                      <img className="book-oracle-page__card-face" src={card.image} alt="" />
-                      <div className="book-oracle-page__card-label" aria-hidden="true">
-                        <span>{String(card.number).padStart(2, '0')} · АРКАН ПОТОКА</span>
-                        <strong>{card.title}</strong>
-                      </div>
-                    </div>
-                    <p>{oraclePositionLabels[position]}</p>
-                  </article>
-                );
-              })}
-            </div>
-
-            {phase === 'ready' && (
-              <button className="book-oracle-page__primary" type="button" onClick={startReading}>
-                <Sparkles size={18} aria-hidden="true" />
-                Сделать расклад
-              </button>
-            )}
-            {phase === 'drawing' && (
-              <button className="book-oracle-page__primary is-waiting" type="button" disabled>
-                <Sparkles size={18} aria-hidden="true" />
-                Книга раскрывает расклад…
-              </button>
-            )}
-          </section>
-        </div>
-
-        {reading && (
-          <section className="book-oracle-page__reading" aria-labelledby="oracle-reading-title">
-            <p className="book-oracle-page__result-kicker">РАСКЛАД СОБРАН</p>
-            <h2 id="oracle-reading-title">Слово Книжного оракула</h2>
-            <div className="book-oracle-page__interpretations">
-              {reading.entries.map(({ card, interpretation, position }) => {
-                return (
-                  <article key={card.id}>
-                    <p>{oraclePositionLabels[position]}</p>
-                    <h3>{card.number} · {card.title}</h3>
-                    <em>Символ: {card.symbol}</em>
-                    <span>{interpretation}</span>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="book-oracle-page__summary">
-              <Sparkles size={19} aria-hidden="true" />
-              <p>{reading.summary}</p>
-            </div>
-
-            <section className="book-oracle-page__book" aria-label="Книга к раскладу">
-              <BookOpen size={23} aria-hidden="true" />
-              <div>
-                <p>КНИГА К РАСКЛАДУ</p>
-                <h3>«{reading.book.title}»</h3>
-                <strong>{reading.book.author}</strong>
-                <span>{reading.book.why}</span>
-                <small>Рекомендация карты «{reading.book.sourceCard}» ({oraclePositionLabels[reading.book.sourcePosition]}).</small>
-              </div>
-            </section>
-
-            <div className="book-oracle-page__reading-actions">
-              <button className="book-oracle-page__primary" type="button" onClick={resetReading}>
-                <Sparkles size={17} aria-hidden="true" />
-                Новый расклад
-              </button>
-              <div className="book-oracle-page__sharing" aria-label="Поделиться раскладом">
-                <button type="button" onClick={copyReading}><Copy size={16} aria-hidden="true" /> Скопировать</button>
-                <button type="button" onClick={shareReading}><Share2 size={16} aria-hidden="true" /> Поделиться</button>
-              </div>
-            </div>
-            {notice && <p className="book-oracle-page__notice" role="status">{notice}</p>}
-          </section>
-        )}
+  return <main className={`book-oracle-page is-${phase}`}>
+    <img className="book-oracle-page__background" src="/chronocards/tent.webp" alt="" />
+    <a className="book-oracle-page__back" href="/#iskin">Вернуться к Искину</a>
+    <header className="book-oracle-page__heading">
+      <p>ХРОНОКАРТЫ КРАСНОЦАРСТВА</p>
+      <h1 id="book-oracle-title">Шатёр гадалки</h1>
+      <p>Три карты о прошлом, настоящем и будущем, которое ещё можно изменить.</p>
+    </header>
+    <div className="book-oracle-page__stage">
+      <aside className="book-oracle-page__seer" aria-label="Гадалка">
+        <img src={`/chronocards/seer-${pose}.webp`} alt="Гадалка с синими косами и колодой хронокарт" decoding="async" />
+        <div><strong>Гадалка</strong><p>«После выбери одну. Я подберу к ней книгу. А уж какую строчку взять в дорогу, решишь по пути».</p></div>
+      </aside>
+      <section className="book-oracle-page__table" aria-labelledby="oracle-step-title">
+        <p className="book-oracle-page__eyebrow">{phase === 'choose' ? `Карта ${spread.length + 1} из 3` : phase === 'book' ? 'Ваша закладка' : 'Расклад'}</p>
+        <h2 id="oracle-step-title" ref={heading} tabIndex={-1}>{title}</h2>
+        {phase === 'choose' && <>
+          <p className="book-oracle-page__question">{questions[spread.length]}</p>
+          <p className="book-oracle-page__hint">Выберите карту. Можно нажать на неё или перейти стрелками и выбрать пробелом.</p>
+          <div className="book-oracle-page__deck-tools">
+            <button type="button" className="oracle-secondary" onClick={() => dispatch({ type: 'shuffle', hand: shuffleRemaining(hand, spread) })}><Shuffle size={17} /> Перетасовать</button>
+            <span role="status">{shuffles ? 'Колода перетасована. ' : ''}Осталось {remaining.length} из 22</span>
+          </div>
+          <div key={shuffles} className={`book-oracle-page__deck${shuffles ? ' is-shuffled' : ''}`} role="group" aria-label="Закрытые хронокарты">
+            {hand.map((number, slot) => spread.includes(number) ? <span key={number} className="oracle-deck-space" aria-hidden="true" /> : <button
+              type="button" key={number} ref={element => { cardButtons.current[number] = element; }}
+              aria-label={`Выбрать закрытую карту ${slot + 1}`} onClick={() => dispatch({ type: 'draw', card: number })}
+              onKeyDown={event => {
+                if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+                event.preventDefault();
+                const index = remaining.indexOf(number);
+                const next = event.key === 'Home' ? 0 : event.key === 'End' ? remaining.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + remaining.length) % remaining.length;
+                cardButtons.current[remaining[next]]?.focus();
+              }}><img src={cardBack} alt="" /></button>)}
+          </div>
+          {spread.length > 0 && <div className="book-oracle-page__seen" aria-label="Уже открытые карты">{spread.map((number, index) => <div key={number}><img src={chronocards[number].image} alt="" /><p><span>{positions[index]}</span>{chronocards[number].title}</p></div>)}</div>}
+        </>}
+        {phase === 'read' && current && <>
+          <div className="book-oracle-page__reading" key={current.id}>
+            <img className="oracle-card-art" src={current.image} alt={`Хронокарта «${current.title}»`} />
+            <div><h3>{current.title}</h3><p>{current.reading[position]}</p></div>
+          </div>
+          <button type="button" className="oracle-primary" onClick={() => dispatch({ type: 'next' })}>{spread.length < 3 ? 'Открыть следующую карту' : 'Выбрать карту для чтения'}</button>
+        </>}
+        {phase === 'select' && <>
+          <p className="book-oracle-page__question">Выберите вопрос, с которым откроете книгу.</p>
+          <div className="book-oracle-page__selection">{spread.map((number, index) => <button type="button" key={number} onClick={() => dispatch({ type: 'book', position: index })} aria-label={`Выбрать «${chronocards[number].title}» для чтения`}>
+            <img src={chronocards[number].image} alt="" /><span>{positions[index]}</span><strong>{chronocards[number].title}</strong>
+          </button>)}</div>
+        </>}
+        {phase === 'book' && current && <>
+          <div className="book-oracle-page__reading" key={current.id}>
+            <img className="oracle-card-art" src={current.image} alt={`Хронокарта «${current.title}»`} />
+            <div><p className="book-oracle-page__eyebrow"><BookOpen size={16} /> {current.title}</p><h3>{current.book[0]}</h3><p className="book-oracle-page__author">{current.book[1]}</p><p>{current.book[2]}</p><p className="book-oracle-page__prompt">{readingPrompts[position]}</p></div>
+          </div>
+          <div className="book-oracle-page__actions">
+            <button type="button" className="oracle-primary" onClick={copy}><Copy size={17} /> Сохранить текст расклада</button>
+            <button type="button" className="oracle-secondary" onClick={() => dispatch({ type: 'select' })}>Выбрать другую карту</button>
+          </div>
+          <p className="book-oracle-page__notice" role="status">{notice}</p>
+        </>}
+        {spread.length > 0 && <button type="button" className="oracle-restart" onClick={reset}><RotateCcw size={15} /> Разложить заново</button>}
       </section>
-    </main>
-  );
+    </div>
+  </main>;
 }

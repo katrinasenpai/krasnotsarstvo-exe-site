@@ -19,9 +19,9 @@ export function FeaturesTabs() {
     <div>
       {/* --- Переключатели вкладок --- */}
       <div className="grid grid-cols-3 gap-2 max-w-3xl mx-auto">
-        <button onClick={() => setActiveTab('mechanics')} className={tabButtonClasses('mechanics')}>Основные механики</button>
-        <button onClick={() => setActiveTab('inventory')} className={tabButtonClasses('inventory')}>Предметы и Артефакты</button>
-        <button onClick={() => setActiveTab('world')} className={tabButtonClasses('world')}>Мир и Квесты</button>
+        <button aria-pressed={activeTab === 'mechanics'} onClick={() => setActiveTab('mechanics')} className={tabButtonClasses('mechanics')}>Механики</button>
+        <button aria-pressed={activeTab === 'inventory'} onClick={() => setActiveTab('inventory')} className={tabButtonClasses('inventory')}>Артефакты</button>
+        <button aria-pressed={activeTab === 'world'} onClick={() => setActiveTab('world')} className={tabButtonClasses('world')}>Мир и квесты</button>
       </div>
 
       {/* --- Контент вкладок --- */}
@@ -37,8 +37,9 @@ export function FeaturesTabs() {
                 <div>
                   <h3 className="font-serif text-2xl font-bold mb-3">Диалоги с выбором</h3>
                   <p className="text-off-white/80">
-                    Основа геймплея — это общение. Ваши реплики напрямую влияют на ход квеста, реакции и судьбу персонажей, а также на то, какие предметы вы получите или потеряете. Каждое слово имеет вес, и иногда хитрость оказывается важнее прямолинейности.
+                    Решайте, кому помочь, что спросить и какие находки взять с собой. Реплики меняют реакции собеседников, награды и доступные действия. У первой главы три исхода: путь зависит от ваших решений и собранных предметов.
                   </p>
+                  <p className="text-off-white/80 mt-4">Поступки и артефакты влияют на храбрость, магию, мудрость и запас монет. Иногда найденная вещь открывает новый способ справиться с трудностью.</p>
                 </div>
               </div>
             </div>
@@ -49,21 +50,28 @@ export function FeaturesTabs() {
                   <FaPuzzlePiece className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Мини-игры и загадки</h4>
-                    <p className="text-sm text-off-white/70">Решайте головоломки: от загадок дракончиков в Крепости-Стакане до квеста на заброшенном пиратском дирижабле.</p>
+                    <p className="text-base text-off-white/70">Отвечайте на загадки Горынычей, восстанавливайте узор жёрнова в Катакомбах, проходите четыре испытания чаепития в Квартале и помогайте живому багажу на Станции дирижаблей.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <FaBriefcase className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Инвентарь и предметы</h4>
-                    <p className="text-sm text-off-white/70">Собирайте десятки артефактов, которые применяются в диалогах, для решения загадок или обмена.</p>
+                    <p className="text-base text-off-white/70">Храните находки в сундуке, читайте описания и используйте вещи в диалогах, обменах и испытаниях. Оттуда же можно открыть карту.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <FaBookDead className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
                   <div>
                     <h4 className="font-serif text-xl font-bold">Заклятие как механика</h4>
-                    <p className="text-sm text-off-white/70">Заклятие Забвения стирает записи, нарушает работу порталов и затрагивает память Искина. Внимательное чтение помогает замечать его следы.</p>
+                    <p className="text-base text-off-white/70">Заклятие Забвения стирает записи, нарушает работу порталов и затрагивает память Искина. Внимательное чтение помогает замечать его следы.</p>
+                  </div>
+                </li>
+                <li className="flex items-start gap-4">
+                  <FaMagic className="text-gold-leaf/80 mt-1 text-xl shrink-0" />
+                  <div>
+                    <h4 className="font-serif text-xl font-bold">Хронокарты у гадалки</h4>
+                    <p className="text-base text-off-white/70">Вытяните три карты из колоды, выберите одну и получите книгу в дорогу. В сюжетном визите останется закладка, которая пригодится у жёрнова.</p>
                   </div>
                 </li>
               </ul>
@@ -74,14 +82,14 @@ export function FeaturesTabs() {
         {/* === Контент для "Предметов и Артефактов" (ОБНОВЛЕНО) === */}
         {activeTab === 'inventory' && (
           <div className="animate-fade-in">
-            <p className="text-off-white/80 mb-8 text-center max-w-2xl mx-auto">Соберите свою коллекцию уникальных предметов, чтобы раскрыть все тайны КрасноЦарства. Каждый артефакт имеет свою историю и предназначение.</p>
+            <p className="text-off-white/80 mb-8 text-center max-w-2xl mx-auto">У находок есть история и применение. Кувшин из драконьего стекла превращает речную воду в молоко, а дорожный складень открывает путь к гадалке.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {/* Карточка 1 */}
               <div className="p-6 bg-shadow-grey/10 rounded-lg border border-transparent hover:border-gold-leaf/30 transition-colors duration-300">
                 <div className="flex flex-col items-center text-center">
                   <FaBoxOpen className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Стартовые предметы</h4>
-                  <p className="text-sm text-off-white/70">Выберите рюкзак, подкидывающий артефакты, или шоппер, усиливающий свойства вещей.</p>
+                  <p className="text-base text-off-white/70">Рюкзак хранит Жар-перо в потайном кармане, а шоппер с вышитым бобром откликается на чары в Лавке древних артефактов.</p>
                 </div>
               </div>
               {/* Карточка 2 */}
@@ -89,7 +97,7 @@ export function FeaturesTabs() {
                 <div className="flex flex-col items-center text-center">
                   <FaKey className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Ключевые предметы</h4>
-                  <p className="text-sm text-off-white/70">Соберите лодку или раздобудьте дирижабль, чтобы открыть доступ к новым локациям.</p>
+                  <p className="text-base text-off-white/70">Раздобудьте лодку или дирижабль, чтобы добраться до Уткиной Гавани. Фонарь поможет в тёмных Катакомбах.</p>
                 </div>
               </div>
               {/* Карточка 3 */}
@@ -97,7 +105,7 @@ export function FeaturesTabs() {
                 <div className="flex flex-col items-center text-center">
                   <FaHandshake className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Обменные предметы</h4>
-                  <p className="text-sm text-off-white/70">Используйте зерно, чтобы приманить утку, но сначала обменяйте ведро у купца.</p>
+                  <p className="text-base text-off-white/70">Договаривайтесь с жителями рынка: верёвка, ведро и мешок становятся звеньями цепочки, которая приведёт к зерну и кормушке для утки.</p>
                 </div>
               </div>
               {/* Карточка 4 */}
@@ -105,7 +113,7 @@ export function FeaturesTabs() {
                 <div className="flex flex-col items-center text-center">
                   <FaMagic className="text-3xl text-gold-leaf mb-3" />
                   <h4 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Редкие артефакты</h4>
-                  <p className="text-sm text-off-white/70">Значимые артефакты входят в зелье против Заклятия. С каждым из них приходит строка заклинания, которое пробудит зелье.</p>
+                  <p className="text-base text-off-white/70">Яйцо Восстановления входит в зелье против Заклятия. С каждым значимым артефактом приходит строка заклинания, которое пробудит зелье.</p>
                 </div>
               </div>
             </div>
@@ -117,28 +125,28 @@ export function FeaturesTabs() {
            <div className="animate-fade-in">
               <div className="text-center max-w-3xl mx-auto">
                 <h3 className="font-serif text-2xl text-gold-leaf mb-3">Переходы и связи</h3>
-                <p className="text-off-white/80 mb-10">Все основные локации связаны порталами, которые становятся активными по мере прохождения сюжета. Некоторые из них нестабильны из-за Заклятия и требуют особых артефактов для использования. Ваш гид Искин всегда объяснит связь каждой локации с реальным миром.</p>
+                <p className="text-off-white/80 mb-10">Маршрут первой главы проходит через фэнтезийную «Ржевскую», Крепость-Стакан или Катакомбы, Молочные берега и Уткину Гавань. Искин помогает сравнить места КрасноЦарства с их прототипами в Петербурге. На карте показан весь мир; его история продолжится во второй части.</p>
               </div>
               <div>
-                <h4 className="font-serif text-2xl text-center text-gold-leaf mb-6">Тематические зоны</h4>
+                <h4 className="font-serif text-2xl text-center text-gold-leaf mb-6">Побочные квесты первой главы</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Карточка 1 */}
                   <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
                     <FaLandmark className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
-                    <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Библиотечные узлы</h5>
-                    <p className="text-sm text-off-white/70">14 библиотек: от Узла миров до Листотеки и Переплётного куба</p>
+                    <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Квартал Четырёх Дураков</h5>
+                    <p className="text-base text-off-white/70">Одно чаепитие, четыре хозяина и четыре испытания: ритм, ложки, печенье и чашки. Жетоны выдаются за успешное прохождение.</p>
                   </div>
                   {/* Карточка 2 */}
                    <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
                     <FaGem className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
-                    <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Артефактные зоны</h5>
-                    <p className="text-sm text-off-white/70">Крепость-Стакан, Хранилище (Ладожская)</p>
+                    <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Катакомбы</h5>
+                    <p className="text-base text-off-white/70">Знакомство с Большой Крысой и Летучей Мышью, восстановление узора жёрнова и поиск пути в Лавку древних артефактов.</p>
                   </div>
                   {/* Карточка 3 */}
                    <div className="p-6 bg-shadow-grey/10 rounded-lg text-center">
                     <FaTree className="text-4xl text-gold-leaf/50 mb-4 mx-auto" />
-                    <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Мирные / сельские</h5>
-                    <p className="text-sm text-off-white/70">Молочные берега, Верфь, Рынок</p>
+                    <h5 className="font-serif text-xl font-bold text-gold-leaf/90 mb-2">Станция дирижаблей</h5>
+                    <p className="text-base text-off-white/70">«Заблудившийся багаж»: восстановите записи Сильвера, охладите трюм и договоритесь с упрямым живым сундуком.</p>
                   </div>
                 </div>
               </div>

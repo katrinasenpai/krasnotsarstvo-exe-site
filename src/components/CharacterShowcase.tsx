@@ -5,8 +5,8 @@ import library from '../assets/backgrounds/bg1.webp';
 import './CharacterShowcase.css';
 
 const cast = [
-  { id: 'traveler', label: 'Вы', caption: 'По ту сторону книги' },
-  { id: 'iskin', label: 'Искин', caption: 'Ваш проводник' },
+  { id: 'traveler', label: 'Вы', caption: 'Герой' },
+  { id: 'iskin', label: 'Искин', caption: 'Искусственный интеллект' },
   { id: 'archmage', label: 'Архимаг', caption: 'Хранитель тайн' },
   { id: 'apprentice', label: 'Подмастерье', caption: 'Первый союзник' },
   { id: 'albino-elves', label: 'Эльфы-альбиносы', caption: 'Хранители артефактов' },
@@ -50,7 +50,7 @@ export function CharacterShowcase() {
     </div>
 
     <div id="cast-story" className="cast-story" role="tabpanel" aria-labelledby={`cast-tab-${character.id}`} tabIndex={0}>
-      <div className={`cast-portrait${character.id === 'antagonist' ? ' cast-portrait--unknown' : ''}`} style={character.id === 'antagonist' ? undefined : { backgroundImage: `url(${library})` }}>
+      <div className="cast-portrait" style={{ backgroundImage: `url(${library})` }}>
         <span className="cast-portrait__orbit" aria-hidden="true" />
         <img key={`${character.id}-${appearance}`} className="cast-portrait__figure" src={portrait?.src || character.image} alt={portrait?.label || character.imageAlt || character.name} decoding="async" />
         {character.variants && <div className="cast-appearances">

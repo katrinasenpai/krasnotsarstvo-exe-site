@@ -513,7 +513,14 @@ function App() {
                 <h3 className="font-serif text-xl text-gold-leaf">Релиз 1 части</h3>
               </div>
               <p className="text-off-white/90 text-lg font-semibold">Первая половина декабря 2026</p>
-              <p className="text-off-white/70 text-sm mt-2">Релиз 1 главы с сюжетными правками и три дополнительных побочных квеста (Квартал Четырёх Дураков, Катакомбы и Станция дирижаблей)</p>
+              <ul className="mt-4 space-y-2 text-left text-off-white/80">
+                <li>Расширенная первая глава</li>
+                <li>Новая рисовка</li>
+                <li>Новые места на карте</li>
+                <li>Озвучка персонажей</li>
+                <li>Достижения</li>
+                <li>Новые побочные квесты: Квартал Четырёх Дураков, Катакомбы и Станция дирижаблей</li>
+              </ul>
             </div>
           </div>
 
@@ -521,7 +528,7 @@ function App() {
           <div className="max-w-4xl mx-auto bg-shadow-grey/20 border border-shadow-grey/50 rounded-xl p-8 md:p-12 mb-8">
             <div className="text-center">
               <h3 className="font-serif text-2xl text-gold-leaf mb-4">Добавить в избранное</h3>
-              <p className="text-off-white/70 mb-6">Первая часть выйдет в первой половине декабря 2026 года: обновлённая первая глава, новая рисовка и три побочных квеста. Продолжение истории, вторая часть, запланировано на 2027 год. Добавьте новеллу в избранное, чтобы следить за выходом.</p>
+              <p className="text-off-white/70 mb-6">Первая часть выйдет в первой половине декабря 2026 года. Вас ждут расширенная первая глава, новая рисовка, новые места на карте, озвучка, достижения и новые побочные квесты. Продолжение истории, вторая часть, запланировано на 2027 год. Добавьте новеллу в избранное, чтобы следить за выходом.</p>
               <a
                 href="https://vkplay.ru/play/game/krasnocarstvoexe/"
                 target="_blank"

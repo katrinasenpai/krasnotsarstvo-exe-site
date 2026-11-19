@@ -16,8 +16,6 @@
 .cast-portrait::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#0d1722b8,#0d172288 60%,#0d1722), linear-gradient(0deg,#0d1722,transparent 30%,#0d172288); }
 .cast-portrait__orbit { position: absolute; width: 72%; height: 80%; border: 1px solid #d5b87c55; border-radius: 50% 50% 0 0; bottom: 0; z-index: -1; box-shadow: 0 0 75px #78b6b51c inset; }
 .cast-portrait__figure { display: block; height: 540px; width: 100%; max-width: 440px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 8px 18px #04080d80); mask-image: linear-gradient(#000 86%, transparent 100%); animation: cast-reveal .35s ease-out; }
-.cast-portrait--unknown { background: radial-gradient(ellipse at 50% 42%, #263742, #0d1722 70%); }
-.cast-portrait--unknown .cast-portrait__orbit { display: none; }
 .cast-copy { align-self: center; padding: 2.7rem 3rem 2.7rem 1.5rem; animation: cast-reveal .3s ease-out; }
 .cast-copy__eyebrow { text-transform: uppercase; font-size: .68rem; letter-spacing: .2em; color: var(--cast-gold); margin-bottom: 1.25rem; }
 .cast-copy h3 { font-family: Kereru, serif; font-size: clamp(2.3rem,4.2vw,3.5rem); line-height: 1.07; color: #f2e5cc; }
