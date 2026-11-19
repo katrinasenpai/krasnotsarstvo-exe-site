@@ -9,8 +9,7 @@ const cast = [
   { id: 'iskin', label: 'Искин', caption: 'Ваш проводник' },
   { id: 'archmage', label: 'Архимаг', caption: 'Хранитель тайн' },
   { id: 'apprentice', label: 'Подмастерье', caption: 'Первый союзник' },
-  { id: 'merchant', label: 'Хозяйка Лавки', caption: 'Эльфийка-альбинос' },
-  { id: 'lantern-merchant', label: 'Продавец фонарей', caption: 'Эльф-альбинос' },
+  { id: 'albino-elves', label: 'Эльфы-альбиносы', caption: 'Хранители артефактов' },
   { id: 'seer', label: 'Гадалка', caption: 'Хранительница хронокарт' },
   { id: 'antagonist', label: 'Неизвестный', caption: 'Главный антагонист' },
 ].map(entry => ({ ...charactersData.find(character => character.id === entry.id)!, ...entry }));
