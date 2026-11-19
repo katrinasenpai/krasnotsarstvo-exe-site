@@ -24,7 +24,7 @@ const places=JSON.parse(await readFile('src/data/atlas.json','utf8'));
 assert.equal(places.length,35); assert.equal(places.filter(p=>p.library).length,14);
 assert.equal(new Set(places.map(p=>p.id)).size,35);
 for(const p of places) for(const ref of [p.landmark,p.real_info.image,p.fantasy_info.image]) assert((await stat(`public${ref}`)).size>0,ref);
-for(const c of modules.characters.charactersData) for(const ref of [c.image,...(c.variants||[]).map(v=>v.src),...(c.groupPortraits||[]).map(p=>p.src)]) assert((await stat(`public${ref}`)).size>0,ref);
+for(const c of modules.characters.charactersData) for(const ref of [c.image,...(c.variants||[]).map(v=>v.src)]) assert((await stat(`public${ref}`)).size>0,ref);
 for(const id of quizTypes) assert(quizResults[id]?.desc && quizResults[id]?.img,id);
 const glb=await readFile('public/ar/iskin-projection-billboard.glb');
 assert.equal(glb.toString('utf8',0,4),'glTF');

@@ -52,9 +52,7 @@ export function CharacterShowcase() {
     <div id="cast-story" className="cast-story" role="tabpanel" aria-labelledby={`cast-tab-${character.id}`} tabIndex={0}>
       <div className={`cast-portrait${character.id === 'antagonist' ? ' cast-portrait--unknown' : ''}`} style={character.id === 'antagonist' ? undefined : { backgroundImage: `url(${library})` }}>
         <span className="cast-portrait__orbit" aria-hidden="true" />
-        {character.groupPortraits ? <div className="cast-portrait__group" key={character.id}>
-          {character.groupPortraits.map(member => <img key={member.src} src={member.src} alt={member.label} decoding="async" />)}
-        </div> : <img key={`${character.id}-${appearance}`} className="cast-portrait__figure" src={portrait?.src || character.image} alt={portrait?.label || character.imageAlt || character.name} decoding="async" />}
+        <img key={`${character.id}-${appearance}`} className="cast-portrait__figure" src={portrait?.src || character.image} alt={portrait?.label || character.imageAlt || character.name} decoding="async" />
         {character.variants && <div className="cast-appearances">
           <p>Выберите свой облик</p>
           <div role="group" aria-label="Облик главного героя">{character.variants.map((variant, index) => <button key={variant.label} type="button" aria-label={variant.label} aria-pressed={appearance === index} onClick={() => setAppearance(index)}><img src={variant.src} alt="" loading="lazy" /><span aria-hidden="true">0{index + 1}</span></button>)}</div>
