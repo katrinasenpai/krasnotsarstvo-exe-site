@@ -1,4 +1,4 @@
-export type Character = { id: string; name: string; status: string; role: string; description: string; image: string; imageAlt?: string; facts?: { label: string; value: string }[]; variants?: { src: string; label: string }[] };
+export type Character = { id: string; name: string; status: string; role: string; description: string; image: string; imageAlt?: string; groupPortraits?: { src: string; label: string }[]; facts?: { label: string; value: string }[]; variants?: { src: string; label: string }[] };
 const portrait = (id: string) => `/characters/${id}.webp`;
 export const charactersData: Character[] = [
   { id: 'traveler', name: 'Путник между мирами', status: 'Ваша история', role: 'Читатель из Петербурга', image: portrait('heroine'), variants: [
@@ -8,7 +8,10 @@ export const charactersData: Character[] = [
   { id: 'archmage', name: 'Архимаг', status: 'Наставник', role: 'Маг и создатель Искина', image: portrait('archmage'), description: 'Ищет средство против Заклятия Забвения среди выцветших страниц и упрямых артефактов. Даже его знания не гарантируют, что очередной портал откроется там, где задумано.' },
   { id: 'apprentice', name: 'Подмастерье', status: 'Союзник', role: 'Ученик Архимага', image: portrait('apprentice'), description: 'Встречает путника в Узле миров и вручает карту. За рассеянностью молодого волшебника скрывается готовность действовать, особенно когда учителю нужна помощь.' },
   { id: 'merchant', name: 'Хозяйка Лавки', status: 'Эльфы-альбиносы', role: 'Хранительница древних артефактов', image: portrait('merchant'), description: 'Принадлежит к подземному народу эльфов-альбиносов, которому древние короли доверили хранение сильнейших артефактов. В её лавке у каждой вещи есть своя история и сила. Хозяйка тщательно отбирает находки, но Заклятие уже повредило древние печати.' },
-  { id: 'albino-elves', name: 'Эльфы-альбиносы', status: 'Магическая раса', role: 'Хранители артефактов', image: portrait('merchant'), imageAlt: 'Представительница народа эльфов-альбиносов', description: 'Когда-то древние короли доверили хранение сильнейших артефактов магическому народу эльфов-альбиносов, которые проживали в КрасноЦарстве глубоко под землёй.', facts: [
+  { id: 'albino-elves', name: 'Эльфы-альбиносы', status: 'Магическая раса', role: 'Хранители артефактов', image: portrait('merchant'), groupPortraits: [
+    { src: portrait('merchant'), label: 'Эльфийка-альбинос, хранительница артефактов' },
+    { src: portrait('lantern-merchant'), label: 'Эльф-альбинос с магическим фонарём' },
+  ], description: 'Когда-то древние короли доверили хранение сильнейших артефактов магическому народу эльфов-альбиносов, которые проживали в КрасноЦарстве глубоко под землёй.', facts: [
     { label: 'Позиция', value: 'Нейтралитет' },
   ] },
   { id: 'seer', name: 'Гадалка', status: 'Шатёр хронокарт', role: 'Карты, книги и возможное будущее', image: portrait('seer'), description: 'За столом при свечах она предлагает выбрать три хронокарты: о прошлом, настоящем и будущем, которое ещё можно изменить. К одной из карт гадалка подберёт книгу. А какую строчку взять с собой в дорогу, решать вам.' },

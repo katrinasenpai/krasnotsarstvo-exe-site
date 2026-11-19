@@ -16,6 +16,8 @@
 .cast-portrait::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#0d1722b8,#0d172288 60%,#0d1722), linear-gradient(0deg,#0d1722,transparent 30%,#0d172288); }
 .cast-portrait__orbit { position: absolute; width: 72%; height: 80%; border: 1px solid #d5b87c55; border-radius: 50% 50% 0 0; bottom: 0; z-index: -1; box-shadow: 0 0 75px #78b6b51c inset; }
 .cast-portrait__figure { display: block; height: 540px; width: 100%; max-width: 440px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 8px 18px #04080d80); mask-image: linear-gradient(#000 86%, transparent 100%); animation: cast-reveal .35s ease-out; }
+.cast-portrait__group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: end; width: 100%; height: clamp(540px, 33vw, 900px); padding-inline: clamp(.25rem, 1vw, 1rem); gap: clamp(.25rem, .6vw, .75rem); animation: cast-reveal .35s ease-out; }
+.cast-portrait__group img { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 8px 18px #04080d80); mask-image: linear-gradient(#000 86%, transparent 100%); }
 .cast-portrait--unknown { background: radial-gradient(ellipse at 50% 42%, #263742, #0d1722 70%); }
 .cast-portrait--unknown .cast-portrait__orbit { border-color: #9bb9c329; }
 .cast-copy { align-self: center; padding: 2.7rem 3rem 2.7rem 1.5rem; animation: cast-reveal .3s ease-out; }
@@ -48,6 +50,7 @@
   .cast-portrait { height: 340px; }
   .cast-portrait::before { background: linear-gradient(0deg,#0d1722,transparent 45%),#0d172277; }
   .cast-portrait__figure { height: 350px; max-width: 280px; }
+  .cast-portrait__group { height: 340px; }
   .cast-portrait__orbit { width: 65%; }
   .cast-copy { padding: 1.1rem 1.25rem 2rem; }
   .cast-copy__eyebrow { margin-bottom: .75rem; }
@@ -57,4 +60,4 @@
   .cast-epilogue { display: block; padding: 1.1rem .2rem; }
   .cast-epilogue a { margin-top: .4rem; }
 }
-@media(prefers-reduced-motion: reduce) { .cast-copy, .cast-portrait__figure { animation: none; } }
+@media(prefers-reduced-motion: reduce) { .cast-copy, .cast-portrait__figure, .cast-portrait__group { animation: none; } }
