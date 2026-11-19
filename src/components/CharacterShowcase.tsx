@@ -9,6 +9,10 @@ const cast = [
   { id: 'iskin', label: 'Искин', caption: 'Ваш проводник' },
   { id: 'archmage', label: 'Архимаг', caption: 'Хранитель тайн' },
   { id: 'apprentice', label: 'Подмастерье', caption: 'Первый союзник' },
+  { id: 'merchant', label: 'Хозяйка Лавки', caption: 'Эльфийка-альбинос' },
+  { id: 'lantern-merchant', label: 'Продавец фонарей', caption: 'Эльф-альбинос' },
+  { id: 'seer', label: 'Гадалка', caption: 'Хранительница хронокарт' },
+  { id: 'antagonist', label: 'Неизвестный', caption: 'Главный антагонист' },
 ].map(entry => ({ ...charactersData.find(character => character.id === entry.id)!, ...entry }));
 
 export function CharacterShowcase() {
@@ -43,13 +47,13 @@ export function CharacterShowcase() {
           event.preventDefault();
           moveFocus(event.key === 'Home' ? 0 : event.key === 'End' ? cast.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + cast.length) % cast.length);
         }}
-      ><span className="cast-tabs__number" aria-hidden="true">0{index + 1}</span><span><strong>{entry.label}</strong><small>{entry.caption}</small></span></button>)}
+      ><span><strong>{entry.label}</strong><small>{entry.caption}</small></span></button>)}
     </div>
 
     <div id="cast-story" className="cast-story" role="tabpanel" aria-labelledby={`cast-tab-${character.id}`} tabIndex={0}>
-      <div className="cast-portrait" style={{ backgroundImage: `url(${library})` }}>
+      <div className={`cast-portrait${character.id === 'antagonist' ? ' cast-portrait--unknown' : ''}`} style={character.id === 'antagonist' ? undefined : { backgroundImage: `url(${library})` }}>
         <span className="cast-portrait__orbit" aria-hidden="true" />
-        <img key={`${character.id}-${appearance}`} className="cast-portrait__figure" src={portrait?.src || character.image} alt={portrait?.label || character.name} decoding="async" />
+        <img key={`${character.id}-${appearance}`} className="cast-portrait__figure" src={portrait?.src || character.image} alt={portrait?.label || character.imageAlt || character.name} decoding="async" />
         {character.variants && <div className="cast-appearances">
           <p>Выберите свой облик</p>
           <div role="group" aria-label="Облик главного героя">{character.variants.map((variant, index) => <button key={variant.label} type="button" aria-label={variant.label} aria-pressed={appearance === index} onClick={() => setAppearance(index)}><img src={variant.src} alt="" loading="lazy" /><span aria-hidden="true">0{index + 1}</span></button>)}</div>
@@ -61,6 +65,7 @@ export function CharacterShowcase() {
         <p className="cast-copy__role">{role}</p>
         <div className="cast-copy__rule" aria-hidden="true" />
         <p className="cast-copy__description">{character.description}</p>
+        {character.facts && <dl className="cast-facts">{character.facts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>}
       </div>
     </div>
     <div className="cast-epilogue"><p>А за порогом библиотеки вас ждёт целый мир со своими жителями и историями.</p><a href="#map">Отправиться по карте<ArrowUpRight size={18} /></a></div>

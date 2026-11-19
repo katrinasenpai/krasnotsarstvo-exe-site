@@ -302,8 +302,8 @@ function App() {
       {/* CHARACTERS SECTION */}
       <section id="characters" className="py-20 md:py-32 bg-midnight-ink">
         <div className="container relative">
-          <p className="cast-intro">ГЕРОИ ПЕРВОЙ ВСТРЕЧИ</p>
-          <h2 className="cast-heading">С них начинается история</h2>
+          <p className="cast-intro">ДЕЙСТВУЮЩИЕ ЛИЦА</p>
+          <h2 className="cast-heading">С ними связана ваша история</h2>
           <CharacterShowcase />
         </div>
 

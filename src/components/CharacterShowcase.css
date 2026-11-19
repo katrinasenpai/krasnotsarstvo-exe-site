@@ -7,21 +7,27 @@
 .cast-tabs button:hover { color: #eadfc8; background: #ffffff04; }
 .cast-tabs button[aria-selected=true] { color: #f4e4c7; background: linear-gradient(0deg, #c2a46c16, transparent); }
 .cast-tabs button[aria-selected=true]::after { background: var(--cast-gold); }
-.cast-tabs__number { font-size: .7rem; letter-spacing: .1em; color: #bda471; }
-.cast-tabs strong { font-family: Kereru, serif; display: block; font-size: 1.55rem; font-weight: normal; }
-.cast-tabs small { display: block; margin-top: .25rem; font-size: .72rem; color: #a1acb2; }
+.cast-tabs button:focus-visible { outline: 2px solid var(--cast-gold); outline-offset: -3px; }
+.cast-tabs strong { font-family: Kereru, serif; display: block; font-size: 1.55rem; font-weight: normal; line-height: 1.2; }
+.cast-tabs small { display: block; margin-top: .4rem; font-size: max(13px, .75rem); color: #a1acb2; }
 .cast-story { display: grid; grid-template-columns: 1fr 1fr; min-height: 550px; background: #0d1722; overflow: hidden; }
 .cast-story:focus-visible { outline: 2px solid var(--cast-gold); outline-offset: 4px; }
 .cast-portrait { position: relative; display: grid; place-items: end center; min-width: 0; isolation: isolate; background-size: cover; background-position: 48% center; overflow: hidden; }
 .cast-portrait::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,#0d1722b8,#0d172288 60%,#0d1722), linear-gradient(0deg,#0d1722,transparent 30%,#0d172288); }
 .cast-portrait__orbit { position: absolute; width: 72%; height: 80%; border: 1px solid #d5b87c55; border-radius: 50% 50% 0 0; bottom: 0; z-index: -1; box-shadow: 0 0 75px #78b6b51c inset; }
 .cast-portrait__figure { display: block; height: 540px; width: 100%; max-width: 440px; object-fit: contain; object-position: center bottom; filter: drop-shadow(0 8px 18px #04080d80); mask-image: linear-gradient(#000 86%, transparent 100%); animation: cast-reveal .35s ease-out; }
+.cast-portrait--unknown { background: radial-gradient(ellipse at 50% 42%, #263742, #0d1722 70%); }
+.cast-portrait--unknown .cast-portrait__orbit { border-color: #9bb9c329; }
 .cast-copy { align-self: center; padding: 2.7rem 3rem 2.7rem 1.5rem; animation: cast-reveal .3s ease-out; }
 .cast-copy__eyebrow { text-transform: uppercase; font-size: .68rem; letter-spacing: .2em; color: var(--cast-gold); margin-bottom: 1.25rem; }
 .cast-copy h3 { font-family: Kereru, serif; font-size: clamp(2.3rem,4.2vw,3.5rem); line-height: 1.07; color: #f2e5cc; }
 .cast-copy__role { color: #9baebc; margin-top: .8rem; font-size: .9rem; }
 .cast-copy__rule { height: 1px; width: 4rem; background: var(--cast-gold); margin: 1.6rem 0; }
 .cast-copy__description { color: #d0d6d7; font-size: 1rem; line-height: 1.75; max-width: 27rem; }
+.cast-facts { margin-top: 1.7rem; max-width: 27rem; font-size: max(14px, .9rem); }
+.cast-facts > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .35rem 1rem; padding: .65rem 0; border-bottom: 1px solid #9bb9c329; }
+.cast-facts dt { color: #9baebc; }
+.cast-facts dd { color: #e3d4b7; }
 .cast-appearances { position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); padding: .7rem 1rem; background: #0b1723dc; border: 1px solid #bda47144; }
 .cast-appearances p { color: #d3d8d5; font-size: .72rem; margin-bottom: .5rem; text-align: center; }
 .cast-appearances > div { display: flex; gap: .65rem; }
@@ -33,12 +39,11 @@
 .cast-epilogue p { max-width: 33rem; line-height: 1.6; }
 .cast-epilogue a { display: inline-flex; align-items: center; gap: .5rem; color: var(--cast-gold); flex-shrink: 0; min-height: 44px; }
 @keyframes cast-reveal { from { opacity: .4; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-@media(max-width: 900px) { .cast-tabs button { padding: 1rem .6rem; gap: .6rem; } .cast-tabs strong { font-size: 1.25rem; } .cast-tabs small { font-size: .65rem; } .cast-copy { padding: 2rem 1.4rem 2rem .5rem; } .cast-portrait__figure { height: 510px; } }
+@media(max-width: 900px) { .cast-tabs button { padding: 1rem .6rem; gap: .6rem; } .cast-tabs strong { font-size: 1.25rem; } .cast-copy { padding: 2rem 1.4rem 2rem .5rem; } .cast-portrait__figure { height: 510px; } }
 @media(max-width: 600px) {
   .cast-tabs { grid-template-columns: 1fr 1fr; }
   .cast-tabs button { min-height: 78px; padding: .8rem; }
   .cast-tabs strong { font-size: 1.4rem; }
-  .cast-tabs small { font-size: .7rem; }
   .cast-story { grid-template-columns: 1fr; }
   .cast-portrait { height: 340px; }
   .cast-portrait::before { background: linear-gradient(0deg,#0d1722,transparent 45%),#0d172277; }

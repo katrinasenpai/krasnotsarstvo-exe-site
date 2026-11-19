@@ -13,6 +13,7 @@ const portraits = {
   iskin: 'iskin/iskin_normal.png', apprentice: 'apprentice/apprentice_normal.png',
   'iskin-wry': 'iskin/iskin_wry.png', 'iskin-thinking': 'iskin/iskin_right.png',
   archmage: 'archmage/archmage_happy.png', merchant: 'nps/merchant_shop_normal.png',
+  'lantern-merchant': 'nps/merchant_lamp.webp', seer: 'chronicle/seer_welcome.webp',
   gorynych: 'chapter1/young_gorynych.png', cow: 'chapter1/wise_cow.png',
   rat: 'nps/big_rat_normal.png', bat: 'nps/bat_normal.png',
   pilot: 'station/pilot.png', mechanic: 'station/mechanic.png',
@@ -30,16 +31,17 @@ const assets = [
   { source: 'gui/library/iskin_reading.webp', target: 'public/characters/iskin-reading.webp', width: 640 },
 ];
 const scenesOnly = process.argv.includes('--site-scenes-only');
-const selectedAssets = scenesOnly ? assets.filter(asset => /backgrounds\/bg[1-5]\.webp$|characters\/iskin-(wry|thinking)\.webp$/.test(asset.target)) : assets;
+const recurringCastOnly = process.argv.includes('--recurring-cast-only');
+const selectedAssets = recurringCastOnly ? assets.filter(asset => /characters\/(merchant|lantern-merchant|seer)\.webp$/.test(asset.target)) : scenesOnly ? assets.filter(asset => /backgrounds\/bg[1-5]\.webp$|characters\/iskin-(wry|thinking)\.webp$/.test(asset.target)) : assets;
 for (const asset of selectedAssets) {
   const dest = path.join(root, asset.target);
   await mkdir(path.dirname(dest), { recursive: true });
   await sharp(path.join(game, asset.source)).resize({ width: asset.width, withoutEnlargement: true }).webp({ quality: 86 }).toFile(dest);
 }
 const poses = { idle: 'iskin_normal.png', thinking: 'iskin_right.png', 'adjust-monocle': 'iskin_left.png', resting: 'iskin-ar-resting.png' };
-for (const [name, source] of scenesOnly ? [] : Object.entries(poses)) {
+for (const [name, source] of scenesOnly || recurringCastOnly ? [] : Object.entries(poses)) {
   await sharp(path.join(game, 'images/iskin', source))
     .resize(768, 1152, { fit: 'contain', background: '#00000000' })
     .png().toFile(path.join(root, `src/assets/images/iskin-ar-sequence/iskin-ar-${name}.png`));
 }
-console.log(`Prepared ${selectedAssets.length} website images${scenesOnly ? '' : ' and four AR poses'} from the main novel.`);
+console.log(`Prepared ${selectedAssets.length} website images${scenesOnly || recurringCastOnly ? '' : ' and four AR poses'} from the main novel.`);

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" fill="none">
+  <title>Условный силуэт неизвестного персонажа</title>
+  <defs>
+    <linearGradient id="outline" x1="240" y1="70" x2="240" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#d3e0df" stop-opacity=".85"/>
+      <stop offset=".6" stop-color="#9fb9c2" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#9fb9c2" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="240" y1="90" x2="240" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1420"/>
+      <stop offset="1" stop-color="#0b1420" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M60 640 77 431Q82 382 134 361L186 339 190 302Q155 272 155 205C155 140 180 96 240 96S325 140 325 205Q325 272 290 302L294 339 346 361Q398 382 403 431L420 640Z" fill="url(#shadow)"/>
+  <path d="M60 640 77 431Q82 382 134 361L186 339 190 302Q155 272 155 205C155 140 180 96 240 96S325 140 325 205Q325 272 290 302L294 339 346 361Q398 382 403 431L420 640" stroke="url(#outline)" stroke-width="2" stroke-linecap="round"/>
+</svg>
