@@ -3,50 +3,31 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 const projectRoot = process.cwd();
-const poseDirectory = path.join(projectRoot, 'src/assets/images/iskin-ar-sequence');
+const poseDirectory = path.join(projectRoot, 'public/ar/reading');
 const outputDirectory = path.join(projectRoot, 'public/ar');
 const glbOutputPath = path.join(outputDirectory, 'iskin-projection-billboard.glb');
 const usdzOutputPath = path.join(outputDirectory, 'iskin-projection-billboard.usdz');
 
-const modelHeightMetres = 1.72;
-const animationName = 'Holographic pose sequence loop';
-const animationDurationSeconds = 9.6;
+const modelHeightMetres = 1.15;
+const animationName = 'Reading the virtual book';
+const animationDurationSeconds = 2.29;
 const hiddenScale = 0.001;
-const quickLookOpacityThreshold = 0.4;
+const quickLookOpacityThreshold = 0.08;
 
-const poses = [
-  { id: 'idle', nodeName: 'Искин · поза ожидания', fileName: 'iskin-ar-idle.png', materialName: 'IdleMaterial' },
-  { id: 'thinking', nodeName: 'Искин · задумался', fileName: 'iskin-ar-thinking.png', materialName: 'ThinkingMaterial' },
-  { id: 'adjust-monocle', nodeName: 'Искин · поправляет монокль', fileName: 'iskin-ar-adjust-monocle.png', materialName: 'AdjustMonocleMaterial' },
-  { id: 'resting', nodeName: 'Искин · короткая пауза', fileName: 'iskin-ar-resting.png', materialName: 'RestingMaterial' },
-];
-
-// Между позами оставлены короткие интервалы: это не слайд-шоу, а спокойный цикл жестов.
-const poseTimeline = [
-  { time: 0, pose: 'idle' },
-  { time: 1.8, pose: 'idle' },
-  { time: 1.82, pose: 'thinking' },
-  { time: 3.35, pose: 'thinking' },
-  { time: 3.37, pose: 'idle' },
-  { time: 4.85, pose: 'idle' },
-  { time: 4.87, pose: 'adjust-monocle' },
-  { time: 6.35, pose: 'adjust-monocle' },
-  { time: 6.37, pose: 'idle' },
-  { time: 7.45, pose: 'idle' },
-  { time: 7.47, pose: 'resting' },
-  { time: 8.05, pose: 'resting' },
-  { time: 8.07, pose: 'idle' },
-  { time: animationDurationSeconds, pose: 'idle' },
-];
-
+const poses = Array.from({length:8}, (_, index) => ({
+  id: 'reading-'+index, nodeName: 'Искин · виртуальная книга '+index,
+  fileName: 'frame-'+index+'.png', materialName: 'ReadingMaterial'+index,
+}));
+const poseTimeline = [{time:0,pose:'reading-0'},{time:.18,pose:'reading-0'}];
+for(let index=1;index<8;index++) {
+  const time=.18+.86*index/7;
+  poseTimeline.push({time:time-.001,pose:'reading-'+(index-1)},{time,pose:'reading-'+index});
+}
+poseTimeline.push({time:animationDurationSeconds-.001,pose:'reading-7'},{time:animationDurationSeconds,pose:'reading-0'});
 const parentTimeline = [
-  { time: 0, translation: [0, 0, 0], rotation: [0, 0, 0, 1], scale: [1, 1, 1] },
-  { time: 1.6, translation: [0, 0.016, 0], rotation: [0, 0.004, 0, 0.999992], scale: [1.006, 1.006, 1.006] },
-  { time: 3.2, translation: [0, 0.032, 0], rotation: [0, -0.003, 0, 0.999996], scale: [1.012, 1.012, 1.012] },
-  { time: 4.8, translation: [0, 0.018, 0], rotation: [0, 0.003, 0, 0.999996], scale: [1.004, 1.004, 1.004] },
-  { time: 6.4, translation: [0, 0.037, 0], rotation: [0, -0.004, 0, 0.999992], scale: [1.011, 1.011, 1.011] },
-  { time: 8, translation: [0, 0.019, 0], rotation: [0, 0.002, 0, 0.999998], scale: [1.005, 1.005, 1.005] },
-  { time: animationDurationSeconds, translation: [0, 0, 0], rotation: [0, 0, 0, 1], scale: [1, 1, 1] },
+  {time:0,translation:[0,0,0],rotation:[0,0,0,1],scale:[1,1,1]},
+  {time:animationDurationSeconds/2,translation:[0,.01,0],rotation:[0,0,0,1],scale:[1,1,1]},
+  {time:animationDurationSeconds,translation:[0,0,0],rotation:[0,0,0,1],scale:[1,1,1]},
 ];
 
 function align(buffer, byte = 0x00) {
@@ -174,7 +155,7 @@ function createGlb(poseSources, width, height) {
       ...poses.map((pose, index) => ({
         name: pose.nodeName,
         mesh: index,
-        scale: pose.id === 'idle' ? [1, 1, 1] : [hiddenScale, hiddenScale, hiddenScale],
+        scale: index === 0 ? [1, 1, 1] : [hiddenScale, hiddenScale, hiddenScale],
         extras: { transparentBillboardPose: pose.id },
       })),
     ],
@@ -203,7 +184,7 @@ function createGlb(poseSources, width, height) {
     textures: poses.map((_, index) => ({ sampler: 0, source: index })),
     samplers: [{ magFilter: 9729, minFilter: 9729, wrapS: 33071, wrapT: 33071 }],
     images: poseSources.map(({ fileName }, index) => ({
-      bufferView: 13 + index,
+      bufferView: 9 + poses.length + index,
       mimeType: 'image/png',
       name: fileName,
     })),

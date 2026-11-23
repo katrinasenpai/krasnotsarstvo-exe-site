@@ -1,0 +1,41 @@
+# Merge into the existing HTTPS server block for krasnotsarstvo.ru only.
+# Preserve its root, TLS, security headers and any unrelated routes.
+# Merge matching locations instead of adding duplicates. Run nginx -t first.
+
+gzip on;
+gzip_vary on;
+gzip_comp_level 5;
+gzip_min_length 1024;
+gzip_types text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml;
+
+# Vite content-hashed files. Retain existing security headers by using expires.
+location ^~ /assets/ {
+    try_files $uri =404;
+    expires 1y;
+}
+
+# Public media have stable filenames, so keep the cache short.
+location = /ar/iskin-projection-billboard.usdz {
+    types { model/vnd.usdz+zip usdz; }
+    try_files $uri =404;
+    expires 1h;
+}
+
+location = /ar/iskin-projection-billboard.glb {
+    types { model/gltf-binary glb; }
+    try_files $uri =404;
+    expires 1h;
+}
+
+location ~* ^/(atlas|characters|chronocards|ar)/.*\.(webp|png|jpe?g|svg|glb|usdz)$ {
+    try_files $uri =404;
+    expires 1h;
+}
+
+# Revalidate the app shell after each release.
+location = /index.html {
+    expires -1;
+}
+
+# Keep the existing SPA fallback (usually try_files $uri $uri/ /index.html).
+# Do not apply these locations to the database subdomains.

@@ -7,12 +7,22 @@
   {
     "source": "images/cards/gogol_real.jpg",
     "target": "public/atlas/cards/gogol_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/gogol_real.jpg",
+    "target": "public/atlas/cards/gogol_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/gogol_fantasy.jpg",
     "target": "public/atlas/cards/gogol_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/gogol_fantasy.jpg",
+    "target": "public/atlas/cards/gogol_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/rzevskaya.png",
@@ -22,12 +32,22 @@
   {
     "source": "images/cards/rzevskaya_real.jpg",
     "target": "public/atlas/cards/rzevskaya_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/rzevskaya_real.jpg",
+    "target": "public/atlas/cards/rzevskaya_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/library_parallel_2.jpg",
     "target": "public/atlas/cards/rzevskaya_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/library_parallel_2.jpg",
+    "target": "public/atlas/cards/rzevskaya_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/sovrem.png",
@@ -37,12 +57,22 @@
   {
     "source": "images/cards/sovrem_real.jpg",
     "target": "public/atlas/cards/sovrem_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/sovrem_real.jpg",
+    "target": "public/atlas/cards/sovrem_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/sovrem_fantasy.jpg",
     "target": "public/atlas/cards/sovrem_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/sovrem_fantasy.jpg",
+    "target": "public/atlas/cards/sovrem_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/kub.png",
@@ -52,12 +82,22 @@
   {
     "source": "images/cards/kub_real.jpg",
     "target": "public/atlas/cards/kub_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kub_real.jpg",
+    "target": "public/atlas/cards/kub_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/kub_fantasy.jpg",
     "target": "public/atlas/cards/kub_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kub_fantasy.jpg",
+    "target": "public/atlas/cards/kub_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/shkaf.png",
@@ -67,12 +107,22 @@
   {
     "source": "images/cards/shkaf_real.jpg",
     "target": "public/atlas/cards/shkaf_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/shkaf_real.jpg",
+    "target": "public/atlas/cards/shkaf_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/shkaf_fantasy.jpg",
     "target": "public/atlas/cards/shkaf_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/shkaf_fantasy.jpg",
+    "target": "public/atlas/cards/shkaf_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/sfera.png",
@@ -82,12 +132,22 @@
   {
     "source": "images/cards/sfera_real.jpg",
     "target": "public/atlas/cards/sfera_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/sfera_real.jpg",
+    "target": "public/atlas/cards/sfera_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/sfera_fantasy.jpg",
     "target": "public/atlas/cards/sfera_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/sfera_fantasy.jpg",
+    "target": "public/atlas/cards/sfera_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/nota.png",
@@ -97,12 +157,22 @@
   {
     "source": "images/cards/nota_real.jpg",
     "target": "public/atlas/cards/nota_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/nota_real.jpg",
+    "target": "public/atlas/cards/nota_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/nota_fantasy.jpg",
     "target": "public/atlas/cards/nota_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/nota_fantasy.jpg",
+    "target": "public/atlas/cards/nota_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/leslib.png",
@@ -112,12 +182,22 @@
   {
     "source": "images/cards/leslib_real.jpg",
     "target": "public/atlas/cards/leslib_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/leslib_real.jpg",
+    "target": "public/atlas/cards/leslib_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/leslib_fantasy.jpg",
     "target": "public/atlas/cards/leslib_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/leslib_fantasy.jpg",
+    "target": "public/atlas/cards/leslib_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/ohtlib.png",
@@ -127,12 +207,22 @@
   {
     "source": "images/cards/ohtlib_real.jpg",
     "target": "public/atlas/cards/ohtlib_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/ohtlib_real.jpg",
+    "target": "public/atlas/cards/ohtlib_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/ohtlib_fantasy.jpg",
     "target": "public/atlas/cards/ohtlib_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/ohtlib_fantasy.jpg",
+    "target": "public/atlas/cards/ohtlib_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/malolib.png",
@@ -142,12 +232,22 @@
   {
     "source": "images/cards/malolib_real.jpg",
     "target": "public/atlas/cards/malolib_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/malolib_real.jpg",
+    "target": "public/atlas/cards/malolib_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/malolib_fantasy.jpg",
     "target": "public/atlas/cards/malolib_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/malolib_fantasy.jpg",
+    "target": "public/atlas/cards/malolib_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/porohlib.png",
@@ -157,12 +257,22 @@
   {
     "source": "images/cards/porohlib_real.jpg",
     "target": "public/atlas/cards/porohlib_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/porohlib_real.jpg",
+    "target": "public/atlas/cards/porohlib_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/porohlib_fantasy.jpg",
     "target": "public/atlas/cards/porohlib_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/porohlib_fantasy.jpg",
+    "target": "public/atlas/cards/porohlib_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/kit.png",
@@ -172,12 +282,22 @@
   {
     "source": "images/cards/kit_real.jpg",
     "target": "public/atlas/cards/kit_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kit_real.jpg",
+    "target": "public/atlas/cards/kit_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/kit_fantasy.jpg",
     "target": "public/atlas/cards/kit_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kit_fantasy.jpg",
+    "target": "public/atlas/cards/kit_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/gorod.png",
@@ -187,12 +307,22 @@
   {
     "source": "images/cards/gorod_real.jpg",
     "target": "public/atlas/cards/gorod_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/gorod_real.jpg",
+    "target": "public/atlas/cards/gorod_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/gorod_fantasy.jpg",
     "target": "public/atlas/cards/gorod_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/gorod_fantasy.jpg",
+    "target": "public/atlas/cards/gorod_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/child4.png",
@@ -202,12 +332,22 @@
   {
     "source": "images/cards/child4_real.jpg",
     "target": "public/atlas/cards/child4_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/child4_real.jpg",
+    "target": "public/atlas/cards/child4_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/child4_fantasy.jpg",
     "target": "public/atlas/cards/child4_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/child4_fantasy.jpg",
+    "target": "public/atlas/cards/child4_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/forest.png",
@@ -217,12 +357,22 @@
   {
     "source": "images/cards/forest_real.jpg",
     "target": "public/atlas/cards/forest_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/forest_real.jpg",
+    "target": "public/atlas/cards/forest_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/forest_fantasy.jpg",
     "target": "public/atlas/cards/forest_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/forest_fantasy.jpg",
+    "target": "public/atlas/cards/forest_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/quarter.png",
@@ -232,12 +382,22 @@
   {
     "source": "images/cards/quarter_real.jpg",
     "target": "public/atlas/cards/quarter_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/quarter_real.jpg",
+    "target": "public/atlas/cards/quarter_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/quarter/hub.png",
     "target": "public/atlas/cards/quarter_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/quarter/hub.png",
+    "target": "public/atlas/cards/quarter_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/zavod.png",
@@ -247,12 +407,22 @@
   {
     "source": "images/cards/zavod_real.jpg",
     "target": "public/atlas/cards/zavod_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/zavod_real.jpg",
+    "target": "public/atlas/cards/zavod_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/zavod_fantasy.jpg",
     "target": "public/atlas/cards/zavod_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/zavod_fantasy.jpg",
+    "target": "public/atlas/cards/zavod_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/sloboda.png",
@@ -262,12 +432,22 @@
   {
     "source": "images/cards/sloboda_real.jpg",
     "target": "public/atlas/cards/sloboda_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/sloboda_real.jpg",
+    "target": "public/atlas/cards/sloboda_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/archemist_slums.jpg",
     "target": "public/atlas/cards/sloboda_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/archemist_slums.jpg",
+    "target": "public/atlas/cards/sloboda_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/ladozhskaya.png",
@@ -277,12 +457,22 @@
   {
     "source": "images/cards/ladozhskaya_real.jpg",
     "target": "public/atlas/cards/ladozhskaya_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/ladozhskaya_real.jpg",
+    "target": "public/atlas/cards/ladozhskaya_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/artifact_store.jpg",
     "target": "public/atlas/cards/ladozhskaya_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/artifact_store.jpg",
+    "target": "public/atlas/cards/ladozhskaya_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/vokzal.png",
@@ -292,12 +482,22 @@
   {
     "source": "images/cards/vokzal_real.jpg",
     "target": "public/atlas/cards/vokzal_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/vokzal_real.jpg",
+    "target": "public/atlas/cards/vokzal_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/station/station_platform.png",
     "target": "public/atlas/cards/vokzal_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/station/station_platform.png",
+    "target": "public/atlas/cards/vokzal_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/stakan.png",
@@ -307,12 +507,22 @@
   {
     "source": "images/cards/stakan_real.jpg",
     "target": "public/atlas/cards/stakan_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/stakan_real.jpg",
+    "target": "public/atlas/cards/stakan_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/chapter1/fortress_exterior.png",
     "target": "public/atlas/cards/stakan_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/chapter1/fortress_exterior.png",
+    "target": "public/atlas/cards/stakan_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/dacha.png",
@@ -322,12 +532,22 @@
   {
     "source": "images/cards/dacha_real.jpg",
     "target": "public/atlas/cards/dacha_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/dacha_real.jpg",
+    "target": "public/atlas/cards/dacha_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/duck/harbor/landing.webp",
     "target": "public/atlas/cards/dacha_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/duck/harbor/landing.webp",
+    "target": "public/atlas/cards/dacha_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/bedlam.png",
@@ -337,12 +557,22 @@
   {
     "source": "images/cards/bedlam_real.jpg",
     "target": "public/atlas/cards/bedlam_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/bedlam_real.jpg",
+    "target": "public/atlas/cards/bedlam_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/bedlam_fantasy.jpg",
     "target": "public/atlas/cards/bedlam_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/bedlam_fantasy.jpg",
+    "target": "public/atlas/cards/bedlam_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/park.png",
@@ -352,12 +582,22 @@
   {
     "source": "images/cards/park_real.jpg",
     "target": "public/atlas/cards/park_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/park_real.jpg",
+    "target": "public/atlas/cards/park_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/park_fantasy.jpg",
     "target": "public/atlas/cards/park_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/park_fantasy.jpg",
+    "target": "public/atlas/cards/park_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/rinok.png",
@@ -367,12 +607,22 @@
   {
     "source": "images/cards/rinok_real.jpg",
     "target": "public/atlas/cards/rinok_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/rinok_real.jpg",
+    "target": "public/atlas/cards/rinok_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/market.jpg",
     "target": "public/atlas/cards/rinok_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/market.jpg",
+    "target": "public/atlas/cards/rinok_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/kalancha.png",
@@ -382,12 +632,22 @@
   {
     "source": "images/cards/kalancha_real.jpg",
     "target": "public/atlas/cards/kalancha_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kalancha_real.jpg",
+    "target": "public/atlas/cards/kalancha_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/watchtower.jpg",
     "target": "public/atlas/cards/kalancha_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/watchtower.jpg",
+    "target": "public/atlas/cards/kalancha_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/berega.png",
@@ -397,12 +657,22 @@
   {
     "source": "images/cards/berega_real.jpg",
     "target": "public/atlas/cards/berega_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/berega_real.jpg",
+    "target": "public/atlas/cards/berega_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/chapter1/river_firecups.png",
     "target": "public/atlas/cards/berega_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/chapter1/river_firecups.png",
+    "target": "public/atlas/cards/berega_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/verfi.png",
@@ -412,12 +682,22 @@
   {
     "source": "images/cards/verfi_real.jpg",
     "target": "public/atlas/cards/verfi_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/verfi_real.jpg",
+    "target": "public/atlas/cards/verfi_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/harbor.jpg",
     "target": "public/atlas/cards/verfi_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/harbor.jpg",
+    "target": "public/atlas/cards/verfi_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/pushka.png",
@@ -427,12 +707,22 @@
   {
     "source": "images/cards/pushka_real.jpg",
     "target": "public/atlas/cards/pushka_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/pushka_real.jpg",
+    "target": "public/atlas/cards/pushka_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/pushka_fantasy.jpg",
     "target": "public/atlas/cards/pushka_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/pushka_fantasy.jpg",
+    "target": "public/atlas/cards/pushka_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/katakombs.png",
@@ -442,12 +732,22 @@
   {
     "source": "images/cards/katakombs_real.jpg",
     "target": "public/atlas/cards/katakombs_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/katakombs_real.jpg",
+    "target": "public/atlas/cards/katakombs_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/bg/catacombs_branch.jpg",
     "target": "public/atlas/cards/katakombs_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/bg/catacombs_branch.jpg",
+    "target": "public/atlas/cards/katakombs_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/buff.png",
@@ -457,12 +757,22 @@
   {
     "source": "images/cards/buff_real.jpg",
     "target": "public/atlas/cards/buff_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/buff_real.jpg",
+    "target": "public/atlas/cards/buff_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/buff_fantasy.jpg",
     "target": "public/atlas/cards/buff_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/buff_fantasy.jpg",
+    "target": "public/atlas/cards/buff_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/kapishya.png",
@@ -472,12 +782,22 @@
   {
     "source": "images/cards/kapishya_real.jpg",
     "target": "public/atlas/cards/kapishya_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kapishya_real.jpg",
+    "target": "public/atlas/cards/kapishya_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/kapishya_fantasy.jpg",
     "target": "public/atlas/cards/kapishya_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/kapishya_fantasy.jpg",
+    "target": "public/atlas/cards/kapishya_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/most.png",
@@ -487,12 +807,22 @@
   {
     "source": "images/cards/most_real.jpg",
     "target": "public/atlas/cards/most_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/most_real.jpg",
+    "target": "public/atlas/cards/most_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/most_fantasy.jpg",
     "target": "public/atlas/cards/most_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/most_fantasy.jpg",
+    "target": "public/atlas/cards/most_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/ohta.png",
@@ -502,12 +832,22 @@
   {
     "source": "images/cards/ohta_real.jpg",
     "target": "public/atlas/cards/ohta_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/ohta_real.jpg",
+    "target": "public/atlas/cards/ohta_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/ohta_fantasy.jpg",
     "target": "public/atlas/cards/ohta_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/ohta_fantasy.jpg",
+    "target": "public/atlas/cards/ohta_fantasy-small.webp",
+    "width": 640
   },
   {
     "source": "images/map/landmarks/neva.png",
@@ -517,11 +857,46 @@
   {
     "source": "images/cards/neva_real.jpg",
     "target": "public/atlas/cards/neva_real.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/neva_real.jpg",
+    "target": "public/atlas/cards/neva_real-small.webp",
+    "width": 640
   },
   {
     "source": "images/cards/neva_fantasy.jpg",
     "target": "public/atlas/cards/neva_fantasy.webp",
-    "width": 1440
+    "width": 1280
+  },
+  {
+    "source": "images/cards/neva_fantasy.jpg",
+    "target": "public/atlas/cards/neva_fantasy-small.webp",
+    "width": 640
+  },
+  {
+    "source": "images/map/landmarks/okhtenka.png",
+    "target": "public/atlas/landmarks/okhtenka.webp",
+    "width": 168
+  },
+  {
+    "source": "images/cards/okhtenka_real.jpg",
+    "target": "public/atlas/cards/okhtenka_real.webp",
+    "width": 1280
+  },
+  {
+    "source": "images/cards/okhtenka_real.jpg",
+    "target": "public/atlas/cards/okhtenka_real-small.webp",
+    "width": 640
+  },
+  {
+    "source": "images/cards/okhtenka_fantasy.jpg",
+    "target": "public/atlas/cards/okhtenka_fantasy.webp",
+    "width": 1280
+  },
+  {
+    "source": "images/cards/okhtenka_fantasy.jpg",
+    "target": "public/atlas/cards/okhtenka_fantasy-small.webp",
+    "width": 640
   }
 ]

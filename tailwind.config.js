@@ -21,7 +21,7 @@ export default {
       fontFamily: {
         sans: ['PFDinTextPro', 'sans-serif'],
         serif: ['Kereru', 'serif'],
-        handwriting: ['Caveat', 'cursive'], 
+        handwriting: ['Denistina', 'cursive'],
       },
 
       backgroundImage: {

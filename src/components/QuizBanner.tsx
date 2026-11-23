@@ -26,7 +26,7 @@ export function QuizBanner() {
 
   const goToQuiz = () => {
     setIsVisible(false);
-    document.getElementById('quiz')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('quiz')?.scrollIntoView({ behavior: 'instant', block: 'start' });
   };
 
   if (!isVisible) return null;

@@ -1,0 +1,6 @@
+.iskin-projection { position: relative; width: 100%; aspect-ratio: 428 / 618; }
+.iskin-projection > img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.iskin-projection > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.iskin-projection.is-moving { animation: projection-float 5.5s ease-in-out infinite; }
+@keyframes projection-float { 50% { transform: translateY(-4px); } }
+@media(prefers-reduced-motion: reduce) { .iskin-projection.is-moving { animation: none; } }

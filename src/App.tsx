@@ -6,13 +6,35 @@ import { Navbar } from './components/Navbar';
 // Эффект дыма за курсором подгружается отдельно, чтобы не утяжелять основной бандл
 const SplashCursor = lazy(() => import('./components/SplashCursor'));
 import './refresh.css';
-import { CharacterShowcase } from './components/CharacterShowcase';
-import { Map } from './components/Map';
+const CharacterShowcase = lazy(() => import('./components/CharacterShowcase').then(m => ({default:m.CharacterShowcase})));
+const Map = lazy(() => import('./components/Map').then(m => ({default:m.Map})));
 import { Separator } from './components/Separator';
 import { FeaturesTabs } from './components/FeaturesTabs';
 import { Footer } from './components/Footer';
-import { Quiz } from './components/Quiz';
+const Quiz = lazy(() => import('./components/Quiz').then(m => ({default:m.Quiz})));
 import { HeroOracleInvite } from './components/HeroOracleInvite';
+import { DeferredContent, SceneArtwork } from './components/DeferredContent';
+import { Trailer } from './components/Trailer';
+import { ContactSection } from './components/ContactSection';
+import { Mail as ContactIcon } from 'lucide-react';
+import atlasSummary from './data/atlas-summary.json';
+import heroMobile from './assets/backgrounds/hero-bg-mobile.webp';
+import bg1Mobile from './assets/backgrounds/bg1-mobile.webp';
+import bg2Mobile from './assets/backgrounds/bg2-mobile.webp';
+import bg3Mobile from './assets/backgrounds/bg3-mobile.webp';
+import bg4Mobile from './assets/backgrounds/bg4-mobile.webp';
+import bg5Mobile from './assets/backgrounds/bg5-mobile.webp';
+import thumb1 from './assets/images/gallery-1-thumb.webp';
+import thumb2 from './assets/images/gallery-2-thumb.webp';
+import thumb3 from './assets/images/gallery-3-thumb.webp';
+import thumb4 from './assets/images/gallery-4-thumb.webp';
+import thumb5 from './assets/images/gallery-5-thumb.webp';
+import thumb6 from './assets/images/gallery-6-thumb.webp';
+import thumb7 from './assets/images/gallery-7-thumb.webp';
+import thumb8 from './assets/images/gallery-8-thumb.webp';
+import thumb9 from './assets/images/gallery-9-thumb.webp';
+import thumb10 from './assets/images/gallery-10-thumb.webp';
+import thumb11 from './assets/images/gallery-11-thumb.webp';
 import { FaHeart, FaBookOpen, FaCodeBranch, FaMapMarkedAlt, FaBookReader, FaCalendarAlt, FaStar, FaExternalLinkAlt, FaVk, FaTelegram } from 'react-icons/fa';
 import heroBg from './assets/backgrounds/hero-bg.webp';
 import ArrowLeftIcon from './assets/icons/arrow-left.svg?react';
@@ -62,6 +84,7 @@ const navLinks = [
   { href: 'gallery', IconComponent: GalleryIcon, label: 'Галерея' },
   { href: 'quiz', IconComponent: QuizIcon, label: 'Тест' },
   { href: 'download', IconComponent: BellIcon, label: 'Релиз и демо' },
+  { href: 'contact', IconComponent: ContactIcon, label: 'Связь' },
 ];
 
 
@@ -79,6 +102,8 @@ const galleryImages = [
   gallery10,
   gallery11
 ];
+
+const galleryThumbs = [thumb1,thumb2,thumb3,thumb4,thumb5,thumb6,thumb7,thumb8,thumb9,thumb10,thumb11];
 
 function App() {
   const galleryScrollRef = useRef<HTMLDivElement>(null);
@@ -105,7 +130,7 @@ function App() {
       (nav.deviceMemory !== undefined && nav.deviceMemory <= 4);
 
     const checkIsDesktop = () => {
-      setShowSplashCursor(window.matchMedia('(min-width: 768px)').matches && !isWeakDevice);
+      setShowSplashCursor(window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)').matches && !isWeakDevice);
     };
 
     // Проверяем при загрузке
@@ -175,9 +200,9 @@ function App() {
 
       {/* HERO */}
       <section id="home" className="hero-shell relative overflow-hidden bg-midnight-ink ">
-        <img src={heroBg} alt="Библиотека КрасноЦарства" className="hero-shell__background absolute inset-0 z-0 h-full w-full object-cover" />
+        <picture><source media="(max-width: 700px)" srcSet={heroMobile} /><img src={heroBg} alt="Библиотека КрасноЦарства" width="1920" height="1080" {...{fetchpriority: "high"}} decoding="async" className="hero-shell__background absolute inset-0 z-0 h-full w-full object-cover" /></picture>
         <div className="hero-shell__content relative z-10 px-6 sm:px-10 md:px-16 lg:px-20">
-          <div className="hero-story"><p className="hero-story__eyebrow">МИСТИЧЕСКАЯ ВИЗУАЛЬНАЯ НОВЕЛЛА</p><h1>КрасноЦарство<span>.exe</span></h1><p className="hero-story__lead">У каждого места есть другая сторона.<br />У каждой истории есть тот, кто её помнит.</p><a className="hero-story__release" href="#download">Первая часть · первая половина декабря 2026</a></div>
+          <div className="hero-story"><p className="hero-story__eyebrow">ФЭНТЕЗИЙНАЯ ВИЗУАЛЬНАЯ НОВЕЛЛА</p><h1>КрасноЦарство<span>.exe</span></h1><p className="hero-story__lead">У каждого места есть другая сторона.<br />У каждой истории есть тот, кто её помнит.</p><a className="hero-story__release" href="#download">Первая часть · первая половина декабря 2026</a></div>
           <div className="hero-shell__actions" aria-label="Основные действия КрасноЦарства">
             <a
               href="https://vkplay.ru/play/game/krasnocarstvoexe/"
@@ -212,7 +237,7 @@ function App() {
             {/* Левая колонка: Описание */}
             <div className="text-lg text-off-white/80 leading-relaxed">
               <p>
-                «КрасноЦарство.exe» приглашает в мистическую визуальную новеллу, где реальная история Красногвардейского района Санкт-Петербурга переплетается с магическим миром КрасноЦарства.
+                «КрасноЦарство.exe» приглашает в параллельную фэнтези-реальность Красногвардейского района Петербурга. Здесь знакомые места и настоящая история обретают другую жизнь: библиотеки становятся узлами миров, а за привычными адресами скрываются магические тайны.
               </p>
               <p className="mt-4">
                 Ваш путь начинается с обычного визита в библиотеку. Прикосновение к странной книге открывает портал в библиотеке «Ржевская» и приводит в мир, охваченный Заклятием Забвения, стирающим память целого мира. Ваши решения определят судьбу героев, исход истории и то, какие тайны вам удастся раскрыть.
@@ -240,7 +265,7 @@ function App() {
                   <div className="text-gold-leaf text-2xl mt-1"><FaBookReader /></div>
                   <div>
                     <h3 className="font-serif text-xl font-bold">Интерактивная карта</h3>
-                    <p className="text-off-white/70">Рассмотрите 35 мест, сравните две стороны знакомых адресов и узнайте легенды 14 библиотек.</p>
+                    <p className="text-off-white/70">Рассмотрите {atlasSummary.places} мест, сравните две стороны знакомых адресов и узнайте легенды {atlasSummary.libraries} библиотек.</p>
                   </div>
                 </li>
               </ul>
@@ -253,8 +278,8 @@ function App() {
       <section
         id="teaser"
         className="scene-section relative py-20 md:py-32 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bg5})` }}
       >
+        <SceneArtwork src={bg5} mobile={bg5Mobile} />
         {/* Затемняющий слой для читаемости */}
         <div className="absolute inset-0 bg-midnight-ink/70"></div>
 
@@ -281,15 +306,7 @@ function App() {
                 <div className="aspect-video">
 
                   {/* --- ВК ВИДЕО IFRAME --- */}
-                  <iframe
-                    src="https://vkvideo.ru/video_ext.php?oid=-17047312&id=456240243&hd=2&autoplay=0"
-                    title="Первый трейлер КрасноЦарства"
-                    className="w-full h-full rounded-md"
-                    style={{backgroundColor: '#000'}}
-                    allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
-                    frameBorder="0"
-                    allowFullScreen>
-                  </iframe>
+                  <Trailer />
 
                 </div>
               </div>
@@ -304,7 +321,7 @@ function App() {
         <div className="container relative">
           <p className="cast-intro">ДЕЙСТВУЮЩИЕ ЛИЦА</p>
           <h2 className="cast-heading">С ними связана ваша история</h2>
-          <CharacterShowcase />
+          <DeferredContent height={650}><CharacterShowcase /></DeferredContent>
         </div>
 
       </section>
@@ -313,8 +330,8 @@ function App() {
       <section
         id="map"
         className="scene-section relative py-12 md:py-32 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bg1})` }}
       >
+        <SceneArtwork src={bg1} mobile={bg1Mobile} />
         <div className="absolute inset-0 bg-midnight-ink/75"></div>
         <div className="container relative z-10">
           <div>
@@ -323,7 +340,7 @@ function App() {
               КАРТА КРАСНОЦАРСТВА
             </h2>
           </div>
-          <Map />
+          <DeferredContent height={760}><Map /></DeferredContent>
         </div>
       </section>
 
@@ -334,8 +351,8 @@ function App() {
       <section
         id="features"
         className="scene-section relative py-20 md:py-32 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bg2})` }}
       >
+        <SceneArtwork src={bg2} mobile={bg2Mobile} />
         <div className="absolute inset-0 bg-midnight-ink/90"></div>
         <div className="container relative z-10">
           <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-12 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
@@ -373,7 +390,7 @@ function App() {
                 className="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 rounded-lg overflow-hidden border-2 border-transparent hover:border-gold-leaf transition-all duration-300"
               >
                 <div className="aspect-video">
-                  <img src={image} alt={`Скриншот галереи ${index + 1}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
+                  <img src={galleryThumbs[index]} width="640" height="360" alt={`Скриншот галереи ${index + 1}`} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
               </button>
             ))}
@@ -426,12 +443,12 @@ function App() {
       <section
         id="quiz"
         className="scene-section relative py-20 md:py-32 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bg4})` }}
       >
+        <SceneArtwork src={bg4} mobile={bg4Mobile} />
         <div className="absolute inset-0 bg-midnight-ink/85"></div>
         <div className="container relative z-10">
           <h2 className="sr-only">Тест: кто вы из КрасноЦарства?</h2>
-          <Quiz />
+          <DeferredContent height={580}><Quiz /></DeferredContent>
         </div>
       </section>
 
@@ -441,8 +458,8 @@ function App() {
       <section
         id="download"
         className="scene-section relative py-20 md:py-32 bg-cover bg-center"
-        style={{ backgroundImage: `url(${bg3})` }}
       >
+        <SceneArtwork src={bg3} mobile={bg3Mobile} />
         <div className="absolute inset-0 bg-midnight-ink/90"></div>
         <div className="container relative z-10 text-center">
           <h2 className="text-center font-serif text-4xl md:text-5xl xl:text-6xl font-normal mb-6 text-gold-leaf [text-shadow:0_0_12px_var(--gold-leaf)] flex items-center justify-center gap-4">
@@ -560,6 +577,8 @@ function App() {
 
         </div>
       </section>
+
+      <ContactSection />
 
       {/* FOOTER */}
       <Footer

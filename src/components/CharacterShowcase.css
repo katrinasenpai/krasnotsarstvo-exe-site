@@ -56,3 +56,5 @@
   .cast-epilogue a { margin-top: .4rem; }
 }
 @media(prefers-reduced-motion: reduce) { .cast-copy, .cast-portrait__figure { animation: none; } }
+.cast-portrait__backdrop { position: absolute; inset: 0; z-index: -2; }
+.cast-portrait__backdrop img { width: 100%; height: 100%; object-fit: cover; }

@@ -3,6 +3,7 @@ import { QRCodeSVG } from 'qrcode.react';
 import { preloadOracle } from '../utils/oracleRoute';
 import { getIskinArUrl } from '../utils/iskinProjectionUrl';
 import './HeroOracleInvite.css';
+import { IskinProjection } from './IskinProjection';
 
 const prepareVisit = () => { void preloadOracle().catch(() => {}); };
 
@@ -13,7 +14,7 @@ export function HeroOracleInvite() {
     <div className="container oracle-teaser__stage">
       <div className="oracle-teaser__guide">
         <div className="oracle-teaser__halo" aria-hidden="true" />
-        <img src="/characters/iskin-wry.webp" alt="Искин приглашает в шатёр гадалки" loading="lazy" decoding="async" />
+        <IskinProjection />
         <p className="oracle-teaser__signature"><strong>Искин</strong><span>Искусственный интеллект</span></p>
       </div>
       <div className="oracle-teaser__copy">
@@ -31,10 +32,10 @@ export function HeroOracleInvite() {
       </a>
       <aside className="oracle-teaser__ar" aria-labelledby="iskin-ar-invite-title">
         <div className="oracle-teaser__ar-copy">
-          <h3 id="iskin-ar-invite-title"><Camera size={18} aria-hidden="true" /> За пределами страницы</h3>
+          <h3 id="iskin-ar-invite-title"><Camera size={24} aria-hidden="true" /> Искин в вашем мире</h3>
           <p>Пригласите Искина в своё пространство через камеру телефона.</p>
-          <a href="/iskin-ar">Открыть дополненную реальность</a>
-          <small>На совместимом смартфоне.</small>
+          <a href="/iskin-ar"><Camera size={20} aria-hidden="true" /> Вызвать Искина в AR</a>
+          <small>Дополненная реальность · Android и iPhone с поддержкой AR.</small>
         </div>
         <div className="oracle-teaser__qr"><QRCodeSVG value={arLink.url} size={112} bgColor="#f3e6c8" fgColor="#142632" marginSize={2} title="Искин в дополненной реальности" /><p>Наведите камеру телефона</p></div>
       </aside>

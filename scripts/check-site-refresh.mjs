@@ -21,16 +21,28 @@ for(let n = 0; n < 5 ** quizQuestions.length; n++) {
 }
 assert.equal(reached.size,quizTypes.length,'Every result must be reachable without a tie');
 const places=JSON.parse(await readFile('src/data/atlas.json','utf8'));
-assert.equal(places.length,35); assert.equal(places.filter(p=>p.library).length,14);
-assert.equal(new Set(places.map(p=>p.id)).size,35);
-for(const p of places) for(const ref of [p.landmark,p.real_info.image,p.fantasy_info.image]) assert((await stat(`public${ref}`)).size>0,ref);
+assert.equal(places.length,36); assert.equal(places.filter(p=>p.library).length,14);
+assert.equal(new Set(places.map(p=>p.id)).size,36);
+for(const p of places) for(const ref of [p.landmark,p.real_info.image,p.fantasy_info.image,p.real_info.mobileImage,p.fantasy_info.mobileImage]) assert((await stat(`public${ref}`)).size>0,ref);
 for(const c of modules.characters.charactersData) for(const ref of [c.image,...(c.variants||[]).map(v=>v.src)]) assert((await stat(`public${ref}`)).size>0,ref);
 for(const id of quizTypes) assert(quizResults[id]?.desc && quizResults[id]?.img,id);
 const glb=await readFile('public/ar/iskin-projection-billboard.glb');
 assert.equal(glb.toString('utf8',0,4),'glTF');
 const model=JSON.parse(glb.toString('utf8',20,20+glb.readUInt32LE(12)));
-assert.equal(model.images.length,4);
+assert.equal(model.images.length,8);
 assert(model.animations.length>0);
+assert.equal(glb.readUInt32LE(8),glb.length,'GLB declared length');
+const binaryStart=28+glb.readUInt32LE(12);
+for(const view of model.bufferViews) assert(binaryStart+(view.byteOffset||0)+view.byteLength<=glb.length,'GLB buffer range');
+for(const image of model.images) {
+  const view=model.bufferViews[image.bufferView];
+  assert.equal(glb.subarray(binaryStart+view.byteOffset,binaryStart+view.byteOffset+8).toString('hex'),'89504e470d0a1a0a','Embedded PNG frame');
+}
+assert(model.materials.every(material=>material.alphaMode==='BLEND'),'Projection retains translucent light');
+assert(glb.length<1_000_000,'AR mobile download budget');
+const usdz=await readFile('public/ar/iskin-projection-billboard.usdz');
+assert.equal(usdz.readUInt32LE(0),0x04034b50,'USDZ archive');
+assert(usdz.length<1_000_000,'Quick Look mobile download budget');
 const config=ts.readConfigFile('tsconfig.app.json',ts.sys.readFile);
 const parsed=ts.parseJsonConfigFileContent(config.config,ts.sys,'.');
 const program=ts.createProgram(parsed.fileNames,parsed.options);

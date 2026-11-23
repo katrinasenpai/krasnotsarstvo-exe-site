@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { charactersData } from '../data/characters';
 import library from '../assets/backgrounds/bg1.webp';
+import libraryMobile from '../assets/backgrounds/bg1-mobile.webp';
 import './CharacterShowcase.css';
 
 const cast = [
@@ -50,7 +51,8 @@ export function CharacterShowcase() {
     </div>
 
     <div id="cast-story" className="cast-story" role="tabpanel" aria-labelledby={`cast-tab-${character.id}`} tabIndex={0}>
-      <div className="cast-portrait" style={{ backgroundImage: `url(${library})` }}>
+      <div className="cast-portrait">
+        <picture className="cast-portrait__backdrop" aria-hidden="true"><source media="(max-width: 700px)" srcSet={libraryMobile} /><img src={library} alt="" decoding="async" /></picture>
         <span className="cast-portrait__orbit" aria-hidden="true" />
         <img key={`${character.id}-${appearance}`} className="cast-portrait__figure" src={portrait?.src || character.image} alt={portrait?.label || character.imageAlt || character.name} decoding="async" />
         {character.variants && <div className="cast-appearances">

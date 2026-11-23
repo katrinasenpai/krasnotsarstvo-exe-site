@@ -1,7 +1,7 @@
 /* src/index.css */
 
 /* === 1. ШРИФТЫ === */
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400&display=swap');
+@font-face { font-family: 'Denistina'; src: url('/src/assets/fonts/Denistina.ttf') format('truetype'); font-display: swap; }
 @font-face {
   font-family: 'Kereru';
   src: url('/src/assets/fonts/Kereru.woff2') format('woff2');
@@ -27,7 +27,7 @@
 /* === 4. ОСНОВНЫЕ СТИЛИ === */
 @layer base {
   body { @apply bg-midnight-ink text-off-white font-sans text-base xl:text-lg; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; }
 }
 
 /* === 5. КОМПОНЕНТЫ === */

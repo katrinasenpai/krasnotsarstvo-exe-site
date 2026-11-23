@@ -1,200 +1,39 @@
-import { ArrowLeft, Box, Camera, ShieldCheck, Sparkles } from 'lucide-react';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import type { ModelViewerElement } from '@google/model-viewer';
-import '@google/model-viewer';
-const iskinProjection = '/characters/iskin.webp';
-import iskinArAdjustMonocle from '../assets/images/iskin-ar-sequence/iskin-ar-adjust-monocle.png';
-import iskinArIdle from '../assets/images/iskin-ar-sequence/iskin-ar-idle.png';
-import iskinArResting from '../assets/images/iskin-ar-sequence/iskin-ar-resting.png';
-import iskinArThinking from '../assets/images/iskin-ar-sequence/iskin-ar-thinking.png';
+import { Camera, Smartphone } from 'lucide-react';
+import { lazy, Suspense, useState } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
+import { IskinProjection } from './IskinProjection';
+import { getIskinArUrl } from '../utils/iskinProjectionUrl';
+import { arModel, quickLookModel } from '../utils/arAssets';
 import './IskinArPage.css';
 
-// Файлы в public/ не получают хеш в имени: при перегенерации меняйте версию, иначе Safari и Quick Look покажут старую модель из кэша.
-const arAssetVersion = '2026-11-17';
-const arModel = `/ar/iskin-projection-billboard.glb?v=${arAssetVersion}`;
-const quickLookModel = `/ar/iskin-projection-billboard.usdz?v=${arAssetVersion}`;
-const posePreview = [
-  { id: 'idle', src: iskinArIdle },
-  { id: 'thinking', src: iskinArThinking },
-  { id: 'adjust-monocle', src: iskinArAdjustMonocle },
-  { id: 'resting', src: iskinArResting },
-] as const;
-
-type NavigatorWithClientHints = Navigator & {
-  userAgentData?: { platform?: string };
-};
-
-function isAndroidDevice() {
-  const navigatorWithClientHints = navigator as NavigatorWithClientHints;
-  return /android/i.test(navigator.userAgent) || navigatorWithClientHints.userAgentData?.platform === 'Android';
+const ArModelPreview=lazy(()=>import('./ArModelPreview'));
+function sceneViewerIntent() {
+  const file=new URL(arModel,window.location.origin).toString();
+  const fallback=new URL('/iskin-ar?scene-viewer=unavailable',window.location.origin).toString();
+  return `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(file)}&mode=ar_only&title=${encodeURIComponent('Искин читает виртуальную книгу')}&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallback)};end;`;
 }
-
-function createSceneViewerIntent(modelUrl: string, fallbackUrl: string) {
-  const query = [
-    `file=${encodeURIComponent(modelUrl)}`,
-    'mode=ar_only',
-    `title=${encodeURIComponent('Искин: голографическая проекция')}`,
-    'resizable=false',
-  ].join('&');
-
-  return `intent://arvr.google.com/scene-viewer/1.0?${query}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
-}
-
-/**
- * Голографическая 2D-проекция на прозрачной вертикальной плоскости.
- * В нативном AR доступен короткий loop спокойных 2D-поз; сложные сцены остаются на канале.
- * На Android кнопка явно вызывает Scene Viewer / ARCore; на iOS остаётся нативный Quick Look.
- */
 export default function IskinArPage() {
-  const isSecure = useMemo(() => window.isSecureContext, []);
-  const isAndroid = useMemo(isAndroidDevice, []);
-  const sceneViewerIntent = useMemo(() => {
-    const modelUrl = new URL(arModel, window.location.origin).toString();
-    const fallbackUrl = new URL('/iskin-ar?scene-viewer=unavailable', window.location.origin).toString();
-    return createSceneViewerIntent(modelUrl, fallbackUrl);
-  }, []);
-  const isSceneViewerFallback = new URLSearchParams(window.location.search).get('scene-viewer') === 'unavailable';
-  const [launchMessage, setLaunchMessage] = useState<string | null>(null);
-  const [modelLoaded, setModelLoaded] = useState(false);
-  const viewerRef = useRef<ModelViewerElement>(null);
-
-  // React 18 не подписывает onLoad на веб-компоненты, поэтому событие load слушаем напрямую.
-  useEffect(() => {
-    const viewer = viewerRef.current;
-    if (!viewer) return;
-    if (viewer.loaded) {
-      setModelLoaded(true);
-      return;
-    }
-    const handleLoad = () => setModelLoaded(true);
-    viewer.addEventListener('load', handleLoad);
-    return () => viewer.removeEventListener('load', handleLoad);
-  }, []);
-
-  const launchSceneViewer = () => {
-    if (!isSecure) {
-      setLaunchMessage('Откройте страницу по защищённому адресу сайта, чтобы разместить проекцию в комнате.');
-      return;
-    }
-
-    setLaunchMessage('Открываем пространство Искина…');
-    window.location.assign(sceneViewerIntent);
-    window.setTimeout(() => {
-      setLaunchMessage('Если камера не открылась, обновите Google Play Services for AR и Chrome, затем попробуйте снова.');
-    }, 1600);
-  };
-
-  return (
-    <main className="iskin-ar-page">
-      <a className="iskin-ar-page__back" href="/#iskin" aria-label="Вернуться на сайт">
-        <ArrowLeft size={18} aria-hidden="true" />
-        На сайт КрасноЦарства
-      </a>
-
-      <section className="iskin-ar-page__content" aria-labelledby="iskin-ar-title">
-        <p className="iskin-ar-page__eyebrow">
-          <Sparkles size={15} aria-hidden="true" />
-          ПРОЕКЦИЯ В ПРОСТРАНСТВЕ
-        </p>
-        <h1 id="iskin-ar-title">Поместите Искина рядом</h1>
-        <p className="iskin-ar-page__lead">
-          Проводник КрасноЦарства в новой рисовке. Откройте эту страницу на телефоне, найдите свободное место и пригласите Искина в свой мир.
-        </p>
-
-        <div className="iskin-ar-page__viewer-wrap">
-          <div className={`iskin-ar-page__pose-preview ${modelLoaded ? 'is-hidden' : ''}`} aria-hidden="true">
-            {posePreview.map((pose) => (
-              <img key={pose.id} className={`iskin-ar-page__pose is-${pose.id}`} src={pose.src} alt="" />
-            ))}
-          </div>
-          <model-viewer
-            ref={viewerRef}
-            class="iskin-ar-page__viewer"
-            src={arModel}
-            ios-src={quickLookModel}
-            alt="Вертикальная голографическая 2D-проекция Искина для размещения в помещении"
-            ar=""
-            ar-modes="scene-viewer webxr quick-look"
-            ar-placement="floor"
-            ar-scale="fixed"
-            quick-look-browsers="safari chrome"
-            camera-controls=""
-            camera-orbit="0deg 90deg 3.8m"
-            camera-target="0m 0.86m 0m"
-            field-of-view="32deg"
-            shadow-intensity="0"
-            environment-image="neutral"
-            exposure="1.15"
-            interaction-prompt="auto"
-            touch-action="pan-y"
-            loading="eager"
-            autoplay=""
-            animation-name="Holographic pose sequence loop"
-          >
-            <img slot="poster" src={iskinProjection} alt="" aria-hidden="true" />
-            {isAndroid ? (
-              <span slot="ar-button" className="iskin-ar-page__hidden-ar-button" aria-hidden="true" />
-            ) : (
-              <button
-                className="iskin-ar-page__ar-button"
-                slot="ar-button"
-                type="button"
-                disabled={!isSecure}
-                aria-describedby="iskin-ar-security-note"
-              >
-                <Camera size={18} aria-hidden="true" />
-                Посмотреть в пространстве
-              </button>
-            )}
-          </model-viewer>
-        </div>
-
-        {isAndroid && (
-          <button
-            className="iskin-ar-page__scene-viewer-button"
-            type="button"
-            onClick={launchSceneViewer}
-            aria-describedby="iskin-ar-security-note"
-          >
-            <Camera size={18} aria-hidden="true" />
-            Разместить проекцию
-          </button>
-        )}
-
-        <p id="iskin-ar-security-note" className={`iskin-ar-page__security ${isSecure ? 'is-ready' : ''}`}>
-          <ShieldCheck size={17} aria-hidden="true" />
-          {isAndroid && isSecure
-            ? 'Кнопка откроет камеру и позволит разместить мягко парящую голографическую проекцию Искина на полу.'
-            : isSecure
-            ? 'Защищённое соединение обнаружено: кнопка передаст модель в AR-режим, если он поддерживается устройством.'
-            : 'Откройте страницу на сайте по защищённому адресу, чтобы разместить проекцию в комнате.'}
-        </p>
-
-        {launchMessage && !isSceneViewerFallback && (
-          <p className="iskin-ar-page__scene-viewer-fallback" role="status">
-            {launchMessage}
-          </p>
-        )}
-
-        {isSceneViewerFallback && (
-          <p className="iskin-ar-page__scene-viewer-fallback" role="status">
-            Не удалось открыть режим размещения. Обновите Google Play Services for AR и Chrome, затем попробуйте снова.
-          </p>
-        )}
-
-        <div className="iskin-ar-page__facts" aria-label="Возможности проекции в пространстве">
-          <p><Box size={17} aria-hidden="true" /> Иллюстрированная проекция мягко парит и меняет позы. Рассматривать Искина лучше спереди.</p>
-          <p><Camera size={17} aria-hidden="true" /> На Android откроется режим размещения, на iPhone/iPad: Quick Look.</p>
-        </div>
-
-        <details className="iskin-ar-page__fallback">
-          <summary>Нужна помощь с размещением?</summary>
-          <p>
-            Откройте страницу в Chrome на Android или Safari на iPhone/iPad по HTTPS и разрешите доступ к камере.
-            Если кнопка размещения не появилась, проверьте, поддерживает ли устройство AR. На Android может понадобиться обновить Google Play Services for AR. На компьютере доступен просмотр проекции.
-          </p>
-        </details>
-      </section>
-    </main>
-  );
+  const android=/android/i.test(navigator.userAgent);
+  const apple=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
+  const secure=window.isSecureContext;
+  const [preview,setPreview]=useState(false);
+  const fallback=new URLSearchParams(window.location.search).get('scene-viewer')==='unavailable';
+  return <main className="iskin-ar-page">
+    <a className="iskin-ar-page__back" href="/#iskin">На сайт КрасноЦарства</a>
+    <section className="iskin-ar-page__content" aria-labelledby="iskin-ar-title">
+      <p className="iskin-ar-page__eyebrow">ДОПОЛНЕННАЯ РЕАЛЬНОСТЬ</p>
+      <h1 id="iskin-ar-title">Искин рядом с вами</h1>
+      <p className="iskin-ar-page__lead">Пока Искин сверяется с виртуальной книгой, его проекция может появиться рядом с вами. Найдите свободное место и пригласите проводника в свой мир.</p>
+      <div className="iskin-ar-page__viewer-wrap">
+        {preview ? <Suspense fallback={<p className="iskin-ar-page__loading" role="status">Собираем проекцию из света…</p>}><ArModelPreview /></Suspense> : <IskinProjection eager />}
+      </div>
+      {android&&<a className="iskin-ar-page__scene-viewer-button" href={secure?sceneViewerIntent():undefined} aria-disabled={!secure}><Camera size={22} aria-hidden="true" /> Вызвать Искина в камере</a>}
+      {apple&&<a className="iskin-ar-page__scene-viewer-button" rel="ar" href={secure?quickLookModel:undefined} aria-disabled={!secure}><img src="/characters/iskin-projection-reading.webp" width="30" height="42" alt="" /> Вызвать Искина в камере</a>}
+      {(android||apple)&&<p className="iskin-ar-page__security">{secure?'Наведите камеру на пол или стол, дождитесь появления поверхности и разместите проекцию.':'Для размещения откройте эту страницу на сайте по HTTPS.'}</p>}
+      {!android&&!apple&&<div className="iskin-ar-page__desktop-invite"><QRCodeSVG value={getIskinArUrl().url} size={120} bgColor="#f4e7cc" fgColor="#142632" marginSize={2} /><div><h2><Smartphone size={20} aria-hidden="true" /> Откройте на телефоне</h2><p>Отсканируйте QR-код камерой смартфона. На компьютере можно рассмотреть проекцию ниже.</p></div></div>}
+      {!preview&&<button type="button" className="iskin-ar-page__preview-button" onClick={()=>setPreview(true)}>Рассмотреть проекцию здесь</button>}
+      {fallback&&<p className="iskin-ar-page__scene-viewer-fallback" role="status">Режим дополненной реальности не открылся. Проверьте поддержку AR устройством, откройте страницу в Chrome и обновите Google Play Services for AR.</p>}
+      <details className="iskin-ar-page__fallback"><summary>Как вызвать Искина?</summary><p>На Android откройте страницу в Chrome, на iPhone или iPad в Safari. Нажмите «Вызвать Искина в камере» и разрешите доступ к камере. Устройство должно поддерживать дополненную реальность. Проекцию удобнее рассматривать спереди. Если AR недоступна, останется просмотр на этой странице.</p></details>
+    </section>
+  </main>;
 }

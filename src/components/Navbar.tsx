@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import LogoIcon from '../assets/icons/logo.svg?react';
 import './Navbar.css';
+import { Camera } from 'lucide-react';
 
 // Определяем типы для наших данных, чтобы всё было строго
 type NavLink = {
@@ -21,7 +22,7 @@ export function Navbar({ navLinks }: NavbarProps) {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     document.getElementById(targetId)?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'instant',
       block: 'start',
     });
     // Закрываем мобильное меню после клика
@@ -31,7 +32,7 @@ export function Navbar({ navLinks }: NavbarProps) {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     document.getElementById('home')?.scrollIntoView({
-      behavior: 'smooth',
+      behavior: 'instant',
       block: 'start',
     });
     // Закрываем мобильное меню после клика
@@ -85,6 +86,7 @@ export function Navbar({ navLinks }: NavbarProps) {
 
       {/* Мобильная навигация */}
       <div className="md:hidden">
+        <a className="mobile-ar-entry" href="/iskin-ar"><Camera size={19} aria-hidden="true" /> Искин в AR</a>
         {/* Логотип для открытия меню */}
         <button
           onClick={toggleMobileMenu}

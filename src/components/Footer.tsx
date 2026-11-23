@@ -62,10 +62,10 @@ export function Footer({ orgLogos = [], navLinks }: FooterProps) {
                 <div key={logo.id} className="flex items-center justify-center p-4 bg-shadow-grey/10 rounded-md border border-shadow-grey/20 h-20">
                   {logo.href ? (
                     <a href={logo.href} target="_blank" rel="noopener noreferrer" aria-label={logo.alt} className="w-full h-full flex items-center justify-center">
-                      <img src={logo.src} alt={logo.alt} className="max-h-12 max-w-full object-contain" />
+                      <img loading="lazy" decoding="async" src={logo.src} alt={logo.alt} className="max-h-12 max-w-full object-contain" />
                     </a>
                   ) : (
-                    <img src={logo.src} alt={logo.alt} className="max-h-12 max-w-full object-contain" />
+                    <img loading="lazy" decoding="async" src={logo.src} alt={logo.alt} className="max-h-12 max-w-full object-contain" />
                   )}
                 </div>
               ))

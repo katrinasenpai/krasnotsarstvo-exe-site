@@ -3,7 +3,7 @@
   "private": false,
   "version": "1.0.0",
   "type": "module",
-  "description": "Официальный сайт мистической визуальной новеллы 'КрасноЦарство.exe'",
+  "description": "Официальный сайт фэнтезийной визуальной новеллы 'КрасноЦарство.exe'",
   "keywords": [
     "visual-novel",
     "game",
@@ -29,7 +29,7 @@
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "format": "prettier --write .",
-    "generate:iskin-ar": "node scripts/generate-iskin-ar-assets.mjs",
+    "generate:iskin-ar": "node scripts/render-iskin-projection.mjs && node scripts/generate-iskin-ar-assets.mjs",
     "deploy": "npm run build && gh-pages -d dist",
     "postbuild": "node scripts/prepare-static-routes.mjs",
     "check:refresh": "node scripts/check-site-refresh.mjs",

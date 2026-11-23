@@ -48,3 +48,44 @@
 @media(max-width: 640px) { .atlas-dialog__body { grid-template-columns: 1fr; } .atlas-dialog__body img { position: static; } }
 @media(max-width: 540px) { .atlas__index { display: block; } .atlas__list { height: 10rem; } .atlas__caption { display: none; } .atlas__toolbar span { display: none; } }
 @media(prefers-reduced-motion: reduce) { .atlas__pin img { transition: none; } }
+.atlas__heading { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.atlas__heading img { width: 4.3rem; height: 5.4rem; object-fit: contain; filter: drop-shadow(2px 4px 3px #0006); }
+.atlas__heading span { font-size: .75rem; letter-spacing: .12em; }
+.atlas__heading h3 { font-size: 2rem; margin: .25rem 0; }
+.atlas__heading p, .atlas__list small, .atlas__caption p, .atlas__toolbar span { font-size: .875rem; }
+.atlas__heading p { color: #bac6ce; }
+.atlas__search input, .atlas__filters button { font-size: 1rem; }
+.atlas__filters { flex-wrap: wrap; }
+.atlas__margin-notes { font-family: Denistina, cursive; opacity: .8; }
+.atlas-dialog { width: min(1400px, 96vw); max-height: 94dvh; border: 0; border-radius: .5rem; background: #eed7a9 url('/atlas/binding.webp') center / 100% 100% no-repeat; color: #34271e; box-shadow: 0 30px 100px #0009; }
+.atlas-dialog__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 9%; padding: 5.5% 12% 5.5% 10%; min-height: min(780px, 90dvh); }
+.atlas-dialog__close { z-index: 2; top: 1.8%; right: 3%; border-radius: 50%; background: #f8e9c9; color: #34271e; }
+.atlas-dialog__plate { min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; justify-content: center; }
+.atlas-dialog__tabs { gap: .5rem; margin: 0; padding: 0; border: 0; }
+.atlas-dialog__tabs button { flex: 1; padding: .6rem .3rem; border: 0; border-bottom: 1px solid #b29967; border-radius: 0; font-family: Kereru, serif; font-size: clamp(1.05rem, 1.8vw, 1.55rem); }
+.atlas-dialog__tabs [aria-pressed=true] { color: #833a24; background: transparent; box-shadow: 0 3px #924d2c; }
+.atlas-dialog figure { margin: 0; }
+.atlas-dialog figure img { width: 100%; height: auto; max-height: 44dvh; object-fit: contain; background: #faf0d2; border: 1px solid #98754a; padding: .5rem; box-shadow: 2px 4px 12px #34271e22; }
+.atlas-dialog figcaption { margin-top: .5rem; text-align: center; color: #5c4732; font-size: .875rem; }
+.atlas-dialog__leaf { display: flex; flex-direction: column; min-width: 0; }
+.atlas-dialog__eyebrow { font-size: .75rem; letter-spacing: .1em; color: #5c4732; margin-bottom: .8rem; text-transform: uppercase; }
+.atlas-dialog__reading { max-height: 59dvh; overflow-y: auto; padding-right: .75rem; scrollbar-width: thin; scrollbar-color: #957448 transparent; }
+.atlas-dialog h2 { font-size: clamp(1.85rem, 3vw, 2.8rem); line-height: 1.1; margin: .2rem 0 1.3rem; color: #26384a; overflow-wrap: anywhere; }
+.atlas-dialog h3, .atlas-dialog h4 { font-family: Kereru, serif; font-size: 1.35rem; color: #784026; margin: 1.2rem 0 .6rem; }
+.atlas-dialog p { font-size: 1rem; line-height: 1.65; white-space: pre-line; }
+.atlas-dialog__reading p + p { margin-top: 1rem; }
+.atlas-dialog .atlas-dialog__eyebrow { font-size: .75rem; }
+.atlas-dialog__sources { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1rem; }
+.atlas-dialog__sources a { min-height: 44px; display: inline-flex; align-items: center; color: #324d63; text-decoration: underline; text-underline-offset: .25rem; }
+.atlas-dialog__encounter h4 { margin-top: 0; }
+.atlas-dialog__return { margin-top: auto; padding: .8rem 0 .2rem; min-height: 48px; text-align: right; border-top: 1px solid #b19a70; color: #324d63; font-family: Kereru, serif; font-size: 1.5rem; }
+@media(max-width: 700px) {
+  .atlas-dialog { background: linear-gradient(90deg, #b7956422, transparent 12%, #fff5df55 50%, transparent 95%), linear-gradient(#f4e3be, #ead2a1); border: 4px double #b6955d; }
+  .atlas-dialog__inner { grid-template-columns: 1fr; gap: 1.8rem; padding: 3.5rem 1.5rem 2rem; min-height: 0; }
+  .atlas-dialog__tabs button { font-size: 1.15rem; }
+  .atlas-dialog__reading { max-height: none; overflow: visible; padding: 0; }
+  .atlas-dialog__leaf { gap: 1rem; }
+  .atlas-dialog__return { margin-top: .5rem; }
+  .atlas-dialog figure img { max-height: 30dvh; }
+  .atlas-dialog__close { top: .5rem; right: .5rem; }
+}
