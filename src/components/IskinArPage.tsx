@@ -13,11 +13,13 @@ function sceneViewerIntent() {
   return `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(file)}&mode=ar_only&title=${encodeURIComponent('Искин читает виртуальную книгу')}&resizable=false#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(fallback)};end;`;
 }
 export default function IskinArPage() {
-  const android=/android/i.test(navigator.userAgent);
-  const apple=/iPad|iPhone|iPod/.test(navigator.userAgent)||(/Macintosh/.test(navigator.userAgent)&&navigator.maxTouchPoints>1);
-  const secure=window.isSecureContext;
+  const device = typeof window === 'undefined' ? undefined : window.navigator;
+  const agent = device?.userAgent ?? '';
+  const android=/android/i.test(agent);
+  const apple=/iPad|iPhone|iPod/.test(agent)||(/Macintosh/.test(agent)&&(device?.maxTouchPoints ?? 0)>1);
+  const secure=typeof window !== 'undefined' && window.isSecureContext;
   const [preview,setPreview]=useState(false);
-  const fallback=new URLSearchParams(window.location.search).get('scene-viewer')==='unavailable';
+  const fallback=new URLSearchParams(typeof window === 'undefined' ? '' : window.location.search).get('scene-viewer')==='unavailable';
   return <main className="iskin-ar-page">
     <a className="iskin-ar-page__back" href="/#iskin">На сайт КрасноЦарства</a>
     <section className="iskin-ar-page__content" aria-labelledby="iskin-ar-title">

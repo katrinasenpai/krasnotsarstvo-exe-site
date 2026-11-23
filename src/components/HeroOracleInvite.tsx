@@ -22,10 +22,10 @@ export function HeroOracleInvite() {
         <h2 id="hero-oracle-title">Пойдём к гадалке?</h2>
         <p className="oracle-teaser__intro">За туманом, в шатре при свечах, вас ждёт хранительница хронокарт. Вытяните три карты и выберите одну, к которой она подберёт книгу.</p>
         <div className="oracle-teaser__voice"><span>ИСКИН</span><p>«Покажу дорогу к гадалке. Хронокарты у неё. Какую книгу взять в путь, решишь после расклада».</p></div>
-        <a className="oracle-teaser__cta" href="/book-oracle" onPointerEnter={prepareVisit} onFocus={prepareVisit}>Пойти к гадалке</a>
+        <a className="oracle-teaser__cta" href="/book-oracle/" onPointerEnter={prepareVisit} onFocus={prepareVisit}>Пойти к гадалке</a>
         <p className="oracle-teaser__note">22 хронокарты · 3 вопроса · книга в дорогу</p>
       </div>
-      <a className="oracle-teaser__destination" href="/book-oracle" onPointerEnter={prepareVisit} onFocus={prepareVisit} aria-label="Войти в шатёр гадалки">
+      <a className="oracle-teaser__destination" href="/book-oracle/" onPointerEnter={prepareVisit} onFocus={prepareVisit} aria-label="Войти в шатёр гадалки">
         <img className="oracle-teaser__tent" src="/chronocards/tent.webp" alt="" loading="lazy" />
         <img className="oracle-teaser__seer" src="/chronocards/seer-welcome.webp" alt="Гадалка с колодой хронокарт" loading="lazy" />
         <span>Шатёр гадалки<small>Войти</small></span>
@@ -34,7 +34,7 @@ export function HeroOracleInvite() {
         <div className="oracle-teaser__ar-copy">
           <h3 id="iskin-ar-invite-title"><Camera size={24} aria-hidden="true" /> Искин в вашем мире</h3>
           <p>Пригласите Искина в своё пространство через камеру телефона.</p>
-          <a href="/iskin-ar"><Camera size={20} aria-hidden="true" /> Вызвать Искина в AR</a>
+          <a href="/iskin-ar/"><Camera size={20} aria-hidden="true" /> Вызвать Искина в AR</a>
           <small>Дополненная реальность · Android и iPhone с поддержкой AR.</small>
         </div>
         <div className="oracle-teaser__qr"><QRCodeSVG value={arLink.url} size={112} bgColor="#f3e6c8" fgColor="#142632" marginSize={2} title="Искин в дополненной реальности" /><p>Наведите камеру телефона</p></div>

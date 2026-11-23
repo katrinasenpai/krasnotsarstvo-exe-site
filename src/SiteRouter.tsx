@@ -1,7 +1,14 @@
-import { Component, Suspense, lazy, useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { Component, Suspense, lazy, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { OracleFog, type FogPhase } from './components/OracleFog';
 import { preloadOracle } from './utils/oracleRoute';
 import { bookOraclePath, iskinArPath, iskinProjectionPath } from './utils/iskinProjectionUrl';
+
+import { pageFor, pageTags, siteOrigin } from './data/sitePages';
+
+function StaticPageReady() {
+  useLayoutEffect(() => { document.getElementById('static-page')?.remove(); }, []);
+  return null;
+}
 
 const App = lazy(() => import('./App'));
 const IskinArPage = lazy(() => import('./components/IskinArPage'));
@@ -12,7 +19,7 @@ const wait = (ms: number) => new Promise<void>((resolve) => window.setTimeout(re
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function RouteFailure() {
-  return <div className="route-error" role="alert"><p>Страница пока не открылась. Попробуйте загрузить её ещё раз.</p><a href="/book-oracle">Повторить загрузку оракула</a></div>;
+  return <div className="route-error" role="alert"><StaticPageReady /><p>Страница пока не открылась. Попробуйте загрузить её ещё раз.</p><a href="/book-oracle/">Повторить загрузку оракула</a></div>;
 }
 
 class RouteBoundary extends Component<{ children: ReactNode; onError: () => void }, { failed: boolean }> {
@@ -131,8 +138,14 @@ export default function SiteRouter() {
   const normalized = normalize(pathname);
   const ar = normalized === iskinArPath || normalized === iskinProjectionPath;
   useEffect(() => {
+    const page = pageFor(pathname);
+    document.title = page.title;
+    document.querySelector('link[rel="canonical"]')?.setAttribute('href', siteOrigin + page.path);
+    for (const [name, content] of Object.entries(pageTags(page))) {
+      document.querySelector(`meta[${name.startsWith('og:') ? 'property' : 'name'}="${name}"]`)?.setAttribute('content', content);
+    }
     if (normalize(pathname) === iskinProjectionPath) {
-      window.history.replaceState(null, '', '/iskin-ar' + window.location.search + window.location.hash);
+      window.history.replaceState(null, '', '/iskin-ar/' + window.location.search + window.location.hash);
     }
   }, [pathname]);
 
@@ -140,6 +153,7 @@ export default function SiteRouter() {
     <div ref={pageRef} aria-hidden={fogVisible || undefined}>
       <RouteBoundary key={pathname} onError={clearFog}>
         <Suspense fallback={null}>
+          <StaticPageReady />
           {ar ? <IskinArPage /> : isOracle(pathname) ? <OracleScene onReady={reveal} /> : <App />}
         </Suspense>
       </RouteBoundary>

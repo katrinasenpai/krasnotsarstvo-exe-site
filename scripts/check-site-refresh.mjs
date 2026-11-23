@@ -29,7 +29,10 @@ for(const id of quizTypes) assert(quizResults[id]?.desc && quizResults[id]?.img,
 const glb=await readFile('public/ar/iskin-projection-billboard.glb');
 assert.equal(glb.toString('utf8',0,4),'glTF');
 const model=JSON.parse(glb.toString('utf8',20,20+glb.readUInt32LE(12)));
-assert.equal(model.images.length,8);
+const motion = await import('../src/data/projection-motion.mjs');
+assert.deepEqual(model.images.map(image=>image.name),[...motion.poses,'Leaf']);
+assert.equal(model.skins.length,1,'Projection and turning leaf use a native skeletal animation');
+assert(model.animations[0].samplers.every(s=>s.interpolation==='LINEAR'));
 assert(model.animations.length>0);
 assert.equal(glb.readUInt32LE(8),glb.length,'GLB declared length');
 const binaryStart=28+glb.readUInt32LE(12);
@@ -42,6 +45,18 @@ assert(model.materials.every(material=>material.alphaMode==='BLEND'),'Projection
 assert(glb.length<1_000_000,'AR mobile download budget');
 const usdz=await readFile('public/ar/iskin-projection-billboard.usdz');
 assert.equal(usdz.readUInt32LE(0),0x04034b50,'USDZ archive');
+const entries=[];
+for(let offset=0;usdz.readUInt32LE(offset)===0x04034b50;) {
+  const nameEnd=offset+30+usdz.readUInt16LE(offset+26);
+  const dataStart=nameEnd+usdz.readUInt16LE(offset+28);
+  const name=usdz.toString('utf8',offset+30,nameEnd);
+  assert.equal(dataStart%64,0,'Quick Look alignment for '+name);
+  assert.equal(usdz.readUInt16LE(offset+8),0,'Stored entry '+name);
+  if(entries.length===0) assert.equal(usdz.toString('ascii',dataStart,dataStart+8),'PXR-USDC');
+  entries.push(name);
+  offset=dataStart+usdz.readUInt32LE(offset+18);
+}
+assert.deepEqual(entries,['projection.usdc',...model.images.map(img=>'textures/'+img.name+'.png')]);
 assert(usdz.length<1_000_000,'Quick Look mobile download budget');
 const config=ts.readConfigFile('tsconfig.app.json',ts.sys.readFile);
 const parsed=ts.parseJsonConfigFileContent(config.config,ts.sys,'.');

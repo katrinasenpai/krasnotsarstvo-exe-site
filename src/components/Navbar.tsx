@@ -1,6 +1,6 @@
 // src/components/Navbar.tsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import LogoIcon from '../assets/icons/logo.svg?react';
 import './Navbar.css';
 import { Camera } from 'lucide-react';
@@ -18,6 +18,33 @@ type NavbarProps = {
 
 export function Navbar({ navLinks }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const opener = useRef<HTMLButtonElement>(null);
+  const drawer = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const panel = drawer.current;
+    const items = Array.from(panel?.querySelectorAll<HTMLElement>('a[href], button') ?? []);
+    panel?.querySelector('button')?.focus({preventScroll:true});
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const close = () => setIsMobileMenuOpen(false);
+    const keyboard = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') close();
+      if (event.key !== 'Tab' || items.length === 0) return;
+      const first = items[0], last = items[items.length-1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    const desktop = window.matchMedia('(min-width: 768px)');
+    desktop.addEventListener('change',close);
+    document.addEventListener('keydown',keyboard);
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener('keydown',keyboard);
+      desktop.removeEventListener('change',close);
+      opener.current?.focus({preventScroll:true});
+    };
+  }, [isMobileMenuOpen]);
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -86,12 +113,14 @@ export function Navbar({ navLinks }: NavbarProps) {
 
       {/* Мобильная навигация */}
       <div className="md:hidden">
-        <a className="mobile-ar-entry" href="/iskin-ar"><Camera size={19} aria-hidden="true" /> Искин в AR</a>
+        <a className="mobile-ar-entry" href="/iskin-ar/"><Camera size={19} aria-hidden="true" /> Искин в AR</a>
         {/* Логотип для открытия меню */}
         <button
           onClick={toggleMobileMenu}
-          className="fixed top-4 left-4 z-50 p-2 bg-midnight-ink/80 backdrop-blur-lg border border-shadow-grey/20 rounded-lg group hover:bg-gold-leaf/10 transition-all duration-300 transform hover:scale-110"
+          ref={opener}
+          className="mobile-menu-trigger group"
           aria-label={isMobileMenuOpen ? 'Свернуть меню' : 'Открыть меню'}
+          hidden={isMobileMenuOpen}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-navigation"
         >
@@ -99,7 +128,7 @@ export function Navbar({ navLinks }: NavbarProps) {
         </button>
 
         {/* Выдвижное боковое меню */}
-        <nav id="mobile-navigation" aria-label="Мобильное меню" aria-hidden={!isMobileMenuOpen} className={`fixed top-0 left-0 h-full w-80 bg-midnight-ink/95 backdrop-blur-lg border-r border-shadow-grey/20 transform transition-transform duration-300 z-40 ${isMobileMenuOpen ? 'visible translate-x-0' : 'invisible -translate-x-full'}`}>
+        <nav ref={drawer} id="mobile-navigation" aria-label="Мобильное меню" aria-hidden={!isMobileMenuOpen} className={`mobile-glass-menu fixed transform transition-transform duration-300 z-40 ${isMobileMenuOpen ? 'visible translate-x-0' : 'invisible -translate-x-full'}`}>
           <div className="flex flex-col h-full">
             {/* Заголовок с логотипом и кнопкой закрытия */}
             <div className="p-6 border-b border-shadow-grey/20 relative">
@@ -150,7 +179,7 @@ export function Navbar({ navLinks }: NavbarProps) {
         {/* Затемняющий фон */}
         {isMobileMenuOpen && (
           <div 
-            className="fixed inset-0 bg-black/50 z-30"
+            className="fixed inset-0 bg-black/25 z-[36]"
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
         )}

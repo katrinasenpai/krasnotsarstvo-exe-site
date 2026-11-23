@@ -340,6 +340,7 @@ function App() {
               КАРТА КРАСНОЦАРСТВА
             </h2>
           </div>
+          <p className="atlas-intro">{atlasSummary.places} мест, {atlasSummary.libraries} библиотек и две стороны каждого адреса. Откройте книжный разворот, чтобы узнать историю места и его жизнь в КрасноЦарстве.</p>
           <DeferredContent height={760}><Map /></DeferredContent>
         </div>
       </section>

@@ -3,7 +3,6 @@ import { Search, ZoomIn, Map as MapIcon } from 'lucide-react';
 import { atlasPlaces, atlasPoint } from '../data/locations';
 import { LocationModal } from './LocationModal';
 import './Map.css';
-import atlasSummary from '../data/atlas-summary.json';
 
 export function Map() {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -18,7 +17,6 @@ export function Map() {
   const focus = atlasPlaces.find(p => p.id === focusId)!;
   const points = atlasPlaces.map(place => ({ place, ...atlasPoint(place, detail) })).filter(p => p.visible);
   return <>
-    <p className="atlas-intro">{atlasSummary.places} мест, {atlasSummary.libraries} библиотек и две стороны каждого адреса. Откройте книжный разворот, чтобы узнать историю места и его жизнь в КрасноЦарстве.</p>
     <div className="atlas">
       <aside className="atlas__index" aria-label="Указатель атласа">
         <div className="atlas__heading"><img src="/atlas/cover.webp" alt="Обложка атласа из новеллы" width="84" height="104" loading="lazy" /><div><span>АТЛАС ДВУХ МИРОВ</span><h3>Вдоль Охты</h3><p>Истории на полях карты</p></div></div>

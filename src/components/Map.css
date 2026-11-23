@@ -1,4 +1,4 @@
-.atlas-intro { max-width: 44rem; margin: -1rem auto 2rem; text-align: center; color: #d3d6da; font-size: 1.1rem; }
+
 .atlas { display: grid; grid-template-columns: 18rem minmax(0, 1fr); overflow: hidden; border: 1px solid #b69863; border-radius: 12px; background: #142632; box-shadow: 0 20px 65px #0005; }
 .atlas__index { padding: 1.25rem; min-width: 0; }
 .atlas__heading span { font-size: .65rem; letter-spacing: .22em; color: #bda77e; }

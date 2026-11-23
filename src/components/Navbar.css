@@ -9,4 +9,50 @@
   .site-navbar .nav-link { min-height: 36px; }
   .site-navbar .nav-link svg { width: 1.5rem; height: 1.5rem; }
 }
-.mobile-ar-entry { position: fixed; top: 1rem; right: 1rem; z-index: 35; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: .65rem .9rem; border: 1px solid #a6f0f5; border-radius: .6rem; background: #9ee3eb; color: #082634; box-shadow: 0 4px 20px #0005; font-size: .875rem; font-weight: 700; }
+
+@media (max-width: 767px) {
+  .mobile-ar-entry, .mobile-menu-trigger, .mobile-glass-menu {
+    --glass-base: #183646;
+    background: linear-gradient(145deg, #d6faff3a, transparent 37%, #68cada18), var(--glass-base);
+    color: #f4ffff;
+    border: 1px solid #c5f4ff80;
+    box-shadow: inset 0 1px 1px #ffffff64, inset 0 -1px 2px #a1e8ff25, 0 5px 18px #00141f48;
+  }
+  .mobile-ar-entry, .mobile-menu-trigger {
+    position: fixed;
+    top: max(1rem, env(safe-area-inset-top));
+    z-index: 35;
+    min-height: 48px;
+  }
+  .mobile-ar-entry {
+    right: max(1rem, env(safe-area-inset-right));
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .6rem 1rem; border-radius: 2rem;
+    font-size: .9rem; font-weight: 700;
+  }
+  .mobile-ar-entry svg { color: #aef9ff; }
+  .mobile-menu-trigger { left: max(1rem, env(safe-area-inset-left)); padding: .5rem; border-radius: 1rem; }
+  .mobile-glass-menu {
+    --glass-base: #142936;
+    width: min(21rem, calc(100vw - 2.25rem)); top: .5rem; left: .5rem;
+    height: calc(100% - 1rem); height: calc(100dvh - 1rem); border-radius: 1.5rem;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+    overflow: hidden;
+  }
+  .mobile-glass-menu li a { color: #f1f5f5; }
+  .mobile-glass-menu li svg { color: #e8ca92; }
+  .mobile-ar-entry:focus-visible, .mobile-menu-trigger:focus-visible, .mobile-glass-menu :focus-visible { outline: 2px solid #bffaff; outline-offset: -3px; }
+  @supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+    .mobile-ar-entry, .mobile-menu-trigger, .mobile-glass-menu {
+      --glass-base: rgb(12 36 48 / 57%);
+      -webkit-backdrop-filter: saturate(145%) blur(18px);
+      backdrop-filter: saturate(145%) blur(18px);
+    }
+    .mobile-glass-menu { --glass-base: rgb(12 29 40 / 66%); }
+  }
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .mobile-ar-entry, .mobile-menu-trigger, .mobile-glass-menu {
+      --glass-base: #142e3c; -webkit-backdrop-filter: none; backdrop-filter: none;
+    }
+  }
+}

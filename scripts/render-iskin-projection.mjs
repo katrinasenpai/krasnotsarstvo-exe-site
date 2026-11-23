@@ -1,6 +1,4 @@
-// Bake the game's iskin.archive_page + iskin.light_field shaders for portable AR.
-// The illustration is unchanged; light, dissolving threads and turning pages come
-// from game/iskin_staging.rpy. No WebGL renderer is needed on the landing page.
+// Bake the game's projection light and threads. The book leaf moves separately.
 import sharp from 'sharp';
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
@@ -10,26 +8,34 @@ const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
 const mix=(a,b,t)=>a*(1-t)+b*t;
 const fract=x=>x-Math.floor(x);
 const smooth=(a,b,x)=>{const t=clamp((x-a)/(b-a));return t*t*(3-2*t);};
-const source=await sharp(path.join(game,'images/iskin/iskin_reading.png')).ensureAlpha().resize(380,570).raw().toBuffer();
+const artwork = { reading:'iskin_reading.png', closing:'iskin_folio.png', stowed:'iskin_wry.png', reach:'monocle_reach.webp', approach:'monocle_approach.webp', touch:'iskin_left.png' };
+// The closed folio is drawn in leather. Retain the hands and decorative
+// embossing, and light the cover in the same cyan as the open virtual book.
+function lightFolio(source) {
+  for (let y=0;y<570;y++) for (let x=0;x<380;x++) {
+    const px=x*240/380, py=y*360/570;
+    const u=(px-54-.25*(py-205))/73;
+    const v=(py-205+13*u)/40;
+    if (u<0 || u>1 || v<0 || v>1) continue;
+    const i=(y*380+x)*4, [r,g,b]=source.subarray(i,i+3);
+    const ink=1-smooth(20,43,r-b);
+    const luma=(.3*r+.59*g+.11*b)/255;
+    const rim=1-smooth(0,.07,Math.min(u,1-u,v,1-v));
+    const tone=clamp(.24+luma*1.05+rim*.25);
+    [38+122*tone,104+145*tone,158+97*tone].forEach((light,c)=>{source[i+c]=mix(source[i+c],light,ink);});
+  }
+}
 await mkdir('public/ar/reading',{recursive:true});
-export const projectionFrames = [0,.14,.28,.42,.56,.70,.84,1];
-for(const [index,turn] of projectionFrames.entries()) {
+await mkdir('tmp/projection',{recursive:true});
+for (const [pose, file] of Object.entries(artwork)) {
+  const source = await sharp(path.join(game, 'images/iskin', file)).ensureAlpha().resize(380,570).raw().toBuffer();
+  if (pose==='closing') lightFolio(source);
   const body=Buffer.alloc(width*height*4);
   for(let y=0;y<570;y++)for(let x=0;x<380;x++) {
     const from=(y*380+x)*4, to=((y+24)*width+x+24)*4;
     source.copy(body,to,from,from+4);
-    const angle=turn*Math.PI, span=74*Math.cos(angle);
-    const u=(x/380*512-342)/span;
-    const bottom=382-u*(25+48*Math.sin(angle));
-    const v=(bottom-y/570*768)/(12+3*u);
-    if(Math.abs(span)>.6&&u>0&&u<1&&v>0&&v<1) {
-      const rim=1-smooth(0,.12,Math.min(u,1-u,v,1-v));
-      const a=Math.sin(angle)*(.22+.36*rim+.1*Math.pow(.5+.5*Math.cos(v*25.13),8));
-      for(let c=0;c<3;c++)body[to+c]=mix(body[to+c],[107,230,255][c],a);
-      body[to+3]+=a*(255-body[to+3]);
-    }
   }
-  const out=Buffer.from(body), t=turn*.86;
+  const out=Buffer.from(body), t=0;
   const alphaAt=(u,v)=>body[(Math.floor(clamp(v)* (height-1))*width+Math.floor(clamp(u)*(width-1)))*4+3]/255;
   for(let y=0;y<height;y++)for(let x=0;x<width;x++) {
     const uvx=x/width, uvy=y/height, i=(y*width+x)*4;
@@ -61,7 +67,9 @@ for(const [index,turn] of projectionFrames.entries()) {
     for(let c=0;c<3;c++)out[i+c]=255*clamp(finalAlpha ? (rgb[c]*a*(1-light)+[.21,.93,1][c]*light)/finalAlpha : 0);
     out[i+3]=255*finalAlpha;
   }
-  await sharp(out,{raw:{width,height,channels:4}}).png({palette:true,colours:256,quality:90,effort:8}).toFile(`public/ar/reading/frame-${index}.png`);
-  if(index===0)await sharp(out,{raw:{width,height,channels:4}}).webp({quality:84}).toFile('public/characters/iskin-projection-reading.webp');
+  await sharp(out,{raw:{width,height,channels:4}}).png({palette:true,colours:256,quality:90,effort:8}).toFile(`tmp/projection/${pose}.png`);
+  if (pose!=='reading') await sharp(`tmp/projection/${pose}.png`).resize({width:350})
+    .webp({quality:80,alphaQuality:75,effort:6}).toFile(`public/ar/reading/${pose}.webp`);
+  if(pose==='reading')await sharp(out,{raw:{width,height,channels:4}}).webp({quality:84}).toFile('public/characters/iskin-projection-reading.webp');
 }
-console.log('Exported eight reading frames with the game projection and a small WebP poster.');
+console.log('Exported six registered game poses and a static poster.');
